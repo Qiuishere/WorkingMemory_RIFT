@@ -1,0 +1,10 @@
+Hello, welcome to participate in our experiment!
+
+In this experiment, you will do a free viewing task. At the begining of each
+trial, a fixation dot will appear. You need to keep you eye fixated at the 
+dot until it disappear. Then 4 object images will be shown and you can move 
+your gaze freely to explore. 
+
+At the end of each block, there will be a memory task. 4 objects will be shown
+and you will be asked to give a response saying whether you have seen this 
+object in the previous block.
