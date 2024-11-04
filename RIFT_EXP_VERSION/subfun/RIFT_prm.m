@@ -53,12 +53,17 @@ for i = 1:numel(prm.stim.AllStim)
     stim_path = append(prm.stim.AllStim(i).folder, '\', prm.stim.AllStim(i).name);
     prm.stim.AllStimPath   = [prm.stim.AllStimPath convertCharsToStrings(stim_path)];
 end
-prm.stim.refresh       = prm.monitor.hz * 12;
+
+% freqeuncy setting
+prm.stim.refresh       = prm.w.RefreshRate * 12;
 prm.stim.dt            = 1 / prm.stim.refresh; % in second
 prm.stim.tag_frex      = [55,60,65,70];%[2 4 8 1];
 prm.stim.duration      = 4; % in second
 prm.stim.timax         = prm.stim.dt:prm.stim.dt:prm.stim.duration;
 prm.stim.tag_sigs      = cos(2*pi*prm.stim.tag_frex(:)*prm.stim.timax) / 2 + 0.5;
+
+
+% spatial paramter========================
 prm.stim.SizeInDeg     = 3.5;
 prm.stim.SizeInPxl     = round(prm.monitor.deg_to_pix * prm.stim.SizeInDeg); % vis deg
 prm.stim.size          = [prm.stim.SizeInPxl prm.stim.SizeInPxl];
@@ -97,6 +102,19 @@ prm.trigger.ExpEnd      = 99;
 
 %%=========================================================================
 % fixation
+
+%% Visual content==========================================================
+
+% Fixation size
+
+prm.fix.sizeAngle = 0.15;
+
+prm.fix.size = visAng2pix(prm.fix.sizeAngle, 0, prm.monitor);
+prm.fix.col =  [0 0 0];
+prm.fix.col2 =  [200 0 0];
+
+
+
 prm.fixation.color      = [0 0 0]; % fixation dot color
 prm.fixation.size       = fix(.5*prm.monitor.deg_to_pix).*ones(1,2); 
 % prm.fixation.pos        = position_shifter(prm.monitor,prm.fixation.size,[0 0]); 
@@ -149,5 +167,11 @@ prm.exp.design.OddCurvOrRect   = 2 - mod(prm.exp.design.CurvOrRect + prm.exp.des
 prm.exp.design.OddLargeOrSmall = 2 - (prm.exp.design.LargeOrSmall == prm.exp.design.OddballShapeOrSize);
 prm.exp.design.fixmode         = repmat([zeros(prm.exp.ntrialsperblock, 1); ones(prm.exp.ntrialsperblock, 1)], prm.exp.blocks/2, 1);
 
+if RealRun
+    prm.time.before = 12*1000;
+else
+    prm.time.before = 3*1000;
+end
 
+prm.time.countdown = 3;
 
