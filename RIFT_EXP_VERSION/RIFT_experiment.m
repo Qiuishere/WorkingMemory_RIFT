@@ -1,7 +1,6 @@
 addpath('.\subfun')
 init 
-main = 'D:\Users\sonbai\RIFT_EXP_VERSION\';
-cd(main)
+
 RIFT_order = readmatrix('tag_position.txt');
 % for testing
 % Screen('Preference', 'SkipSyncTests', 1)
@@ -27,17 +26,8 @@ if str2double(id.number) <= 40
     temp = prm.stim.tag_frex;
     prm.stim.tag_frex(order) = temp;
 end
-cd(main)
 %%=========================================================================
 % run the practice
 RIFT_main(prm,id)
 % %%=========================================================================
-% run the main exp
-% cd(main)
-% prm            = RIFT_prm();
-% if str2double(id.number) <= 40
-%     order = RIFT_order(str2double(id.number),:);
-%     temp = prm.stim.tag_frex;
-%     prm.stim.tag_frex(order) = temp;
-% end
-% RIFT_main(prm,id)   
+

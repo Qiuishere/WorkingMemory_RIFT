@@ -86,9 +86,8 @@ prm.stim.JitterInInPxl = round(prm.monitor.deg_to_pix * prm.stim.JitterInDeg);
 % MEG triggers
 if prm.exp.is_live
   prm.trigger.btsi = Bitsi('COM1'); % or whichever COM-port used by the PC
-  prm.trigger.btsi.validResponses = ['a' 'e']; % index finger button on right (a)/left (e) button boxes
 else
-  prm.trigger.btsi = Bitsi('COM1');
+
   prm.trigger.btsi.validResponses = KbName({'a' 'e'});
 end
 prm.trigger.ExpStart    = 9;
