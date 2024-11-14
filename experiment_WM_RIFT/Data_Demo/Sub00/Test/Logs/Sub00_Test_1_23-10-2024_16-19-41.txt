@@ -1,0 +1,97 @@
+Elapsed time is 4.367106 seconds.
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_retroCue_flip', 'C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_retroCue_flip.m', 138)" style="font-weight:bold">Adjustment_retroCue_flip</a> (<a href="matlab: opentoline('C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_retroCue_flip.m',138,0)">line 138</a>)
+Duplicate table variable name: 'targetId'.
+} 
+opentoline('C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_retroCue_flip.m',138,0)
+T = [table; table2];
+{Could not concatenate the table variable 'stimulus' using VERTCAT.
+
+Caused by:
+    Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('vertcat')" style="font-weight:bold">vertcat</a>
+    Dimensions of arrays being concatenated are not consistent.
+} 
+[table; table2]
+{Could not concatenate the table variable 'stimulus' using VERTCAT.
+
+Caused by:
+    Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('vertcat')" style="font-weight:bold">vertcat</a>
+    Dimensions of arrays being concatenated are not consistent.
+} 
+[table; table2]
+{Could not concatenate the table variable 'stimulus' using VERTCAT.
+
+Caused by:
+    Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('vertcat')" style="font-weight:bold">vertcat</a>
+    Dimensions of arrays being concatenated are not consistent.
+} 
+table.Properties.VariableNames
+
+ans =
+
+  1×12 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+  Columns 1 through 7
+
+    {'targetId'}    {'direction'}    {'view1'}    {'figure1'}    {'view2'}    {'figure2'}    {'angle1'}
+
+  Columns 8 through 12
+
+    {'angle2'}    {'angleProbe'}    {'img1Txt'}    {'img2Txt'}    {'stimulus'}
+
+table2.Properties.VariableNames
+
+ans =
+
+  1×12 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+  Columns 1 through 7
+
+    {'targetId'}    {'direction'}    {'view1'}    {'figure1'}    {'view2'}    {'figure2'}    {'angle1'}
+
+  Columns 8 through 12
+
+    {'angle2'}    {'angleProbe'}    {'img1Txt'}    {'img2Txt'}    {'stimulus'}
+
+varfun(@class, table)
+
+ans =
+
+  1×12 <a href="matlab:helpPopup table" style="font-weight:bold">table</a>
+
+    <strong>class_targetId</strong>    <strong>class_direction</strong>    <strong>class_view1</strong>    <strong>class_figure1</strong>    <strong>class_view2</strong>    <strong>class_figure2</strong>    <strong>class_angle1</strong>    <strong>class_angle2</strong>    <strong>class_angleProbe</strong>    <strong>class_img1Txt</strong>    <strong>class_img2Txt</strong>    <strong>class_stimulus</strong>
+    <strong>______________</strong>    <strong>_______________</strong>    <strong>___________</strong>    <strong>_____________</strong>    <strong>___________</strong>    <strong>_____________</strong>    <strong>____________</strong>    <strong>____________</strong>    <strong>________________</strong>    <strong>_____________</strong>    <strong>_____________</strong>    <strong>______________</strong>
+
+        double             cell            double           cell           double           cell            double          double            double            double           double             char     
+
+varfun(@class, table2)
+
+ans =
+
+  1×12 <a href="matlab:helpPopup table" style="font-weight:bold">table</a>
+
+    <strong>class_targetId</strong>    <strong>class_direction</strong>    <strong>class_view1</strong>    <strong>class_figure1</strong>    <strong>class_view2</strong>    <strong>class_figure2</strong>    <strong>class_angle1</strong>    <strong>class_angle2</strong>    <strong>class_angleProbe</strong>    <strong>class_img1Txt</strong>    <strong>class_img2Txt</strong>    <strong>class_stimulus</strong>
+    <strong>______________</strong>    <strong>_______________</strong>    <strong>___________</strong>    <strong>_____________</strong>    <strong>___________</strong>    <strong>_____________</strong>    <strong>____________</strong>    <strong>____________</strong>    <strong>________________</strong>    <strong>_____________</strong>    <strong>_____________</strong>    <strong>______________</strong>
+
+        double             cell            double           cell           double           cell            double          double            double            double           double             char     
+
+colNames1 = table.Properties.VariableNames;
+colNames2 = table2.Properties.VariableNames;
+disp(isequal(colNames1, colNames2)); 
+   1
+
+table.Properties.RowNames = {};
+table2.Properties.RowNames = {};
+T = [table; table2];
+{Could not concatenate the table variable 'stimulus' using VERTCAT.
+
+Caused by:
+    Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('vertcat')" style="font-weight:bold">vertcat</a>
+    Dimensions of arrays being concatenated are not consistent.
+} 
+Adjustment_retroCue_flip
+[Warning: SetScreen: invalid value for "Debug". Debug will be set to 0.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('SetScreen', 'C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Functions\Utils\SetScreen.m', 62)" style="font-weight:bold">SetScreen</a> (<a href="matlab: opentoline('C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Functions\Utils\SetScreen.m',62,0)">line 62</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Settings_General', 'C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Settings_General.m', 43)" style="font-weight:bold">Settings_General</a> (<a href="matlab: opentoline('C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Settings_General.m',43,0)">line 43</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_retroCue_flip', 'C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_retroCue_flip.m', 34)" style="font-weight:bold">Adjustment_retroCue_flip</a> (<a href="matlab: opentoline('C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_retroCue_flip.m',34,0)">line 34</a>)] 
+PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF9DDB23F80. Setting thread priority to HIGHEST as a work-around...
+Bitsi_Scanner: No Com port given, running in testing mode...

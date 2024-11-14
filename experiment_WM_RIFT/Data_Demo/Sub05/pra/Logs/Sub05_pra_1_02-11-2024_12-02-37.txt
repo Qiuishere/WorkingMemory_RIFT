@@ -1,0 +1,11 @@
+Elapsed time is 4.218428 seconds.
+{Undefined function or variable 'monitor'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask', 'C:\Projects\WorkingMemory_RIFT\WM-Bias-Qiu\Adjustment_withMask.m', 193)" style="font-weight:bold">Adjustment_withMask</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\WM-Bias-Qiu\Adjustment_withMask.m',193,0)">line 193</a>)
+    prm.img.Scale  = visAng2pix(prm.img.WAng, 0, monitor)/prm.img.W;
+} 
+opentoline('C:\Projects\WorkingMemory_RIFT\WM-Bias-Qiu\Adjustment_withMask.m',193,0)
+Adjustment_withMask
+[Warning: SetScreen: invalid value for "Debug". Debug will be set to 0.] 
+PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FFAE8763F80. Setting thread priority to HIGHEST as a work-around...
+Bitsi_Scanner: No Com port given, running in testing mode...

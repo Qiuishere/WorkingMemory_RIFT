@@ -1,0 +1,237 @@
+[Warning: ITI cannot achieve qual distribution] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Body_RunRS_new2', 'C:\Projects\fMRI\BodyBias-Qiu\Body_RunRS_new2.m', 167)" style="font-weight:bold">Body_RunRS_new2</a> (<a href="matlab: opentoline('C:\Projects\fMRI\BodyBias-Qiu\Body_RunRS_new2.m',167,0)">line 167</a>)] 
+Elapsed time is 6.852640 seconds.
+[Warning: Sham run: press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Body_RunRS_new2', 'C:\Projects\fMRI\BodyBias-Qiu\Body_RunRS_new2.m', 216)" style="font-weight:bold">Body_RunRS_new2</a> (<a href="matlab: opentoline('C:\Projects\fMRI\BodyBias-Qiu\Body_RunRS_new2.m',216,0)">line 216</a>)] 
+
+ SCANNER TRIGGER (run 1): 25-02-2023 00:27:34 
+Waiting for the task to begin in 3 seconds...
+Responded 2, should be 1.
+Responded 2, should be Responded 2, should be 2.
+Responded 2, should be 1.
+Responded 1, should be 1.
+Responded 2, should be Responded 2, should be 1.
+Responded 2, should be Responded 2, should be 2.
+Responded 2, should be 2.
+Responded 1, should be 1.
+Responded 1, should be 1.
+Responded 2, should be 1.
+Responded 2, should be Responded 2, should be 2.
+Responded 2, should be 1.
+Responded 2, should be Responded 2, should be 1.
+Responded 1, should be 1.
+Responded 1, should be 1.
+Responded 2, should be 2.
+Responded 2, should be 2.
+Responded 2, should be 1.
+Responded 2, should be Elapsed time is 140.879334 seconds.
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('cell/ismember', 'C:\Program Files\MATLAB\R2019a\toolbox\matlab\ops\@cell\ismember.p', 34)" style="font-weight:bold">cell/ismember</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2019a\toolbox\matlab\ops\@cell\ismember.p',34,0)">line 34</a>)
+Input A of class double and input B of class cell must be cell arrays of character vectors, unless one is a
+character vector.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Body_RunRS_new2', 'C:\Projects\fMRI\BodyBias-Qiu\Body_RunRS_new2.m', 346)" style="font-weight:bold">Body_RunRS_new2</a> (<a href="matlab: opentoline('C:\Projects\fMRI\BodyBias-Qiu\Body_RunRS_new2.m',346,0)">line 346</a>)
+    T.ifcorrect = ismember(T.resp, T.correctKey); % no reponse for MVPA trials are also correct
+} 
+T.angle2-T.angle2
+
+ans =
+
+     0
+   NaN
+     0
+   NaN
+     0
+     0
+     0
+     0
+   NaN
+     0
+     0
+   NaN
+     0
+     0
+     0
+   NaN
+     0
+   NaN
+     0
+   NaN
+   NaN
+   NaN
+     0
+     0
+     0
+   NaN
+     0
+     0
+   NaN
+   NaN
+
+try open('T'); catch edit('T'); end
+T.angle2-T.angle1
+
+ans =
+
+     0
+   NaN
+     6
+   NaN
+    -6
+     0
+     0
+     6
+   NaN
+     6
+    -6
+   NaN
+    -6
+     0
+     6
+   NaN
+     0
+   NaN
+    -6
+   NaN
+   NaN
+   NaN
+    -6
+    -6
+     6
+   NaN
+     6
+     0
+   NaN
+   NaN
+
+opentoline('C:\Program Files\MATLAB\R2019a\toolbox\matlab\ops\@cell\ismember.p',34,0)
+opentoline('C:\Projects\fMRI\BodyBias-Qiu\Body_RunRS_new2.m',346,0)
+RStrialId = ismember(T.movingDir,movingDirs(1:2)); % get the RS trials
+T.resp(RStrialId), T.correctKey(RStrialId)
+
+ans =
+
+     2
+     2
+     2
+     2
+     1
+     1
+     2
+     2
+     1
+     1
+     2
+     2
+
+
+ans =
+
+  12×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {[2]}
+    {[1]}
+    {[2]}
+    {[2]}
+    {[1]}
+    {[1]}
+    {[2]}
+    {[1]}
+    {[1]}
+    {[1]}
+    {[2]}
+    {[2]}
+
+T.resp(RStrialId)== T.correctKey(RStrialId)
+{Undefined operator '==' for input arguments of type 'cell'.
+} 
+T.resp(RStrialId)== T.correctKey{RStrialId}
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('eq')" style="font-weight:bold"> == </a>
+Too many input arguments.
+} 
+T.correctKey{RStrialId}
+
+ans =
+
+     2
+
+
+ans =
+
+     1
+
+
+ans =
+
+     2
+
+
+ans =
+
+     2
+
+
+ans =
+
+     1
+
+
+ans =
+
+     1
+
+
+ans =
+
+     2
+
+
+ans =
+
+     1
+
+
+ans =
+
+     1
+
+
+ans =
+
+     1
+
+
+ans =
+
+     2
+
+
+ans =
+
+     2
+
+Error: <a href="matlab: opentoline('C:\Projects\fMRI\BodyBias-Qiu\Body_RunRS_new2.m',73,21)">File: Body_RunRS_new2.m Line: 73 Column: 21
+</a>Invalid expression. When calling a function or indexing a variable, use parentheses. Otherwise, check for
+mismatched delimiters.
+
+correctKeys(themovingdir)
+
+ans =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {[NaN]}
+
+correctKeys = [1, 2, nan];
+time
+
+time = 
+
+  <a href="matlab:helpPopup struct" style="font-weight:bold">struct</a> with fields:
+
+       before: 6000
+    countdown: 3
+         task: 4.5600
+         rest: 12000
+       theory: 4.9600
+      trigger: 1.3602e+05
+

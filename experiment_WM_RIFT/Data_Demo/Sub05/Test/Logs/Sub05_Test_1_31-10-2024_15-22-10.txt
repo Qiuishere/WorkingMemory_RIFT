@@ -1,0 +1,216 @@
+Elapsed time is 4.076004 seconds.
+[Warning: Sham run: press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask', 'C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_withMask.m', 210)" style="font-weight:bold">Adjustment_withMask</a> (<a href="matlab: opentoline('C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_withMask.m',210,0)">line 210</a>)] 
+
+ SCANNER TRIGGER (run 1): 31-10-2024 15:22:15 
+Waiting for the task to begin in 3 seconds...
+Elapsed time is 9.454133 seconds.
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('tabular/dotParenReference', 'C:\Program Files\MATLAB\R2019a\toolbox\matlab\datatypes\@tabular\dotParenReference.m', 69)" style="font-weight:bold">tabular/dotParenReference</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2019a\toolbox\matlab\datatypes\@tabular\dotParenReference.m',69,0)">line 69</a>)
+Unrecognized table variable name 'angle2'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask', 'C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_withMask.m', 259)" style="font-weight:bold">Adjustment_withMask</a> (<a href="matlab: opentoline('C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_withMask.m',259,0)">line 259</a>)
+        angle2Rad = T.angle2(thetrial)/180*pi;
+} 
+opentoline('C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_withMask.m',259,0)
+nFr
+{Undefined function or variable 'nFr'.
+} 
+Nfr
+
+Nfr = 
+
+  <a href="matlab:helpPopup struct" style="font-weight:bold">struct</a> with fields:
+
+       fix: 72
+    image1: 120
+    blank1: 60
+     delay: 120
+      wait: 420
+      rest: 720
+
+id = 0: Nfr.mask/4: Nfr;
+{Reference to non-existent field 'mask'.
+} 
+Nfr.mask = 60
+
+Nfr = 
+
+  <a href="matlab:helpPopup struct" style="font-weight:bold">struct</a> with fields:
+
+       fix: 72
+    image1: 120
+    blank1: 60
+     delay: 120
+      wait: 420
+      rest: 720
+      mask: 60
+
+id = 0: Nfr.mask/4: Nfr;
+{Undefined operator ':' for input arguments of type 'struct'.
+} 
+Nfr.mask/4
+
+ans =
+
+    15
+
+0: Nfr.mask/4 : Nfr
+{Undefined operator ':' for input arguments of type 'struct'.
+} 
+0: (Nfr.mask/4) : Nfr
+{Undefined operator ':' for input arguments of type 'struct'.
+} 
+id = 0: Nfr.mask/4 : Nfr.mask;
+theimg = find((id - nf)>0
+ theimg = find((id - nf)>0
+                          
+{Error: Invalid expression. When calling a function or indexing a variable, use parentheses. Otherwise, check for mismatched delimiters.
+} 
+theimg = find((id - nf)>0)
+{Undefined function or variable 'nf'.
+} 
+nf=16
+
+nf =
+
+    16
+
+theimg = find((id - nf)>0)
+
+theimg =
+
+     3     4     5
+
+id
+
+id =
+
+     0    15    30    45    60
+
+id = 1: Nfr.mask/4 : Nfr.mask;
+theimg = find((id - nf)>0)
+
+theimg =
+
+     3     4
+
+id - nf
+
+ans =
+
+   -15     0    15    30
+
+1: Nfr.mask/4 : Nfr.mask
+
+ans =
+
+     1    16    31    46
+
+find((id - nf)>=0)
+
+ans =
+
+     2     3     4
+
+theimg = min(find((id - nf)>=0))
+
+theimg =
+
+     2
+
+nf = 30
+
+nf =
+
+    30
+
+theimg = min(find((id - nf)>=0))
+
+theimg =
+
+     3
+
+id - nf
+
+ans =
+
+   -29   -14     1    16
+
+nf - id
+
+ans =
+
+    29    14    -1   -16
+
+max(find((nf - id)>=0))
+
+ans =
+
+     2
+
+nf = 16
+
+nf =
+
+    16
+
+max(find((nf - id)>=0))
+
+ans =
+
+     2
+
+nf = 15
+
+nf =
+
+    15
+
+max(find((nf - id)>=0))
+
+ans =
+
+     1
+
+nf = 30
+
+nf =
+
+    30
+
+max(find((nf - id)>=0))
+
+ans =
+
+     2
+
+nf = 31
+
+nf =
+
+    31
+
+max(find((nf - id)>=0))
+
+ans =
+
+     3
+
+Adjustment_withMask
+PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
+PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
+PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY6 ...
+PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY7 ...
+
+PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
+PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
+PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (120, 120), matching that of
+PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
+PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
+PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
+[Warning: SetScreen: invalid value for "Debug". Debug will be set to 0.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('SetScreen', 'C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Functions\Utils\SetScreen.m', 62)" style="font-weight:bold">SetScreen</a> (<a href="matlab: opentoline('C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Functions\Utils\SetScreen.m',62,0)">line 62</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Settings_General', 'C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Settings_General.m', 43)" style="font-weight:bold">Settings_General</a> (<a href="matlab: opentoline('C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Settings_General.m',43,0)">line 43</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask', 'C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_withMask.m', 39)" style="font-weight:bold">Adjustment_withMask</a> (<a href="matlab: opentoline('C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_withMask.m',39,0)">line 39</a>)] 
+PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FFB0C583F80. Setting thread priority to HIGHEST as a work-around...
+Bitsi_Scanner: No Com port given, running in testing mode...

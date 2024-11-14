@@ -1,0 +1,11 @@
+Elapsed time is 3.691135 seconds.
+[Warning: Sham run: press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('UpDownTask_retroCue', 'C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\UpDownTask_retroCue.m', 192)" style="font-weight:bold">UpDownTask_retroCue</a> (<a href="matlab: opentoline('C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\UpDownTask_retroCue.m',192,0)">line 192</a>)] 
+
+ SCANNER TRIGGER (run 1): 14-10-2024 11:39:17 
+Waiting for the task to begin in 3 seconds...
+Responded 2, should be 1.
+Responded 2, should be 1.
+
+
+Experiment terminated at 14-Oct-2024 11:39:51, diary closed...

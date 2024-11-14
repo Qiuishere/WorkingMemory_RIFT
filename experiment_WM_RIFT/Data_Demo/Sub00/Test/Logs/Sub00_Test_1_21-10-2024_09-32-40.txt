@@ -1,0 +1,9 @@
+Elapsed time is 3.784793 seconds.
+[Warning: Sham run: press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_retroCue_flip', 'C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_retroCue_flip.m', 199)" style="font-weight:bold">Adjustment_retroCue_flip</a> (<a href="matlab: opentoline('C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_retroCue_flip.m',199,0)">line 199</a>)] 
+
+ SCANNER TRIGGER (run 1): 21-10-2024 09:32:42 
+Waiting for the task to begin in 3 seconds...
+
+
+Experiment terminated at 21-Oct-2024 09:33:05, diary closed...

@@ -1,0 +1,9 @@
+Elapsed time is 3.884684 seconds.
+[Warning: Sham run: press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask', 'C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_withMask.m', 211)" style="font-weight:bold">Adjustment_withMask</a> (<a href="matlab: opentoline('C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_withMask.m',211,0)">line 211</a>)] 
+
+ SCANNER TRIGGER (run 1): 31-10-2024 17:09:37 
+Waiting for the task to begin in 3 seconds...
+
+
+Experiment terminated at 31-Oct-2024 17:09:57, diary closed...

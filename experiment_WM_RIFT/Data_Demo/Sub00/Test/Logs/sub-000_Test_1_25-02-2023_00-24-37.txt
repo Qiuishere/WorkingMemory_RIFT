@@ -1,0 +1,40 @@
+[Warning: ITI cannot achieve qual distribution] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Body_RunRS_new2', 'C:\Projects\fMRI\BodyBias-Qiu\Body_RunRS_new2.m', 167)" style="font-weight:bold">Body_RunRS_new2</a> (<a href="matlab: opentoline('C:\Projects\fMRI\BodyBias-Qiu\Body_RunRS_new2.m',167,0)">line 167</a>)] 
+Elapsed time is 6.542077 seconds.
+[Warning: Sham run: press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Body_RunRS_new2', 'C:\Projects\fMRI\BodyBias-Qiu\Body_RunRS_new2.m', 216)" style="font-weight:bold">Body_RunRS_new2</a> (<a href="matlab: opentoline('C:\Projects\fMRI\BodyBias-Qiu\Body_RunRS_new2.m',216,0)">line 216</a>)] 
+
+ SCANNER TRIGGER (run 1): 25-02-2023 00:24:43 
+Waiting for the task to begin in 3 seconds...
+Elapsed time is 18.245878 seconds.
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('fprintf')" style="font-weight:bold">fprintf</a>
+Function is not defined for 'cell' inputs.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Body_RunRS_new2', 'C:\Projects\fMRI\BodyBias-Qiu\Body_RunRS_new2.m', 324)" style="font-weight:bold">Body_RunRS_new2</a> (<a href="matlab: opentoline('C:\Projects\fMRI\BodyBias-Qiu\Body_RunRS_new2.m',324,0)">line 324</a>)
+                fprintf('Responded %g, should be %g.\n', T.resp(thetrial), T.correctKey(thetrial));
+} 
+opentoline('C:\Projects\fMRI\BodyBias-Qiu\Body_RunRS_new2.m',324,0)
+T.correctKey{thetrial}
+
+ans =
+
+     2
+
+T.correctKey{28}
+
+ans =
+
+     1     2
+
+fprintf('Responded %g, should be %g.\n', T.resp(thetrial), T.correctKey{28});
+Responded 2, should be 1.
+Responded 2, should be Body_RunRS_new2
+{Undefined function or variable 'RunInfo'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Body_RunRS_new2', 'C:\Projects\fMRI\BodyBias-Qiu\Body_RunRS_new2.m', 22)" style="font-weight:bold">Body_RunRS_new2</a> (<a href="matlab: opentoline('C:\Projects\fMRI\BodyBias-Qiu\Body_RunRS_new2.m',22,0)">line 22</a>)
+    RunNo = RunInfo(1);
+} 
+clear
+Body_RunRS_new2
+PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FFE388D3F80. Setting thread priority to HIGHEST as a work-around...
+Bitsi_Scanner: No Com port given, running in testing mode...
