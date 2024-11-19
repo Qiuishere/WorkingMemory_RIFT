@@ -1,0 +1,10 @@
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',14,0)">line 14</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_Rift', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_Rift.m', 68)" style="font-weight:bold">Adjustment_withMask_Rift</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_Rift.m',68,0)">line 68</a>)] 
+
+ Starting the task: (run 1): 14-11-2024 18:52:49 
+Waiting for the task to begin in 3 seconds...
+Responded 48, should be 48.
+
+
+Experiment terminated at 14-Nov-2024 18:53:06, diary closed...

@@ -1,4 +1,4 @@
-function prm = Adjustment_withMask_RIFT(prm)
+function prm = Adjustment_withMask_withFlicker(prm)
 
 %{
 the single-target design with flickering mask
@@ -174,7 +174,6 @@ try % open screen from here
         theSwitchFr = [fixFr; (prm.SwitchFr +fixFr)];
 
         nf = 1;  % number of flipped frame (on the monitor). reset to 1 for every trial
-        nf_draw = 1;
         
         respFlag     =   0;
         
@@ -183,17 +182,6 @@ try % open screen from here
                 Screen('DrawDots', prm.w.Number, [0; 0], prm.fix.size, prm.fix.color, prm.w.Center, 1);
             elseif  nf <= theSwitchFr(2) % target 1
                 for thestrip = 1:prm.tag.nStrip
-                    quadrant = mod(phys_frame_ind-1, 4) + 1;
-                    
-                    % select the proper colour channel to draw into
-                    % colorchan will increase by 1 every 4 physical frame and reset after
-                    % 12 physical frames
-                    colorchan = mod(floor((phys_frame_ind-1)/4), 3) + 1;
-                    
-                    colmask = zeros(4,1);
-                    colmask(colorchan) = 1;
-                    Screen('BlendFunction', prm.monitor.window, [], [], colmask);
-                    
                   this_tag = prm.tag.tag_sigs(thestrip, nf);
                   Screen('DrawTexture', prm.w.Number, blackTxts(thestrip, theview), [],[],[],[], []); % draw the black line normally
                   Screen('DrawTexture', prm.w.Number, whiteTxts(thestrip, theview), [],[],[],[], this_tag); % use transparency to change

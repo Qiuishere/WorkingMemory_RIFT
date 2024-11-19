@@ -1,0 +1,8 @@
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_Rift', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_Rift.m', 177)" style="font-weight:bold">Adjustment_withMask_Rift</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_Rift.m',177,0)">line 177</a>)] 
+
+ Starting the task: (run 1): 14-11-2024 17:23:16 
+Waiting for the task to begin in 3 seconds...
+
+
+Experiment terminated at 14-Nov-2024 17:23:21, diary closed...

@@ -30,10 +30,6 @@ else
     Keys.number = [KbName('UpArrow') KbName('DownArrow')];
 end
 
-% randomize key correspondence
-if mod(SubNo,2)
-    Keys = structfun(@fliplr,Keys,'UniformOutput',false);
-end
 
 
 RespKeys = Keys.number;
@@ -81,10 +77,10 @@ if ~exist(LogDir, 'dir')
 end
 
 RunStart = datestr(now, 'dd-mm-yyyy_HH-MM-SS');
-diary(fullfile(LogDir, sprintf('Sub%02d_%s_%g_%s.txt', SubNo, RunType, ThisRunNo, RunStart)));
+diary(fullfile(LogDir, sprintf('Sub%02d_%s_%g_%s.txt', SubNo, RunType, RunStart)));
 
 
-ScriptName = {'Adjustment_withMask_Rift','Settings_General_MEG', 'RUN'};
+ScriptName = {'Adjustment_withMask_RIFT','Settings_General_MEG', 'RUN'};
 myCode = cell(length(ScriptName),1);
 for i = 1:length(ScriptName)
     fid = fopen([ScriptName{i} '.m'],'r'); % 'r': open file for reading

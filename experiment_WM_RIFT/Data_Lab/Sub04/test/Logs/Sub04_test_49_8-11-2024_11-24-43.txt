@@ -1,0 +1,14 @@
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',14,0)">line 14</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_Rift', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_Rift.m', 64)" style="font-weight:bold">Adjustment_withMask_Rift</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_Rift.m',64,0)">line 64</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('RUN', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\RUN.m', 101)" style="font-weight:bold">RUN</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\RUN.m',101,0)">line 101</a>)] 
+
+ Starting the task: (test): 18-11-2024 11:24:47 
+Waiting for the task to begin in 3 seconds...
+Responded 58, should be 42.
+Responded 61, should be 48.
+Responded 25, should be 42.
+Responded 56, should be 54.
+
+
+Experiment terminated at 18-Nov-2024 11:25:25, diary closed...

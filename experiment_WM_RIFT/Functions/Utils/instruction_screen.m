@@ -1,16 +1,15 @@
 function instruction_screen(prm,txt)
 
-Screen('glPushMatrix', prm.monitor.window);
-Screen('glLoadIdentity',prm.monitor.window);
+Screen('glPushMatrix', prm.w.Number);
+Screen('glLoadIdentity',prm.w.Number);
 
-default('txt',prm.exp.instructions)
-Screen('Flip', prm.monitor.window);  
-DrawFormattedText(prm.monitor.window, txt, ...
+%default('txt',prm.exp.instructions)
+Screen('Flip', prm.w.Number);  
+DrawFormattedText(prm.w.Number, txt, ...
                    'center','center', prm.monitor.white, [], [], [], 1.5);
 
-Screen('Flip', prm.monitor.window);    
-Screen('glPopMatrix', prm.monitor.window);
+Screen('Flip', prm.w.Number);    
+Screen('glPopMatrix', prm.w.Number);
 
-pause(.5);KbWait; 
-Screen('Flip', prm.monitor.window);
-
+warning('In instruction. Press Spacebar to continue.');
+waitforspace; waitfornokey;

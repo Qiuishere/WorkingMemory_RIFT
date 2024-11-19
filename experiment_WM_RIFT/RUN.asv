@@ -12,7 +12,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Initialize
-sca; clear; close all; clc; commandwindow;
+sca; clear all; close all; clc; commandwindow;
 addpath(genpath('Functions'));
    
 SubNo = 4;
@@ -23,8 +23,7 @@ RealRun = 0;  % this controls if use MEG (i.e. send triggers) and store date in 
 
 if Environment==2 && RealRun ==1
     useEye = 1; % this controls if use eye-Tracker
-else
-    useEye = 0;
+else useEye = 0;
 end
 
 
@@ -35,27 +34,21 @@ Runs = {'pra', ...
         'test'};
 
 % enquire about current run
-prompt      =   {'Enter next run number (1: practice; 2: test):',...
+prompt      =   {'Enter next run number:',...
     'Enter Participant number:',...
-    'RealRun?'...
-    'Use eye-tracker?'};
+    'RealRun='...
+    'Use eye-tracker?};
 title       =   sprintf('Participant %g', SubNo);
-defInput    =   {num2str( 1), num2str(SubNo), num2str(RealRun), num2str(useEye)};
+defInput    =   {num2str( 1), num2str(SubNo), num2str(RealRun)};
 Input       =   inputdlg( prompt, title, [1 60], defInput);
-
 
 %update all entries based on input
 RunType     = Runs{str2double(Input{1})};
 SubNo       = str2double(Input{2});
 RealRun     = str2double(Input{3});
-useEye      = str2double(Input{4});
 
-
-% initiate corresponding parameters
 prm = prm_RIFT(SubNo, RunType, RealRun, Environment, useEye);
 
-
-% gather participant's demographic data
 if  strcmp(prm.exp.RunType , 'test') && RealRun
     prm.subInfo = GetParticipantInfo('age','gender','hand');
 end
@@ -98,6 +91,6 @@ end
 %% Run experiment
 
 
-Adjustment_withFlicker(prm)
+Adjustment_withMask_Rift(prm,SubNo)
 
 clearvars; sca; ShowCursor;

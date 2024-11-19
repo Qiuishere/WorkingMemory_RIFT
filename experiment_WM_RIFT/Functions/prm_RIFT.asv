@@ -5,7 +5,6 @@ function prm    = prm_RIFT(SubNo, RunType, RealRun, Environment, useEye)
 
 %%=========================================================================
 % general exp prm
-prm.exp.SubNo          = SubNo;
 prm.exp.is_live        = RealRun;
 prm.exp.eyelink_live   = useEye;
 prm.exp.Environment    = Environment;
@@ -21,7 +20,6 @@ if strcmp(RunType,'pra')
     prm.exp.datedir =      'Data_Demo';
 
 end
-
 if mod(SubNo,2)
     prm.exp.body1st = 1;
 else
@@ -54,7 +52,7 @@ prm.Nfr        = structfun(@(x) round(x/1000 * prm.monitor.hz), prm.dur,'Uniform
 prm.SwitchFr   = cumsum(cell2mat(struct2cell(prm.Nfr)));
 prm.dur.trial  = sum(cell2mat(struct2cell(prm.dur)));
 
-prm.dur.fixRange = 1000:prm.monitor.dt*1000:1300;
+prm.dur.fixRange = 1000:prm.monitor.ifi*1000:1300;
 
 %% tagging strips
 
@@ -65,8 +63,6 @@ elseif Environment==2 % MEG lab
     prm.tag.refresh       = prm.monitor.hz * 12;
     prm.tag.tag_frex      = 55:0.5:65;
 end
-
-
 prm.tag.dt            = 1 / prm.tag.refresh; % in second
 
 prm.tag.duration      = prm.dur.delay; % in second

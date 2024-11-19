@@ -208,7 +208,7 @@ if prm.exp.eyelink_live
     Eyelink('command', 'set_idle_mode');
     WaitSecs(0.5);
     Eyelink('CloseFile'); % Close EDF file on Host PC
-    %% Transfer the edf file
+    % Transfer the edf file
     transfer_edf(prm); % try transfering the edf file
     Eyelink('Shutdown');
 end
