@@ -1,0 +1,71 @@
+Elapsed time is 3.206935 seconds.
+[Warning: Sham run: press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_retroCue_flip', 'C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_retroCue_flip.m', 197)" style="font-weight:bold">Adjustment_retroCue_flip</a> (<a href="matlab: opentoline('C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_retroCue_flip.m',197,0)">line 197</a>)] 
+
+ SCANNER TRIGGER (run 1): 21-10-2024 11:38:57 
+Waiting for the task to begin in 3 seconds...
+Elapsed time is 25.170199 seconds.
+{Cannot find an exact (case-sensitive) match for 'kbName'
+
+The closest match is: KbName in C:\Toolboxes\Psychtoolbox\PsychBasic\KbName.m
+
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_retroCue_flip', 'C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_retroCue_flip.m', 312)" style="font-weight:bold">Adjustment_retroCue_flip</a> (<a href="matlab: opentoline('C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_retroCue_flip.m',312,0)">line 312</a>)
+                    elseif keyCode(kbName('DownArrow'))
+} 
+keyCode(KbName('Space'))
+
+ans =
+
+     1
+
+keyCode(KbName('Space'))
+
+ans =
+
+     1
+
+keyCode(kbName('DownArrow'))
+{Cannot find an exact (case-sensitive) match for 'kbName'
+
+The closest match is: KbName in C:\Toolboxes\Psychtoolbox\PsychBasic\KbName.m
+} 
+keyCode(KbName('UpArrow'))
+
+ans =
+
+     0
+
+keyCode(KbName('ESCAPE'))
+
+ans =
+
+     0
+
+nf > SwitchFr(7)
+
+ans =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+~respFlag && nf > SwitchFr(7)
+
+ans =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+keydown
+
+keydown =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+Adjustment_retroCue_flip
+PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF9DDB23F80. Setting thread priority to HIGHEST as a work-around...
+Bitsi_Scanner: No Com port given, running in testing mode...

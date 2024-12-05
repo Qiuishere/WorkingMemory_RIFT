@@ -14,17 +14,17 @@ function rect = MakeOffsetRect(ptb, stim, dx, dy, quadrant)
 % Nstimli：how many stimuli will be draw in each quardrant, a matrix of 
 % [Nrow * Ncolumn]
 %                                                   Songyun  15.01.2024 DCC
-stim_w = size(stim.grating, 1);
-stim_h = size(stim.grating, 2);
+stim_w = stim(1);
+stim_h = stim(2);
 
 
-sub_w = ptb.width/4;
-sub_h = ptb.height/4;
+sub_w = ptb.Width/4;
+sub_h = ptb.Height/4;
 
-center = [ptb.width/2, ptb.height/2, ptb.width/2, ptb.height/2];
+center = [ptb.Width/2, ptb.Height/2, ptb.Width/2, ptb.Height/2];
 if nargin < 4
     % origin is center of actual screenbuffer
-    rect = [-stim_w/2+dx, ptb.height/2-stim_h/2+dy, ptb.width/2+stim_w/2+dx, +stim_h/2+dy];
+    rect = [-stim_w/2+dx, ptb.Height/2-stim_h/2+dy, ptb.Width/2+stim_w/2+dx, +stim_h/2+dy];
    
     
 elseif quadrant == 1
@@ -32,28 +32,28 @@ elseif quadrant == 1
     rect = center + [-sub_w-stim_w/2+dx, -sub_h-stim_h/2+dy, -sub_w+stim_w/2+dx, -sub_h+stim_h/2+dy];
     
     % check that we're not attempting to draw outside the selected quadrant
-%     assert(rect(1) >= 0 && rect(2) >= 0 && rect(3) <= ptb.width/2 && rect(4) <= ptb.height/2);
+%     assert(rect(1) >= 0 && rect(2) >= 0 && rect(3) <= ptb.Width/2 && rect(4) <= ptb.Height/2);
     
 elseif quadrant == 2
     % top right quadrant
     rect = center + [sub_w-stim_w/2+dx, -sub_h-stim_h/2+dy, sub_w+stim_w/2+dx, -sub_h+stim_h/2+dy];
     
     % check that we're not attempting to draw outside the selected quadrant
-%     assert(rect(1) >= ptb.width/2 && rect(2) >= 0 && rect(3) <= ptb.width && rect(4) <= ptb.height/2);
+%     assert(rect(1) >= ptb.Width/2 && rect(2) >= 0 && rect(3) <= ptb.Width && rect(4) <= ptb.Height/2);
     
 elseif quadrant == 3
     % bottom left quadrant
     rect = center + [-sub_w-stim_w/2+dx, sub_h-stim_h/2+dy, -sub_w+stim_w/2+dx, sub_h+stim_h/2+dy];
     
     % check that we're not attempting to draw outside the selected quadrant
-%     assert(rect(1) >= 0 && rect(2) >= ptb.height/2 && rect(3) <=  ptb.width/2 && rect(4) <= ptb.height);
+%     assert(rect(1) >= 0 && rect(2) >= ptb.Height/2 && rect(3) <=  ptb.Width/2 && rect(4) <= ptb.Height);
     
 elseif quadrant == 4
     % bottom right quadrant
     rect = center + [sub_w-stim_w/2+dx, sub_h-stim_h/2+dy, sub_w+stim_w/2+dx, sub_h+stim_h/2+dy];
     
     % check that we're not attempting to draw outside the selected quadrant
-%     assert(rect(1) >= ptb.width/2 && rect(2) >= ptb.height/2 && rect(3) <=  ptb.width && rect(4) <= ptb.height);
+%     assert(rect(1) >= ptb.Width/2 && rect(2) >= ptb.Height/2 && rect(3) <=  ptb.Width && rect(4) <= ptb.Height);
     
 else
     error('invalid quadrant specification');

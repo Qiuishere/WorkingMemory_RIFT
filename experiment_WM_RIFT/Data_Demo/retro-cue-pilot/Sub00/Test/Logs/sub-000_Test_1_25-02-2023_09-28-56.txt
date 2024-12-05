@@ -1,0 +1,43 @@
+[Warning: ITI cannot achieve qual distribution] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Body_RunRS_new2', 'C:\Projects\fMRI\BodyBias-Qiu\Body_RunRS_new2.m', 168)" style="font-weight:bold">Body_RunRS_new2</a> (<a href="matlab: opentoline('C:\Projects\fMRI\BodyBias-Qiu\Body_RunRS_new2.m',168,0)">line 168</a>)] 
+Elapsed time is 8.419583 seconds.
+[Warning: Sham run: press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Body_RunRS_new2', 'C:\Projects\fMRI\BodyBias-Qiu\Body_RunRS_new2.m', 217)" style="font-weight:bold">Body_RunRS_new2</a> (<a href="matlab: opentoline('C:\Projects\fMRI\BodyBias-Qiu\Body_RunRS_new2.m',217,0)">line 217</a>)] 
+
+ SCANNER TRIGGER (run 1): 25-02-2023 09:29:03 
+Waiting for the task to begin in 3 seconds...
+Responded 2, should be NaN.
+Responded 2, should be NaN.
+Responded 2, should be 2.
+Responded 2, should be NaN.
+Responded 1, should be 1.
+Responded 1, should be NaN.
+Responded 2, should be NaN.
+Responded 2, should be NaN.
+Responded 2, should be 1.
+Responded 2, should be 1.
+Responded 2, should be NaN.
+Responded 2, should be NaN.
+Responded 2, should be 1.
+Responded 2, should be NaN.
+Responded 2, should be 2.
+Responded 2, should be 2.
+Responded 1, should be 1.
+Responded 1, should be 1.
+Responded 2, should be 2.
+Responded 1, should be 1.
+Responded 2, should be 2.
+Responded 2, should be 2.
+Responded 2, should be 2.
+Responded 2, should be 2.
+Responded 2, should be 2.
+((( Accuracy for RS trials: 79.1667 %, RT = 0.801844 s )))
+((( Trial Duration 3777/3800 ms, SD = 503 ms )))
+Waiting for the task to end in 6 seconds...
+
+Serial ports (virtual response box) CLOSED at 25-Feb-2023 09:31:23. 
+
+RUN DURATION: 2.33333 mins (expected duration: 6.48 mins). 
+
+Diary closed (25-Feb-2023 09:31:23)
+

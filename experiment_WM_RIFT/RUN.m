@@ -75,18 +75,6 @@ if useEye
 end
 
 
-if Environment==2 % switch to 1440Hz mode
-    Datapixx('Open');
-    Datapixx('SetPropixxDlpSequenceProgram', 5); % 2 for 480, 5 for 1440 Hz, 0 for normal
-    Datapixx('RegWr');
-
-    Datapixx('SetPropixxLedCurrent', 0, 8);
-    Datapixx('SetPropixxLedCurrent', 1, 10);
-    Datapixx('SetPropixxLedCurrent', 2, 9);
-
-    Datapixx('RegWrRd');
-end
-
  
 % start the eye tracker
 if useEye
@@ -98,6 +86,6 @@ end
 %% Run experiment
 
 
-Adjustment_withFlicker(prm)
+[prm, T] = Adjustment_withMask_RIFT(prm);
 
 clearvars; sca; ShowCursor;

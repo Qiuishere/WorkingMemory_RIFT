@@ -1,0 +1,26 @@
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',14,0)">line 14</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 50)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',50,0)">line 50</a>)] 
+
+ Starting the task: (pra): 30-11-2024 15:19:53 
+Waiting for the task to begin in 3 seconds...
+Switch projector mode to 1440 hzResponded 42, should be 36.
+Switch projector mode to 120 hz
+ans =
+
+   1.0469e+06
+
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',14,0)">line 14</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 367)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',367,0)">line 367</a>)] 
+Switch projector mode to 1440 hz
+ans =
+
+   1.0470e+06
+
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',14,0)">line 14</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 395)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',395,0)">line 395</a>)] 
+
+
+Experiment terminated at 30-Nov-2024 15:23:11, diary closed...

@@ -29,7 +29,7 @@ BGColor     = 0;
 multiSample = 0;
 imagingPipeline = 0;
 OGL         = 0;    % is OpenGL set?
-debugWinRect= [20 20 1000 700];
+debugWinRect= [20 20 800 600];
 
 window= struct('Number', windowin, ...
     'Rect',         [0 0],  ...

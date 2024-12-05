@@ -1,9 +1,0 @@
-Elapsed time is 6.883267 seconds.
-[Warning: Sham run: press Spacebar to continue.] 
-[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_Rift', 'C:\Projects\WorkingMemory_RIFT\WM-Bias-Qiu\Adjustment_withMask_Rift.m', 191)" style="font-weight:bold">Adjustment_withMask_Rift</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\WM-Bias-Qiu\Adjustment_withMask_Rift.m',191,0)">line 191</a>)] 
-
- SCANNER TRIGGER (run 1): 12-11-2024 15:04:45 
-Waiting for the task to begin in 3 seconds...
-
-
-Experiment terminated at 12-Nov-2024 15:04:59, diary closed...

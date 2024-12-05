@@ -1,0 +1,289 @@
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',14,0)">line 14</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 51)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',51,0)">line 51</a>)] 
+
+ Starting the task: (pra): 03-12-2024 10:55:12 
+Waiting for the task to begin in 3 seconds...
+Elapsed time is 20.168235 seconds.
+{Index in position 2 exceeds array bounds (must not exceed 3312).
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 228)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',228,0)">line 228</a>)
+                            this_tag = prm.tag.tag_sigs(thestrip, nf_proj);
+} 
+timeforstrip(timeforstrip>0.0167)
+
+ans =
+
+    0.0260
+    0.0297
+    0.0183
+    0.0177
+    0.0176
+    0.0186
+
+fliptimes
+
+fliptimes =
+
+  Columns 1 through 13
+
+    3.0538    3.0750    3.0930    3.1112    3.1281    3.1442    3.1617    3.1771    3.1947    3.2102    3.2278    3.2431    3.2607
+
+  Columns 14 through 26
+
+    3.2769    3.2937    3.3101    3.3269    3.3432    3.3599    3.3769    3.3933    3.4113    3.4285    3.4435    3.4611    3.4785
+
+  Columns 27 through 39
+
+    3.4935    3.5106    3.5273    3.5435    3.5604    3.5774    3.5934    3.6108    3.6273    3.6433    3.6604    3.6784    3.6932
+
+  Columns 40 through 52
+
+    3.7113    3.7283    3.7433    3.7611    3.7782    3.7934    3.8113    3.8285    3.8437    3.8600    3.8776    3.8940    3.9112
+
+  Columns 53 through 65
+
+    3.9270    3.9446    3.9603    3.9776    3.9941    4.0101    4.0271    4.0443    4.0601    4.0778    4.0949    4.1112    4.1280
+
+  Columns 66 through 78
+
+    4.1439    4.1612    4.1779    4.1946    4.2102    4.2277    4.2439    4.2600    4.2770    4.2939    4.3100    4.3268    4.3576
+
+  Columns 79 through 91
+
+    4.3778    4.3941    4.4100    4.4272    4.4444    4.4605    4.4780    4.4942    4.5105    4.5272    4.5445    4.5607    4.5764
+
+  Columns 92 through 104
+
+    4.5934    4.6104    4.6266    4.6435    4.6606    4.6764    4.6936    4.7105    4.7267    4.7435    4.7615    4.7765    4.7938
+
+  Columns 105 through 117
+
+    4.8112    4.8265    4.8508    4.8684    4.8792    4.8938    4.9105    4.9271    4.9439    4.9608    4.9766    4.9935    5.0106
+
+  Columns 118 through 130
+
+    5.0267    5.0435    5.0603    5.0766    5.0935    5.1110    5.1265    5.1439    5.1605    5.1775    5.1944    5.2103    5.2274
+
+  Columns 131 through 143
+
+    5.2436    5.2609    5.2778    5.2945    5.3101    5.3274    5.3434    5.3604    5.3774    5.3933    5.4103    5.4274    5.4436
+
+  Columns 144 through 156
+
+    5.4602    5.4775    5.4935    5.5114    5.5284    5.5437    5.5628    5.5778    5.5934    5.6106    5.6275    5.6436    5.6609
+
+  Columns 157 through 169
+
+    5.6774    5.6936    5.7105    5.7274    5.7433    5.7604    5.7774    5.7935    5.8103    5.8274    5.8433    5.8604    5.8775
+
+  Columns 170 through 182
+
+    5.8937    5.9109    5.9279    5.9515    5.9620    5.9777    5.9935    6.0102    6.0274    6.0435    6.0604    6.0772    6.0934
+
+  Columns 183 through 195
+
+    6.1103    6.1274    6.1433    6.1604    6.1775    6.1934    6.2104    6.2277    6.2437    6.2681    6.2786    6.2937    6.3111
+
+  Columns 196 through 208
+
+    6.3278    6.3436    6.3607    6.3775    6.3933    6.4106    6.4275    6.4438    6.4607    6.4775    6.4939    6.5105    6.5276
+
+  Columns 209 through 221
+
+    6.5438    6.6104    6.6599    6.7171    6.7695    6.8197    6.8701    6.9208    6.9716    7.0224    7.0686    7.1152    7.1595
+
+  Columns 222 through 234
+
+    7.2051    7.2502    7.2946    7.3398    7.3865    7.4306    7.4753    7.5217    7.5660    7.6102    7.6613    7.7070    7.7528
+
+  Columns 235 through 247
+
+    7.7968    7.8410    7.8873    7.9328    7.9773    8.0245    8.0729    8.1202    8.1660    8.2105    8.2577    8.3055    8.3515
+
+  Columns 248 through 260
+
+    8.3972    8.4384    8.4841    8.5298    8.5754    8.6228    8.6685    8.7143    8.7620    8.8108    8.8617    8.9078    8.9556
+
+  Columns 261 through 273
+
+    9.0013    9.0464    9.0964    9.1418    9.1892    9.2298    9.2763    9.3236    9.3716    9.4124    9.4609    9.5120    9.5621
+
+  Columns 274 through 286
+
+    9.6089    9.6634    9.7133       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 287 through 299
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 300 through 312
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 313 through 325
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 326 through 338
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 339 through 351
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 352 through 364
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 365 through 377
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 378 through 390
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 391 through 403
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 404 through 416
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 417 through 429
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 430 through 442
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 443 through 455
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 456 through 468
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 469 through 481
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 482 through 494
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 495 through 507
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 508 through 520
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 521 through 533
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 534 through 546
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 547 through 559
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 560 through 572
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 573 through 585
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 586 through 598
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 599 through 611
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 612 through 624
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 625 through 637
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 638 through 650
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 651 through 663
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 664 through 676
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 677 through 689
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 690 through 702
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 703 through 715
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 716 through 728
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 729 through 741
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 742 through 754
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 755 through 767
+
+       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+
+  Columns 768 through 773
+
+       NaN       NaN       NaN       NaN       NaN       NaN
+
+prm.time.fliptimes(thetrial, :) = fliptimes;
+ clear
+(prm.dur.image1 + prm.dur.mask + prm.dur.delay)/1000
+{Undefined variable "prm" or class "prm.dur.image1".
+} 
+Adjustment_withMask_RIFT
+PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
+PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
+PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY22 ...
+PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY23 ...
+
+PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
+PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
+PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (96, 96), matching that of
+PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
+PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
+PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
+[Warning: SetScreen: invalid value for "Debug". Debug will be set to 0.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('SetScreen', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\SetScreen.m', 62)" style="font-weight:bold">SetScreen</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\SetScreen.m',62,0)">line 62</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Settings_General_MEG', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Settings_General_MEG.m', 49)" style="font-weight:bold">Settings_General_MEG</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Settings_General_MEG.m',49,0)">line 49</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 44)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',44,0)">line 44</a>)] 
+PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF93EBD3F80. Setting thread priority to HIGHEST as a work-around...

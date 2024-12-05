@@ -1,7 +1,7 @@
 
 function [blackTxts, whiteTxts] = make_tag_texture(prm)
 
-imgSize = RectWidth(prm.img.pos) ;
+imgSize = prm.img.WPix ;
 
 armLength = round(prm.bar.armLength);
 
@@ -39,11 +39,10 @@ fanMask = (radius >= minRadius & radius <= maxRadius) & ...
 % Set pixels within the fan mask to 255 (white)
 img(fanMask) = 255;
 
-
 % Apply Gaussian smoothing
 sigma = 2; % Adjust sigma for desired smoothness
-%img = imgaussfilt(img, sigma);
-%img(Y,X) = 255;
+img = imgaussfilt(img, sigma);
+
 alphaLayer = img;
 
 figure;
@@ -53,8 +52,10 @@ imshow(img/255)
 for i = 1:prm.tag.nStrip
     theimg = imrotate(img, prm.tag.angle(i), 'bilinear', 'crop');
     thealpha = imrotate(alphaLayer, prm.tag.angle(i), 'bilinear', 'crop'); % 'bilinear' interpolation, 'crop' option
-    blackbar = cat(3, 255-theimg, thealpha);
-    whitebar = cat(3, theimg, thealpha);
+    whitebar = repmat(theimg,[1,1,3]);
+    whitebar(:,:,4) = thealpha;
+    blackbar = repmat(255-theimg,[1,1,3]);
+    blackbar(:,:,4) = thealpha;
     
     
     blackTxts(i,1) = Screen('MakeTexture', prm.w.Number,  blackbar);

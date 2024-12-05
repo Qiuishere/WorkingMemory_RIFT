@@ -1,0 +1,35 @@
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',14,0)">line 14</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 44)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',44,0)">line 44</a>)] 
+Elapsed time is 5.106114 seconds.
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('waitforspace')" style="font-weight:bold">waitforspace</a>
+[!!!] Program aborted by user
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 15)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',15,0)">line 15</a>)
+waitforspace; waitfornokey;
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 44)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',44,0)">line 44</a>)
+     instruction_screen(prm, prm.exp.inst);
+} 
+ clear
+Adjustment_withMask_RIFT
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('monitor_info')" style="font-weight:bold">monitor_info</a>
+Resolution is not 1280 x 720!
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('prm_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Functions\prm_RIFT.m', 39)" style="font-weight:bold">prm_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\prm_RIFT.m',39,0)">line 39</a>)
+prm.monitor            = monitor_info([], Environment);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 21)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',21,0)">line 21</a>)
+    prm = prm_RIFT(SubNo, RunType, RealRun, Environment, useEye);
+} 
+opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\prm_RIFT.m',39,0)
+matlab.internal.language.introspective.errorDocCallback('monitor_info')
+opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\prm_RIFT.m',39,0)
+Adjustment_withMask_RIFT
+[Warning: instrfind will be removed in a future release. There is no simple replacement for this.] 
+[Warning: serial will be removed in a future release. Use serialport instead.] 
+[Warning: SetScreen: invalid value for "Debug". Debug will be set to 0.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('SetScreen', 'D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\SetScreen.m', 62)" style="font-weight:bold">SetScreen</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\SetScreen.m',62,0)">line 62</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Settings_General_MEG', 'D:\Users\qiuhan\experiment_WM_RIFT\Settings_General_MEG.m', 49)" style="font-weight:bold">Settings_General_MEG</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Settings_General_MEG.m',49,0)">line 49</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 37)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',37,0)">line 37</a>)] 
+PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FFF11115140. Setting thread priority to HIGHEST as a work-around...

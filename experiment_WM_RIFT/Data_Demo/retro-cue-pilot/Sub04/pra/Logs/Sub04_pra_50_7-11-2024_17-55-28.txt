@@ -1,0 +1,43 @@
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',14,0)">line 14</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_behavior', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_behavior.m', 42)" style="font-weight:bold">Adjustment_withMask_behavior</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_behavior.m',42,0)">line 42</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('RUN', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\RUN.m', 89)" style="font-weight:bold">RUN</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\RUN.m',89,0)">line 89</a>)] 
+
+ Starting the task: (pra): 27-11-2024 17:55:33 
+Waiting for the task to begin in 3 seconds...
+Responded 52, should be 54.
+Responded 37, should be 48.
+Responded 52, should be 30.
+Responded 58, should be 30.
+
+ans =
+
+   5.4426e+05
+
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',14,0)">line 14</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_behavior', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_behavior.m', 278)" style="font-weight:bold">Adjustment_withMask_behavior</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_behavior.m',278,0)">line 278</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('RUN', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\RUN.m', 89)" style="font-weight:bold">RUN</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\RUN.m',89,0)">line 89</a>)] 
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',14,0)">line 14</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_behavior', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_behavior.m', 308)" style="font-weight:bold">Adjustment_withMask_behavior</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_behavior.m',308,0)">line 308</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('RUN', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\RUN.m', 89)" style="font-weight:bold">RUN</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\RUN.m',89,0)">line 89</a>)] 
+Responded 33, should be 54.
+Responded 58, should be 30.
+Responded 30, should be 30.
+((( mean Error for Body: -14.2, for Bar = 1.4 )))
+Elapsed time is 109.736942 seconds.
+{Reference to non-existent field 'theory'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_behavior', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_behavior.m', 362)" style="font-weight:bold">Adjustment_withMask_behavior</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_behavior.m',362,0)">line 362</a>)
+    fprintf('RUN DURATION: %g mins (expected duration: %g mins). \n\n', prm.time.actual, prm.time.theory);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('RUN', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\RUN.m', 89)" style="font-weight:bold">RUN</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\RUN.m',89,0)">line 89</a>)
+[prm, T] = Adjustment_withMask_behavior(prm);
+} 
+opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_behavior.m',362,0)
+% clean log
+    fprintf('Diary closed (%s)\n\n', datestr(now));
+Diary closed (27-Nov-2024 17:57:37)
+
+    diary off

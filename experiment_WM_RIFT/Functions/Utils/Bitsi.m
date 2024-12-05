@@ -1,7 +1,7 @@
 % Class "Bitsi"
 %
 % %Constructor%
-% 
+%
 % Bitsi(comport)
 %
 % When creating a new 'bitsi' object, you can specify to which comport it
@@ -79,7 +79,7 @@
 
 
 classdef Bitsi<handle % extend handle so that properties are modifiable (weird matlab behavior)
-    
+
     properties (SetAccess = public)
         serobj;
         debugmode = false;
@@ -87,20 +87,20 @@ classdef Bitsi<handle % extend handle so that properties are modifiable (weird m
         ptb = [];
         triggerLog = [];
     end
-    
+
     methods
         function B = Bitsi(comport)
             if (strcmp(comport, ''))
                 fprintf('Bitsi: No Com port given, running in testing mode...\n')
                 B.debugmode = true;
-                
+
                 KbName('UnifyKeyNames');
             end
-            
+
             if (not(B.debugmode))
                 delete(instrfind);
                 B.serobj = serial(comport);
-                
+
                 % serial port configuration
                 set(B.serobj, 'Baudrate',        115200);
                 set(B.serobj, 'Parity',          'none');
@@ -109,60 +109,60 @@ classdef Bitsi<handle % extend handle so that properties are modifiable (weird m
                 %set(B.serobj, 'Terminator',      'CR/LF'); % line ending character
                 % see also:
                 % http://www.mathworks.com/matlabcentral/newsreader/view_original/292759
-                
+
                 %set(B.serobj, 'InputBufferSize', 1);       % set read buffBuffer for read
                 set(B.serobj, 'FlowControl',     'none');   %
-                
+
                 % open the serial port
                 fopen(B.serobj);
-                
+
                 % since matlab pulls the DTR line, the arduino will reset
                 % so we have to wait for the initialization of the controller
                 oldState = pause('query');
                 pause on;
                 pause(2.5);
                 pause(oldState);
-                
+
                 % read all bytes available at the serial port
                 status = '[nothing]';
-                
+
                 if B.serobj.BytesAvailable > 0
                     status = fread(B.serobj, B.serobj.BytesAvailable);
                 end
-                
+
                 %fprintf('BITSI says: %s', char(status));
                 %fprintf('\n');
             end
         end
-        
-        
+
+
         function sendTrigger(B, code)
             % checking code range
             if code > 255
                 error('Bitsi: Error, code should not exeed 255\n');
             end
-            
+
             if code < 1
                 error('Bitsi: Error, code should be bigger than 0\n');
             end
-            
+
             %fprintf('Bitsi: trigger code %i\n', code);
-            
+
             % log trigger
             B.triggerLog(end+1).value = code;
             B.triggerLog(end).timestamp = GetSecs();
-            
+
             if ~B.debugmode
                 fwrite(B.serobj, code)
             end
         end
-        
-        
+
+
         function x = numberOfResponses(B)
             x = B.serobj.BytesAvailable;
         end
-        
-        
+
+
         function clearResponses(B)
             if ~B.debugmode
                 numberOfBytes = B.serobj.BytesAvailable;
@@ -172,26 +172,26 @@ classdef Bitsi<handle % extend handle so that properties are modifiable (weird m
             end
         end
 
-       
-        function [response, rt] = getResponse(B, timeout, return_after_response)
+
+        function [response, when] = waitResponse(B, timeout, return_after_response)
             response = 0;
             startTime = GetSecs;
-            
+
             % start stopwatch
             tic
             if (B.debugmode)
                 while toc < timeout
                     % poll the state of the keyboard
                     [keyisdown, when, keyCode] = KbCheck;
-                    
+
                     % if there wasn't a response before and there is a
                     % keyboard press available
                     if response == 0 && keyisdown
                         response = find(keyCode);
-                        
+
                         if ismember(response, B.validResponses)
                             rt = when - startTime;
-                        
+
                             if return_after_response
                                 break;
                             end
@@ -199,67 +199,123 @@ classdef Bitsi<handle % extend handle so that properties are modifiable (weird m
                             response = 0;
                         end
                     end
-                    
+
                     WaitSecs(0.001);
                 end
-                
+
                 % if no response yet after timeout
                 if (response == 0)
                     rt = GetSecs - startTime;
                 end
             else
-                
+
                 % depending on 'return_after_response' this loop will run
                 % for timeout seconds or until a response is given
                 while toc < timeout
-                    
+
                     % check whether we should pause
-%                     [keydown, ~, keycode] = KbCheck();
-%                     if keydown && keycode(80) % button p - pause
-%                         PauseScreen(B.ptb);
-%                         response = 0;
-%                         break;
-%                     end
-                    
+                    %                     [keydown, ~, keycode] = KbCheck();
+                    %                     if keydown && keycode(80) % button p - pause
+                    %                         PauseScreen(B.ptb);
+                    %                         response = 0;
+                    %                         break;
+                    %                     end
+
                     % if there wasn't a response before and there is a
                     % serial character available
                     if response == 0 && B.serobj.BytesAvailable > 0
-                        
+
                         response = fread(B.serobj, 1);
-                        
+
                         % allow only characters present in the
                         % validResponses array
                         if ismember(response, B.validResponses)
-                        
-                            rt = GetSecs - startTime;
+
+                            when = GetSecs;
                             %fprintf('Bitsi: response code %i\n', response);
 
                             if (return_after_response)
                                 break;
                             end
-                            
+
                         else
                             response = 0;
                         end
-                        
+
                     end
-                    
-                    WaitSecs(0.001);
+
+                    %WaitSecs(0.001);
                 end
-                
+
                 % if no response yet after timeout
                 if (response == 0)
-                    rt = GetSecs - startTime;
+                    when = 0;
                 end
-                
+
                 % now we waited 'duration' seconds and there might be a
                 % button captured, there may be some additional responses
                 % in the serial buffer
-                B.clearResponses();
+                %B.clearResponses();
             end
         end
-        
-        
+
+
+        function [response, when] = getResponse(B)
+            response = 0;
+
+            % start stopwatch
+            tic
+            if (B.debugmode)
+                    % poll the state of the keyboard
+                    [keyisdown, when, keyCode] = KbCheck;
+
+                    % if there wasn't a response before and there is a
+                    % keyboard press available
+                    if response == 0 && keyisdown
+                        response = find(keyCode);
+
+                        if ismember(response, B.validResponses)
+                            when = GetSecs;
+                        else
+                            response = 0;
+                        end
+                    end
+
+                    WaitSecs(0.001);
+
+            else
+                    % if there wasn't a response before and there is a
+                    % serial character available
+                    if response == 0 && B.serobj.BytesAvailable > 0
+
+                        response = fread(B.serobj, 1);
+
+                        % allow only characters present in the
+                        % validResponses array
+                        if ismember(response, B.validResponses)
+
+                            when = GetSecs;
+                            %fprintf('Bitsi: response code %i\n', response);
+                        else
+                            response = 0;
+                            when = 0;
+                        end
+                    else
+                            when = 0; 
+
+                    end
+
+                    %WaitSecs(0.001);
+
+                % now we waited 'duration' seconds and there might be a
+                % button captured, there may be some additional responses
+                % in the serial buffer
+                % B.clearResponses();
+            end
+        end
+
+
+
         % close
         function close(B)
             if (not(B.debugmode))

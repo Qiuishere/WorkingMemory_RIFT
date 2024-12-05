@@ -10,8 +10,8 @@ prm.path               = fileparts(mfilename('fullpath'));
 % cd(prm.path);cd('..\');
 %%=========================================================================
 % general exp prm
-prm.exp.is_live        = 1;
-prm.exp.eyelink_live   = 1;
+prm.exp.is_live        = 0;
+prm.exp.eyelink_live   = 0;
 prm.exp.view_distance  = 100;
 prm.exp.edgeEyeDistTop = 650;
 prm.exp.edgeEyeDistBottom = 665;
@@ -55,7 +55,7 @@ for i = 1:numel(prm.stim.AllStim)
 end
 
 % freqeuncy setting
-prm.stim.refresh       = prm.w.RefreshRate * 12;
+prm.stim.refresh       = prm.monitor.hz * 12;
 prm.stim.dt            = 1 / prm.stim.refresh; % in second
 prm.stim.tag_frex      = [55,60,65,70];%[2 4 8 1];
 prm.stim.duration      = 4; % in second

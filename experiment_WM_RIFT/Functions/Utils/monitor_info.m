@@ -18,7 +18,7 @@ switch Environment
         
     case 2 % In MEG
         correctRefRate = 120;
-        correctRes = [1280 720]; % This is the Resolution we are supposed to use
+        correctRes = [1920 1080]; % This is the Resolution we are supposed to use
         monitor.viewDist = 100; % viewing distance in cm
         
     case 3 % In Behaviour lab

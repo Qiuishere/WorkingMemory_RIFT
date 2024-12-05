@@ -1,0 +1,106 @@
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',14,0)">line 14</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 51)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',51,0)">line 51</a>)] 
+Elapsed time is 219.051417 seconds.
+{Out of memory. Type "help memory" for your options.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('fliplr', 'C:\Program Files\MATLAB\R2019a\toolbox\matlab\elmat\fliplr.m', 13)" style="font-weight:bold">fliplr</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2019a\toolbox\matlab\elmat\fliplr.m',13,0)">line 13</a>)
+x = flip(x,2);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('make_tag_texture_full', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\make_tag_texture_full.m', 73)" style="font-weight:bold">make_tag_texture_full</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\make_tag_texture_full.m',73,0)">line 73</a>)
+    blackTxts(thefr,2) = Screen('MakeTexture', prm.w.Number,  fliplr(texture));
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 95)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',95,0)">line 95</a>)
+    [blackTxts] = make_tag_texture_full(prm);
+} 
+imgSize = prm.img.WPix ;
+
+armLength = round(prm.bar.armLength);
+
+img = zeros(imgSize, imgSize);
+
+if mod(imgSize, 2)==0
+    center = imgSize/2;
+else
+    center = ceil(imgSize/2);
+end
+% Create meshgrid of pixel coordinates relative to center
+[xGrid, yGrid] = meshgrid(1:imgSize, 1:imgSize);
+x = xGrid - center;
+y = center - yGrid; % Flip y to make it in the "upright" direction
+
+% Convert Cartesian coordinates to polar coordinates
+[theta, radius] = cart2pol(x, y);
+theta = rad2deg(theta); % Convert theta to degrees
+
+% Define the fan angle and radius range
+fanAngle = prm.tag.stripWidth; % Total angle of fan in degrees
+halfFanAngle = fanAngle / 2; % Half of the angle for symmetric bounds
+angleCenter = 90; % Upright direction (90 degrees)
+minAngle = angleCenter - halfFanAngle;
+maxAngle = angleCenter + halfFanAngle;
+
+% Define radius range for the fan
+minRadius = armLength - round(0.5 * armLength);
+maxRadius = armLength;
+
+% Create a mask for the fan area
+fanMask = (radius >= minRadius & radius <= maxRadius) & ...
+    (theta >= minAngle & theta <= maxAngle);
+
+% Set pixels within the fan mask to 255 (white)
+img(fanMask) = 255;
+
+
+% Apply Gaussian smoothing
+%sigma = 2; % Adjust sigma for desired smoothness
+%img = imgaussfilt(img, sigma);
+%img(Y,X) = 255;
+alphaLayer = img;
+
+figure
+
+blackTxts = zeros(2, size(prm.tag.tag_sigs, 2));
+for thefr = 1: 30%size(prm.tag.tag_sigs, 2)
+    for i = 1:prm.tag.nStrip
+        
+        thelumi  = prm.tag.tag_sigs(i, thefr);
+        theimg   = img *thelumi;
+        fans(:,:,i)   = imrotate(theimg, prm.tag.angle(i), 'bilinear', 'crop');
+        %thealpha = imrotate(alphaLayer, prm.tag.angle(i), 'bilinear', 'crop'); % 'bilinear' interpolation, 'crop' option
+        
+    end
+    
+    allfans = sum(fans,3);
+    
+    subplot(3,10,thefr)
+    imshow(allfans/255)
+    alpha = zeros(imgSize, imgSize);
+    alpha(allfans~=0) = 255;
+    texture = repmat(allfans,[1,1,3]);
+    texture(:,:,4) = alpha;
+    
+    
+   % blackTxts(thefr,1) = Screen('MakeTexture', prm.w.Number,  texture);
+    %blackTxts(thefr,2) = Screen('MakeTexture', prm.w.Number,  fliplr(texture));
+    
+end
+Your MATLAB session has timed out.  All license keys have been returned.
+      clear
+Adjustment_withMask_RIFT
+PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
+PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
+PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY22 ...
+PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY23 ...
+
+PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
+PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
+PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (96, 96), matching that of
+PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
+PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
+PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
+[Warning: SetScreen: invalid value for "Debug". Debug will be set to 0.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('SetScreen', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\SetScreen.m', 62)" style="font-weight:bold">SetScreen</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\SetScreen.m',62,0)">line 62</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Settings_General_MEG', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Settings_General_MEG.m', 49)" style="font-weight:bold">Settings_General_MEG</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Settings_General_MEG.m',49,0)">line 49</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 44)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',44,0)">line 44</a>)] 
+PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF93EBD3F80. Setting thread priority to HIGHEST as a work-around...

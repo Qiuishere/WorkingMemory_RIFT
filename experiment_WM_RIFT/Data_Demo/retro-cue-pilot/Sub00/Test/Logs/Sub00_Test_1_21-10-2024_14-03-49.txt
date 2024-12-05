@@ -1,0 +1,226 @@
+Elapsed time is 3.358999 seconds.
+[Warning: Sham run: press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_retroCue_flip', 'C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_retroCue_flip.m', 197)" style="font-weight:bold">Adjustment_retroCue_flip</a> (<a href="matlab: opentoline('C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_retroCue_flip.m',197,0)">line 197</a>)] 
+
+ SCANNER TRIGGER (run 1): 21-10-2024 14:03:53 
+Waiting for the task to begin in 3 seconds...
+
+currentAng =
+
+    45
+
+
+currentAng =
+
+    46
+
+
+currentAng =
+
+    47
+
+
+currentAng =
+
+    48
+
+
+currentAng =
+
+    49
+
+
+currentAng =
+
+    50
+
+
+currentAng =
+
+    51
+
+
+currentAng =
+
+    52
+
+
+currentAng =
+
+    53
+
+
+currentAng =
+
+    54
+
+
+currentAng =
+
+    55
+
+
+currentAng =
+
+    56
+
+
+currentAng =
+
+    57
+
+
+currentAng =
+
+    58
+
+
+currentAng =
+
+    59
+
+
+currentAng =
+
+    60
+
+
+currentAng =
+
+    60
+
+
+currentAng =
+
+    60
+
+
+currentAng =
+
+    60
+
+
+currentAng =
+
+    60
+
+
+currentAng =
+
+    60
+
+
+currentAng =
+
+    59
+
+
+currentAng =
+
+    58
+
+
+currentAng =
+
+    57
+
+
+currentAng =
+
+    56
+
+
+currentAng =
+
+    55
+
+
+currentAng =
+
+    54
+
+
+currentAng =
+
+    53
+
+
+currentAng =
+
+    52
+
+
+currentAng =
+
+    51
+
+
+currentAng =
+
+    52
+
+
+currentAng =
+
+    53
+
+
+currentAng =
+
+    54
+
+
+currentAng =
+
+    55
+
+
+currentAng =
+
+    56
+
+
+currentAng =
+
+    57
+
+Elapsed time is 17.821286 seconds.
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_retroCue_flip', 'C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_retroCue_flip.m', 321)" style="font-weight:bold">Adjustment_retroCue_flip</a> (<a href="matlab: opentoline('C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_retroCue_flip.m',321,0)">line 321</a>)
+Unable to perform assignment because the size of the left side is 1-by-1 and the size of the right side is
+1-by-37.
+} 
+opentoline('C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_retroCue_flip.m',321,0)
+history
+
+history =
+
+  Columns 1 through 18
+
+    44    45    46    47    48    49    50    51    52    53    54    55    56    57    58    59    60    60
+
+  Columns 19 through 36
+
+    60    60    60    60    59    58    57    56    55    54    53    52    51    52    53    54    55    56
+
+  Column 37
+
+    57
+
+T.adjustHistory(thetrial) = history;
+{Unable to perform assignment because the size of the left side is 1-by-1 and the size of the right side is
+1-by-37.
+} 
+thetrial
+
+thetrial =
+
+     1
+
+T.adjustHistory{thetrial} = history;
+Adjustment_retroCue_flip
+[Warning: SetScreen: invalid value for "Debug". Debug will be set to 0.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('SetScreen', 'C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Functions\Utils\SetScreen.m', 62)" style="font-weight:bold">SetScreen</a> (<a href="matlab: opentoline('C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Functions\Utils\SetScreen.m',62,0)">line 62</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Settings_General', 'C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Settings_General.m', 43)" style="font-weight:bold">Settings_General</a> (<a href="matlab: opentoline('C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Settings_General.m',43,0)">line 43</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_retroCue_flip', 'C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_retroCue_flip.m', 32)" style="font-weight:bold">Adjustment_retroCue_flip</a> (<a href="matlab: opentoline('C:\Projects\RIFT-WorkingMemory\BodyBias-Qiu\Adjustment_retroCue_flip.m',32,0)">line 32</a>)] 
+PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF9DDB23F80. Setting thread priority to HIGHEST as a work-around...
+Bitsi_Scanner: No Com port given, running in testing mode...

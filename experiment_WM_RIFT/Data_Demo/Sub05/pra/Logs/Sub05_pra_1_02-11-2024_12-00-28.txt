@@ -1,9 +1,0 @@
-Elapsed time is 4.602053 seconds.
-[Warning: Sham run: press Spacebar to continue.] 
-
- SCANNER TRIGGER (run 1): 02-11-2024 12:00:32 
-Waiting for the task to begin in 3 seconds...
-Responded 46, should be 45.
-
-
-Experiment terminated at 02-Nov-2024 12:00:46, diary closed...

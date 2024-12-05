@@ -53,7 +53,7 @@ topPriorityLevel = MaxPriority(prm.w.Number);
 Priority(topPriorityLevel);
 
 if RealRun
-    HideCursor(ScreenID);
+    HideCursor(prm.monitor.screenId);
 end
 
 

@@ -1,0 +1,49 @@
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',14,0)">line 14</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 44)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',44,0)">line 44</a>)] 
+
+ Starting the task: (pra): 29-11-2024 17:37:46 
+Waiting for the task to begin in 3 seconds...
+Switch projector mode to 1440 hzElapsed time is 9.347296 seconds.
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Bitsi/sendTrigger')" style="font-weight:bold">Bitsi/sendTrigger</a>
+Bitsi: Error, code should be bigger than 0\n
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 245)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',245,0)">line 245</a>)
+                if RealRun; prm.trigger.btsi.sendTrigger(prm.trigger.FixStart); end
+} 
+matlab.internal.language.introspective.errorDocCallback('Bitsi/sendTrigger')
+opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',245,0)
+prm.trigger.FixStart
+
+ans =
+
+     0
+
+                if RealRun; prm.trigger.btsi.sendTrigger(prm.trigger.FixStart); end
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Bitsi/sendTrigger')" style="font-weight:bold">Bitsi/sendTrigger</a>
+Bitsi: Error, code should be bigger than 0\n
+} 
+prm.trigger.ExpStart      = 1;
+prm.trigger.FixStart      = 11; % start of a trial
+prm.trigger.TargetStart   = 21; % stimuli onset
+prm.trigger.TargetEnd     = 22; 
+prm.trigger.DelayStart    = 31; 
+prm.trigger.DelayEnd      = 32;
+prm.trigger.Response      = 40;
+prm.trigger.ExpEnd        = 99;
+                if RealRun; prm.trigger.btsi.sendTrigger(prm.trigger.FixStart); end
+                if RealRun; prm.trigger.btsi.sendTrigger(prm.trigger.FixStart); end
+                if RealRun; prm.trigger.btsi.sendTrigger(prm.trigger.FixStart); end
+                if RealRun; prm.trigger.btsi.sendTrigger(prm.trigger.FixStart); end
+                if RealRun; prm.trigger.btsi.sendTrigger(prm.trigger.FixStart); end
+                        if RealRun; prm.trigger.btsi.sendTrigger(prm.trigger.Response); end
+                        if RealRun; prm.trigger.btsi.sendTrigger(prm.trigger.Response); end
+ clear
+Adjustment_withMask_RIFT
+[Warning: instrfind will be removed in a future release. There is no simple replacement for this.] 
+[Warning: serial will be removed in a future release. Use serialport instead.] 
+[Warning: SetScreen: invalid value for "Debug". Debug will be set to 0.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('SetScreen', 'D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\SetScreen.m', 62)" style="font-weight:bold">SetScreen</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\SetScreen.m',62,0)">line 62</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Settings_General_MEG', 'D:\Users\qiuhan\experiment_WM_RIFT\Settings_General_MEG.m', 49)" style="font-weight:bold">Settings_General_MEG</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Settings_General_MEG.m',49,0)">line 49</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 37)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',37,0)">line 37</a>)] 
+PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FFF11115140. Setting thread priority to HIGHEST as a work-around...

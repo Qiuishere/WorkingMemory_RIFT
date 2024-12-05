@@ -1,0 +1,11 @@
+clear
+rr=1
+commandwindow
+while rr==1
+    [keydown,respT,keyCode] = KbCheck;
+    if keydown
+        rr=0
+    end
+
+end
+fprintf('end')

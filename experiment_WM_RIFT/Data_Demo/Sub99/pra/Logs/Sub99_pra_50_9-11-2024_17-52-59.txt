@@ -1,0 +1,33 @@
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',14,0)">line 14</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 44)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',44,0)">line 44</a>)] 
+
+ Starting the task: (pra): 29-11-2024 17:53:06 
+Waiting for the task to begin in 3 seconds...
+Switch projector mode to 1440 hz{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('serial')" style="font-weight:bold">serial</a>
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('serial/subsref>localIndexOf', 'C:\Program Files\MATLAB\R2022b\toolbox\matlab\serial\@serial\subsref.m', 168)" style="font-weight:bold">serial/subsref>localIndexOf</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2022b\toolbox\matlab\serial\@serial\subsref.m',168,0)">line 168</a>)
+        result = feval(c{1}, jobj(index1{:}));
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('serial/subsref', 'C:\Program Files\MATLAB\R2022b\toolbox\matlab\serial\@serial\subsref.m', 113)" style="font-weight:bold">indexing</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2022b\toolbox\matlab\serial\@serial\subsref.m',113,0)">line 113</a>)
+    indexObj = localIndexOf(obj, index1, isColon);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Bitsi/getResponse', 'D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\Bitsi.m', 226)" style="font-weight:bold">Bitsi/getResponse</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\Bitsi.m',226,0)">line 226</a>)
+                    if response == 0 && B.serobj.BytesAvailable > 0
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 264)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',264,0)">line 264</a>)
+                 [keydown,respT] = prm.trigger.btsi.getResponse(Inf, true);
+} 
+ShowCursor
+
+ans =
+
+     0
+
+PTB-INFO: Enforcing script abortion and restoring desktop by executing Screen('CloseAll') now!
+PTB-INFO: Please ignore the false error message (INTERNAL PSYCHTOOLBOX ERROR) caused by this...
+opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',264,0)
+                 [keydown,respT] = prm.trigger.btsi.getResponse(Inf, true);
+ 
+Adjustment_withMask_RIFT

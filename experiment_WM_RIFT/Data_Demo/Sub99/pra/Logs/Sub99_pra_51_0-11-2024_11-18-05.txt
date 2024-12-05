@@ -1,0 +1,69 @@
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',14,0)">line 14</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 47)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',47,0)">line 47</a>)] 
+
+ Starting the task: (pra): 30-11-2024 11:18:10 
+Waiting for the task to begin in 3 seconds...
+Switch projector mode to 1440 hzElapsed time is 0.336023 seconds.
+{Output argument "when" (and possibly others) not assigned a value in the execution with "Bitsi/getResponse"
+function.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 267)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',267,0)">line 267</a>)
+                 [keydown,respT] = prm.trigger.btsi.getResponse;
+} 
+opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',267,0)
+            [keydown,respT,keyCode] = KbCheck;
+  clear
+[keydown,respT,keyCode] = KbCheck;
+[keydown,respT,keyCode] = KbCheck;
+[keydown,respT,keyCode] = KbCheck;
+[keydown,respT,keyCode] = KbCheck;
+[keydown,respT,keyCode] = KbCheck;
+[keydown,respT,keyCode] = KbCheck;
+[keydown,respT,keyCode] = KbCheck;
+[keydown,a,keyCode] = KbCheck;
+                 [keydown,respT] = prm.trigger.btsi.getResponse;
+{Unable to resolve the name 'prm.trigger.btsi.getResponse'.
+} 
+Adjustment_withMask_RIFT
+[Warning: instrfind will be removed in a future release. There is no simple replacement for this.] 
+[Warning: serial will be removed in a future release. Use serialport instead.] 
+{Unrecognized property 'up' for class 'Bitsi'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('prm_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Functions\prm_RIFT.m', 110)" style="font-weight:bold">prm_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\prm_RIFT.m',110,0)">line 110</a>)
+  prm.trigger.btsi.up = 98;
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 24)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',24,0)">line 24</a>)
+    prm = prm_RIFT(SubNo, RunType, RealRun, Environment, useEye);
+} 
+opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',24,0)
+opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\prm_RIFT.m',110,0)
+  prm.trigger.btsi.up = 98;
+  prm.trigger.btsi.up = 98;
+  prm.trigger.btsi.down = 97;
+  prm.trigger.btsi.space = 101;
+  prm.trigger.btsi.validResponses = [prm.trigger.btsi.up, prm.trigger.btsi.down, prm.trigger.btsi.space]; % R index finger, R middle, and L index
+                 [keydown,respT] = prm.trigger.btsi.getResponse;
+{Unrecognized field name "getResponse".
+} 
+clear
+  prm.trigger.btsi = Bitsi('COM1'); % or whichever COM-port used by the PC
+[Warning: instrfind will be removed in a future release. There is no simple replacement for this.] 
+[Warning: serial will be removed in a future release. Use serialport instead.] 
+                 [keydown,respT] = prm.trigger.btsi.getResponse;
+{Output argument "when" (and possibly others) not assigned a value in the execution with "Bitsi/getResponse" function.
+} 
+  prm.trigger.btsi = Bitsi('COM1'); % or whichever COM-port used by the PC
+[Warning: instrfind will be removed in a future release. There is no simple replacement for this.] 
+[Warning: serial will be removed in a future release. Use serialport instead.] 
+                 [keydown,respT] = prm.trigger.btsi.getResponse;
+Adjustment_withMask_RIFT
+{Unrecognized field name "exp".
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 27)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',27,0)">line 27</a>)
+    RealRun = prm.exp.is_live;
+} 
+clear
+Adjustment_withMask_RIFT
+[Warning: instrfind will be removed in a future release. There is no simple replacement for this.] 
+[Warning: serial will be removed in a future release. Use serialport instead.] 
