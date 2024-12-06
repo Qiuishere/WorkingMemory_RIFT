@@ -1,0 +1,135 @@
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',14,0)">line 14</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 47)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',47,0)">line 47</a>)] 
+Error in function MakeTexture: 	Usage error
+Creation of a floating point precision texture requested in SDR mode, but uint8 matrix provided! Only double matrices are acceptable for this mode.
+Elapsed time is 13.168130 seconds.
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Screen')" style="font-weight:bold">Screen</a>
+Usage:
+
+textureIndex=Screen('MakeTexture', WindowIndex, imageMatrix [, optimizeForDrawAngle=0] [, specialFlags=0] [, floatprecision] [, textureOrientation=0] [,
+textureShader=0]);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('make_tag_texture', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\make_tag_texture.m', 69)" style="font-weight:bold">make_tag_texture</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\make_tag_texture.m',69,0)">line 69</a>)
+whiteTxts(i,1) = Screen('MakeTexture', prm.w.Number,  whitebar, [], [], 2); % set specialflag to 2 to ensure it will be read as LA format
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 81)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',81,0)">line 81</a>)
+    [blackTxts, whiteTxts] = make_tag_texture(prm);
+} 
+ uint8(0.333)
+
+ans =
+
+  <a href="matlab:helpPopup uint8" style="font-weight:bold">uint8</a>
+
+   0
+
+imgSize = prm.img.WPix ;
+
+armLength = round(prm.bar.armLength);
+
+img = zeros(imgSize, imgSize);
+
+if mod(imgSize, 2)==0
+    center = imgSize/2;
+else
+    center = ceil(imgSize/2);
+end
+% Create meshgrid of pixel coordinates relative to center
+[xGrid, yGrid] = meshgrid(1:imgSize, 1:imgSize);
+x = xGrid - center;
+y = center - yGrid; % Flip y to make it in the "upright" direction
+
+% Convert Cartesian coordinates to polar coordinates
+[theta, radius] = cart2pol(x, y);
+theta = rad2deg(theta); % Convert theta to degrees
+
+% Define the fan angle and radius range
+fanAngle = prm.tag.stripWidth; % Total angle of fan in degrees
+halfFanAngle = fanAngle / 2; % Half of the angle for symmetric bounds
+angleCenter = 90; % Upright direction (90 degrees)
+minAngle = angleCenter - halfFanAngle;
+maxAngle = angleCenter + halfFanAngle;
+
+% Define radius range for the fan
+minRadius = armLength - round(0.5 * armLength);
+maxRadius = armLength;
+
+% Create a mask for the fan area
+fanMask = (radius >= minRadius & radius <= maxRadius) & ...
+          (theta >= minAngle & theta <= maxAngle);
+
+% Set pixels within the fan mask to 255 (white)
+img(fanMask) = 255;
+
+% Apply Gaussian smoothing
+sigma = 2; % Adjust sigma for desired smoothness
+%img = imgaussfilt(img, sigma);
+
+alphaLayer = img;
+
+figure;
+imshow(img/255)
+i = 1:
+ i = 1:
+       
+{Error: Invalid expression. Check for missing or extra characters.
+} 
+i = 1
+
+i =
+
+     1
+
+theimg = imrotate(img, prm.tag.angle(i), 'bilinear', 'crop');
+    thealpha = imrotate(alphaLayer, prm.tag.angle(i), 'bilinear', 'crop'); % 'bilinear' interpolation, 'crop' option
+whitebar = uint8(cat(3,theimg, thealpha));
+imshow(unit8(theimg))
+{Undefined function or variable 'unit8'.
+} 
+imshow(uint8(theimg))
+close all
+imshow(uint8(theimg))
+whiteTxts(i,1) = Screen('MakeTexture', prm.w.Number,  whitebar, [], [], 2); % set specialflag to 2 to ensure it will be read as LA format
+Error in function MakeTexture: 	Invalid Window (or Texture) Index provided: It doesn't correspond to an open window or texture.
+Did you close it accidentally via Screen('Close') or Screen('CloseAll') ?
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Screen')" style="font-weight:bold">Screen</a>
+Usage:
+
+textureIndex=Screen('MakeTexture', WindowIndex, imageMatrix [, optimizeForDrawAngle=0] [, specialFlags=0] [, floatprecision] [, textureOrientation=0] [,
+textureShader=0]);
+} 
+clear
+Adjustment_withMask_RIFT
+PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
+PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
+PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY18 ...
+PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY19 ...
+PTB-INFO: Screen 3 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
+
+PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
+PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
+PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (96, 96), matching that of
+PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
+PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
+PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
+[Warning: SetScreen: invalid value for "Debug". Debug will be set to 0.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('SetScreen', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\SetScreen.m', 62)" style="font-weight:bold">SetScreen</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\SetScreen.m',62,0)">line 62</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Settings_General_MEG', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Settings_General_MEG.m', 54)" style="font-weight:bold">Settings_General_MEG</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Settings_General_MEG.m',54,0)">line 54</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 41)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',41,0)">line 41</a>)] 
+PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF868C93F80. Setting thread priority to HIGHEST as a work-around...
+PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF868C93F80. Setting thread priority to HIGHEST as a work-around...
+
+
+----- ! PTB - ERROR: SYNCHRONIZATION FAILURE ! -----
+
+One or more internal checks (see Warnings above) indicate that synchronization
+of Psychtoolbox to the vertical retrace (VBL) is not working on your setup.
+
+This will seriously impair proper stimulus presentation and stimulus presentation timing!
+Please read 'help SyncTrouble' for information about how to solve or work-around the problem.
+You can force Psychtoolbox to continue, despite the severe problems, by adding the command
+Screen('Preference', 'SkipSyncTests', 1); at the top of your script, if you really know what you are doing.
+
+
+PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF868C93F80. Setting thread priority to HIGHEST as a work-around...

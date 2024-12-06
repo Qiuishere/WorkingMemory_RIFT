@@ -1,0 +1,35 @@
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',14,0)">line 14</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 47)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',47,0)">line 47</a>)] 
+
+ Starting the task: (pra): 06-12-2024 17:25:51 
+Waiting for the task to begin in 3 seconds...
+Elapsed time is 18.264189 seconds.
+{Undefined function or variable 'whiteTxts'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 237)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',237,0)">line 237</a>)
+                        Screen('DrawTextures', prm.w.Number, whiteTxts(:, theview), [], prm.tag.pos(quadrant, :),[],[], this_tag); % use transparency to
+                        change
+} 
+opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',237,0)
+Adjustment_withMask_RIFT
+[Warning: SetScreen: invalid value for "Debug". Debug will be set to 0.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('SetScreen', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\SetScreen.m', 62)" style="font-weight:bold">SetScreen</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\SetScreen.m',62,0)">line 62</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Settings_General_MEG', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Settings_General_MEG.m', 54)" style="font-weight:bold">Settings_General_MEG</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Settings_General_MEG.m',54,0)">line 54</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 41)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',41,0)">line 41</a>)] 
+PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF868C93F80. Setting thread priority to HIGHEST as a work-around...
+PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF868C93F80. Setting thread priority to HIGHEST as a work-around...
+
+
+----- ! PTB - ERROR: SYNCHRONIZATION FAILURE ! -----
+
+One or more internal checks (see Warnings above) indicate that synchronization
+of Psychtoolbox to the vertical retrace (VBL) is not working on your setup.
+
+This will seriously impair proper stimulus presentation and stimulus presentation timing!
+Please read 'help SyncTrouble' for information about how to solve or work-around the problem.
+You can force Psychtoolbox to continue, despite the severe problems, by adding the command
+Screen('Preference', 'SkipSyncTests', 1); at the top of your script, if you really know what you are doing.
+
+
+PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF868C93F80. Setting thread priority to HIGHEST as a work-around...

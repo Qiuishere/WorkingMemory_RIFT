@@ -49,58 +49,26 @@ try % open screen from here
        
     %% Get the texture for all the iamges
     
-    imgTxts = zeros(length(prm.fac.figures), length(prm.fac.adjustRange), length(prm.fac.views));
-    for i = 1:length(prm.fac.figures)
-        for j = prm.fac.adjustRange(1): prm.fac.adjustRange(end)
-            for k = 1:length(prm.fac.views)
-                theimg = strcat('stimuli/Front-Upper-shoulder-middle/', prm.fac.figures{i}, '_Front_', num2str(j), prm.fac.views{k}, '.png');
-                [X1, ~, alpha1]  = imread(theimg);
-                prm.img.scale    = prm.img.WPix/size(X1,2);
-                
-                X1               = imresize(X1,prm.img.scale);
-                alpha1           = imresize(alpha1, prm.img.scale);
-                
-                X1(:,:,4) = alpha1;
-                imgTxts(i,j,k) =   Screen( 'MakeTexture', prm.w.Number, X1);
-            end
-        end
-    end
+    [imgTxts, maskTxts, prm] = make_stimuli_texture(prm);
     
     
     figureId = strcmp(T.figure1, prm.fac.figures{2})+1;
     T.img1Txt = arrayfun(@(x,y,z) imgTxts(x,y,z), figureId, T.angle1, T.view1);
     %table.img2Txt = arrayfun(@(x,y,z) imgTxts(x,y,z), 3-figureId, table.angle2, table.view2);
     
-    nMask = 6;
-    for theimg = 1:nMask
-        maskFile = strcat('stimuli/masks/m', num2str(theimg), '.jpg');
-        mask = imread(maskFile);
-        mask = imresize(mask, prm.img.WPix/size(mask,2));
-        maskTxts(theimg)  =   Screen( 'MakeTexture', prm.w.Number, mask);
-    end
+
     
     %diode tracking square
-sz = prm.diode_track.SizeInPxl;
-prm.diode_track.texture = Screen('OpenOffscreenWindow', prm.w.Number, [0 0 0 0], [0 0 sz sz]);
-Screen('FillRect', prm.diode_track.texture, 255, [0 prm.w.Center(2)-sz sz prm.w.Center(2)]);
+    sz = prm.diode_track.SizeInPxl;
+    prm.diode_track.texture = Screen('OpenOffscreenWindow', prm.w.Number, [0 0 0 0], [0 0 sz sz]);
+    Screen('FillRect', prm.diode_track.texture, 255, [0 prm.w.Center(2)-sz sz prm.w.Center(2)]);
     
     % spatial parameters
     
-    prm.img.W      = size(X1,2);
-    prm.img.H      = size(X1,1);
-    prm.img.offPix = 139 * prm.img.scale;% distance from the shoulder to the center of the image. vertical shift to center the shoulder at fixation
-
-    prm.img.rect   = [0, 0, prm.img.W, prm.img.W];
-    prm.img.presentedSize = [ min(prm.img.W, prm.w.Center(1)), min(prm.img.H, prm.w.Center(2))];
-    prm.img.sourceRect = CenterRectOnPoint([0, 0, prm.img.presentedSize], prm.img.W/2, prm.img.H/2 - prm.img.offPix);
-    prm.img.sourceRect(prm.img.sourceRect<0) = 0;
-        
-    prm.bar.armLength = 216 * prm.img.scale;
-    prm.bar.color = 0.6*255; % a light grey
-     
+    
     % make tagging fans' texture
     [blackTxts, whiteTxts] = make_tag_texture(prm);
-    
+     
     % determine the positions in four quadrants
     
     for thequa = 1:4
@@ -109,7 +77,6 @@ Screen('FillRect', prm.diode_track.texture, 255, [0 prm.w.Center(2)-sz sz prm.w.
         prm.img.pos(thequa, 1:4)    = MakeOffsetRect(prm.w, prm.img.presentedSize, 0, 0, thequa);
         prm.tag.pos(thequa, 1:4)    = MakeOffsetRect(prm.w, [prm.img.W/2, prm.img.W/2], 0, 0, thequa);
         prm.diode_track.positions(thequa,:) = MakeOffsetRect(prm.w, size(prm.diode_track.grating), 0, 0, thequa);
-
     end
     
     
@@ -129,18 +96,19 @@ Screen('FillRect', prm.diode_track.texture, 255, [0 prm.w.Center(2)-sz sz prm.w.
     WaitSecs(prm.time.before/1000 - prm.time.countdown); % during this period the text is still shown
     fprintf('Waiting for the task to begin in %g seconds...\n', prm.time.countdown);
     
-    for n = 1:prm.time.countdown
-        CountDownTxt = sprintf('Starting in %g seconds', prm.time.countdown - n);
-        if n < prm.time.countdown
-            DrawFormattedText(prm.w.Number, CountDownTxt, 'center', prm.w.Center(2) + 30, prm.monitor.white);
-        else
-            % show fixation at the last second
-            Screen('DrawDots', prm.w.Number, [0; 0], prm.fix.size, prm.fix.color, prm.w.Center, 1);
+    if RealRun
+        for n = 1:prm.time.countdown
+            CountDownTxt = sprintf('Starting in %g seconds', prm.time.countdown - n);
+            if n < prm.time.countdown
+                DrawFormattedText(prm.w.Number, CountDownTxt, 'center', prm.w.Center(2) + 30, prm.monitor.white);
+            else
+                % show fixation at the last second
+                Screen('DrawDots', prm.w.Number, [0; 0], prm.fix.size, prm.fix.color, prm.w.Center, 1);
+            end
+            Screen('Flip', prm.w.Number);
+            WaitSecs(1);
         end
-        Screen('Flip', prm.w.Number);
-        WaitSecs(1);
     end
-    
     
     
     %% real task ==========================================================
@@ -225,16 +193,16 @@ Screen('FillRect', prm.diode_track.texture, 255, [0 prm.w.Center(2)-sz sz prm.w.
                         Screen('DrawDots', prm.w.Number, [0; 0], prm.fix.size, prm.fix.color, prm.tag.subcenters(quadrant, :), 1);
                         
                     elseif  nf <= theSwitchFr(3) % mask
-                        id = 1: prm.Nfr.mask/nMask : prm.Nfr.mask;
+                        id = 1: prm.Nfr.mask/prm.exp.Nmask : prm.Nfr.mask;
                         theimg = max(find((nf- theSwitchFr(2) - id)>=0));
                         Screen('DrawTexture', prm.w.Number, maskTxts(theimg), [], prm.img.pos(quadrant, :));
                         Screen('DrawDots', prm.w.Number, [0; 0], prm.fix.size, prm.fix.color, prm.tag.subcenters(quadrant, :), 1);
                         
                     elseif  nf <= theSwitchFr(4) % delay
-                        Screen('DrawTextures', prm.w.Number, blackTxts(:, theview), [], prm.tag.pos(quadrant, :),[],[], []); % draw the black line normally                        
                         this_tag = prm.tag.tag_sigs(:, nf_proj);
+                        Screen('DrawTextures', prm.w.Number, blackTxts(:, theview), [], prm.tag.pos(quadrant, :),[],[], []); % draw the black line normally                        
                         Screen('DrawTextures', prm.w.Number, whiteTxts(:, theview), [], prm.tag.pos(quadrant, :),[],[], this_tag); % use transparency to change
-%                        Screen('DrawTextures', prm.w.Number, whiteTxts(:, theview), [], prm.tag.pos(quadrant, :),[],[],[], 255*this_tag); 
+%                        Screen('DrawTextures', prm.w.Number, blackTxts(:, theview), [], prm.tag.pos(quadrant, :), [],[],[], ones(4,11)); 
 %                         Screen('DrawTexture', prm.w.Number, blackTxts(this_tag,theview));
                         Screen('DrawDots', prm.w.Number, [0; 0], prm.fix.size, prm.fix.color, prm.tag.subcenters(quadrant, :), 1);
                         

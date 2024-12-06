@@ -65,7 +65,7 @@ prm.dur.fixRange = prm.monitor.frame_ms(1000:prm.monitor.dt*1000:1300);
 
 if Environment==1
     prm.tag.refresh       = prm.monitor.hz *12 ;
-    prm.tag.tag_frex      = linspace(2,10, 11);
+    prm.tag.tag_frex      = linspace(3, 8, 11);
 elseif Environment==2 % MEG lab
     prm.tag.refresh       = prm.monitor.hz * 12;
     prm.tag.tag_frex      = 55:1:65;%:0.5:65;
