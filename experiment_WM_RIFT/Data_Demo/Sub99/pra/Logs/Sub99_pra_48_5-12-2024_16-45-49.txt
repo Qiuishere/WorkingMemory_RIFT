@@ -1,0 +1,181 @@
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',14,0)">line 14</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 46)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',46,0)">line 46</a>)] 
+
+ Starting the task: (pra): 05-12-2024 16:45:54 
+Waiting for the task to begin in 3 seconds...
+Switch projector mode to 1440 hz
+ans =
+
+   1.4840e+06
+
+
+ans =
+
+   1.4840e+06
+
+
+ans =
+
+   1.4840e+06
+
+
+ans =
+
+   1.4840e+06
+
+
+ans =
+
+   1.4840e+06
+
+
+ans =
+
+   1.4840e+06
+
+
+ans =
+
+   1.4840e+06
+
+
+ans =
+
+   1.4840e+06
+
+PTB-INFO: Enforcing script abortion and restoring desktop by executing Screen('CloseAll') now!
+PTB-INFO: Please ignore the false error message (INTERNAL PSYCHTOOLBOX ERROR) caused by this...
+
+--------------------------------------------------------------------------------
+             Access violation detected at 2024-12-05 16:46:06 +0100
+--------------------------------------------------------------------------------
+
+Configuration:
+  Crash Decoding           : Disabled - No sandbox or build area path
+  Crash Mode               : continue (default)
+  Default Encoding         : UTF-8
+  Deployed                 : false
+  Graphics Driver          : NVIDIA Corporation NVIDIA GeForce GTX 960/PCIe/SSE2 Version 4.6.0 NVIDIA 551.61
+  Graphics card 1          : NVIDIA ( 0x10de ) NVIDIA GeForce GTX 960 Version 31.0.15.5161 (2024-2-15)
+  JAWT Patch Status:       : Patch applied
+  Java Version             : Java 1.8.0_202-b08 with Oracle Corporation Java HotSpot(TM) 64-Bit Server VM mixed mode
+  MATLAB Architecture      : win64
+  MATLAB Entitlement ID    : 668897
+  MATLAB Root              : C:\Program Files\MATLAB\R2022b
+  MATLAB Version           : 9.13.0.2049777 (R2022b)
+  OpenGL                   : hardware
+  Operating System         : Microsoft Windows 10 Enterprise
+  Process ID               : 4300
+  Processor ID             : x86 Family 6 Model 85 Stepping 7, GenuineIntel
+  Session Key              : 8e29d30e-001c-489d-a8f6-4d0f7f0ce295
+  Window System            : Version 10.0 (Build 19045)
+
+Fault Count: 1
+
+
+Abnormal termination:
+Access violation
+
+Current Thread: 'MCR 0 interpreter thread' id 6208
+
+Register State (from fault):
+  RAX = 0000000000000000  RBX = 0000000000000438
+  RCX = 00007fff3c141064  RDX = 0000000000000000
+  RSP = 000000d53a1f9340  RBP = 0000000000000780
+  RSI = 00007ffeebfd2d30  RDI = 000001fd85443f60
+ 
+   R8 = 000000d53a1f91e8   R9 = 0000000000000001
+  R10 = 0000000000000000  R11 = 000000d53a1f92a0
+  R12 = 0000000000000400  R13 = 0000000000000000
+  R14 = 0000000000000000  R15 = 0000000000000000
+ 
+  RIP = 00007ffeebf5b155  EFL = 00010206
+ 
+   CS = 0033   FS = 0053   GS = 002b
+
+Stack Trace (from fault):
+[  0] 0x00007ffeebf5b155 C:\toolbox\Psychtoolbox_301813_x64\PsychBasic\MatlabWindowsFilesR2007a\Screen.mexw64+00438613 mexFunction+00372725
+[  1] 0x00007ffeebf623b3 C:\toolbox\Psychtoolbox_301813_x64\PsychBasic\MatlabWindowsFilesR2007a\Screen.mexw64+00467891 mexFunction+00402003
+[  2] 0x00007ffeebf00503 C:\toolbox\Psychtoolbox_301813_x64\PsychBasic\MatlabWindowsFilesR2007a\Screen.mexw64+00066819 mexFunction+00000931
+[  3] 0x00007ffed5eb9149 C:\Program Files\MATLAB\R2022b\bin\win64\libmex.dll+00561481 mexfile::Inspector::needs_upgrade+00027273
+[  4] 0x00007ffed5ebcb32 C:\Program Files\MATLAB\R2022b\bin\win64\libmex.dll+00576306 MexRetrieveVersion+00011746
+[  5] 0x00007ffed5ebcca7 C:\Program Files\MATLAB\R2022b\bin\win64\libmex.dll+00576679 MexRetrieveVersion+00012119
+[  6] 0x00007ffed5ebce57 C:\Program Files\MATLAB\R2022b\bin\win64\libmex.dll+00577111 MexRetrieveVersion+00012551
+[  7] 0x00007ffed5e9b10e C:\Program Files\MATLAB\R2022b\bin\win64\libmex.dll+00438542 mexUnlock+00017022
+[  8] 0x00007ffed629da32 C:\Program Files\MATLAB\R2022b\bin\win64\m_dispatcher.dll+01038898 Mfh_file::dispatch_file_common+00000178
+[  9] 0x00007ffed629cd02 C:\Program Files\MATLAB\R2022b\bin\win64\m_dispatcher.dll+01035522 Mfh_error::lookup+00012722
+[ 10] 0x00007ffed629d96d C:\Program Files\MATLAB\R2022b\bin\win64\m_dispatcher.dll+01038701 Mfh_file::dispatch+00000045
+[ 11] 0x00007ffed5b30c74 C:\Program Files\MATLAB\R2022b\bin\win64\libmwlxemainservices.dll+00330868 mwboost::archive::codecvt_null<wchar_t>::do_max_length+00234740
+[ 12] 0x00007ffed5b3f1f0 C:\Program Files\MATLAB\R2022b\bin\win64\libmwlxemainservices.dll+00389616 mwboost::archive::codecvt_null<wchar_t>::do_max_length+00293488
+[ 13] 0x00007ffed1371f41 C:\Program Files\MATLAB\R2022b\bin\win64\m_lxe.dll+05709633 MathWorks::lxe::ReadOnlyXvaluePtr::operator=+00006049
+[ 14] 0x00007ffed1373539 C:\Program Files\MATLAB\R2022b\bin\win64\m_lxe.dll+05715257 MathWorks::lxe::ReadOnlyXvaluePtr::operator=+00011673
+[ 15] 0x00007ffed12be148 C:\Program Files\MATLAB\R2022b\bin\win64\m_lxe.dll+04972872 MathWorks::lxe::printLxeProfStatsForFeature+00300760
+[ 16] 0x00007ffed12d8199 C:\Program Files\MATLAB\R2022b\bin\win64\m_lxe.dll+05079449 MathWorks::lxe::printLxeProfStatsForFeature+00407337
+[ 17] 0x00007ffed11ab767 C:\Program Files\MATLAB\R2022b\bin\win64\m_lxe.dll+03848039 MathWorks::lxe::GetTag+00006295
+[ 18] 0x00007ffed11ab340 C:\Program Files\MATLAB\R2022b\bin\win64\m_lxe.dll+03846976 MathWorks::lxe::GetTag+00005232
+[ 19] 0x00007ffed119673a C:\Program Files\MATLAB\R2022b\bin\win64\m_lxe.dll+03761978 MathWorks::lxe::SetEngineImplUnlinkFlagForAllCallsOnStack+00040906
+[ 20] 0x00007ffed119aa60 C:\Program Files\MATLAB\R2022b\bin\win64\m_lxe.dll+03779168 MathWorks::lxe::SetEngineImplUnlinkFlagForAllCallsOnStack+00058096
+[ 21] 0x00007ffed5c04a90 C:\Program Files\MATLAB\R2022b\bin\win64\libmwlxemainservices.dll+01198736 FeatureTestObservableWorkspace+00184240
+[ 22] 0x00007ffed5b29d73 C:\Program Files\MATLAB\R2022b\bin\win64\libmwlxemainservices.dll+00302451 mwboost::archive::codecvt_null<wchar_t>::do_max_length+00206323
+[ 23] 0x00007ffed5b294a3 C:\Program Files\MATLAB\R2022b\bin\win64\libmwlxemainservices.dll+00300195 mwboost::archive::codecvt_null<wchar_t>::do_max_length+00204067
+[ 24] 0x00007ffed5b2baa2 C:\Program Files\MATLAB\R2022b\bin\win64\libmwlxemainservices.dll+00309922 mwboost::archive::codecvt_null<wchar_t>::do_max_length+00213794
+[ 25] 0x00007ffed629da32 C:\Program Files\MATLAB\R2022b\bin\win64\m_dispatcher.dll+01038898 Mfh_file::dispatch_file_common+00000178
+[ 26] 0x00007ffed629cd02 C:\Program Files\MATLAB\R2022b\bin\win64\m_dispatcher.dll+01035522 Mfh_error::lookup+00012722
+[ 27] 0x00007ffed629d96d C:\Program Files\MATLAB\R2022b\bin\win64\m_dispatcher.dll+01038701 Mfh_file::dispatch+00000045
+[ 28] 0x00007ffed5b30c74 C:\Program Files\MATLAB\R2022b\bin\win64\libmwlxemainservices.dll+00330868 mwboost::archive::codecvt_null<wchar_t>::do_max_length+00234740
+[ 29] 0x00007ffed5b3f1f0 C:\Program Files\MATLAB\R2022b\bin\win64\libmwlxemainservices.dll+00389616 mwboost::archive::codecvt_null<wchar_t>::do_max_length+00293488
+[ 30] 0x00007ffed1371f41 C:\Program Files\MATLAB\R2022b\bin\win64\m_lxe.dll+05709633 MathWorks::lxe::ReadOnlyXvaluePtr::operator=+00006049
+[ 31] 0x00007ffed1373539 C:\Program Files\MATLAB\R2022b\bin\win64\m_lxe.dll+05715257 MathWorks::lxe::ReadOnlyXvaluePtr::operator=+00011673
+[ 32] 0x00007ffed12be148 C:\Program Files\MATLAB\R2022b\bin\win64\m_lxe.dll+04972872 MathWorks::lxe::printLxeProfStatsForFeature+00300760
+[ 33] 0x00007ffed12d8199 C:\Program Files\MATLAB\R2022b\bin\win64\m_lxe.dll+05079449 MathWorks::lxe::printLxeProfStatsForFeature+00407337
+[ 34] 0x00007ffed10c803b C:\Program Files\MATLAB\R2022b\bin\win64\m_lxe.dll+02916411 MathWorks::lxe::LXEConstants::IsIfElse+00525851
+[ 35] 0x00007ffed10cc644 C:\Program Files\MATLAB\R2022b\bin\win64\m_lxe.dll+02934340 MathWorks::lxe::LXEConstants::IsY+00012980
+[ 36] 0x00007ffed10c9a91 C:\Program Files\MATLAB\R2022b\bin\win64\m_lxe.dll+02923153 MathWorks::lxe::LXEConstants::IsY+00001793
+[ 37] 0x00007ffed10cd785 C:\Program Files\MATLAB\R2022b\bin\win64\m_lxe.dll+02938757 MathWorks::lxe::LXEConstants::IsY+00017397
+[ 38] 0x00007ffed10cda33 C:\Program Files\MATLAB\R2022b\bin\win64\m_lxe.dll+02939443 MathWorks::lxe::LXEConstants::IsY+00018083
+[ 39] 0x00007ffed10cd388 C:\Program Files\MATLAB\R2022b\bin\win64\m_lxe.dll+02937736 MathWorks::lxe::LXEConstants::IsY+00016376
+[ 40] 0x00007ffed10c9236 C:\Program Files\MATLAB\R2022b\bin\win64\m_lxe.dll+02921014 MathWorks::lxe::LxeTypes::GetTypeXvalueOf+00000598
+[ 41] 0x00007ffed1196f53 C:\Program Files\MATLAB\R2022b\bin\win64\m_lxe.dll+03764051 MathWorks::lxe::SetEngineImplUnlinkFlagForAllCallsOnStack+00042979
+[ 42] 0x00007ffed119aa60 C:\Program Files\MATLAB\R2022b\bin\win64\m_lxe.dll+03779168 MathWorks::lxe::SetEngineImplUnlinkFlagForAllCallsOnStack+00058096
+[ 43] 0x00007ffed5c04a90 C:\Program Files\MATLAB\R2022b\bin\win64\libmwlxemainservices.dll+01198736 FeatureTestObservableWorkspace+00184240
+[ 44] 0x00007ffed5b6e776 C:\Program Files\MATLAB\R2022b\bin\win64\libmwlxemainservices.dll+00583542 mwboost::archive::detail::pointer_oserializer<mwboost::archive::xml_oarchive,MathWorks::lxe::PreLineExecutionEvent>::save_object_ptr+00069206
+[ 45] 0x00007ffed5b7018f C:\Program Files\MATLAB\R2022b\bin\win64\libmwlxemainservices.dll+00590223 mwboost::archive::detail::pointer_oserializer<mwboost::archive::xml_oarchive,MathWorks::lxe::PreLineExecutionEvent>::save_object_ptr+00075887
+[ 46] 0x00007ffed5bcecb3 C:\Program Files\MATLAB\R2022b\bin\win64\libmwlxemainservices.dll+00978099 mwboost::archive::detail::iserializer<mwboost::archive::text_iarchive,MathWorks::MatlabComponents::ComponentIdentifier>::load_object_data+00303411
+[ 47] 0x00007ffed5bd0df7 C:\Program Files\MATLAB\R2022b\bin\win64\libmwlxemainservices.dll+00986615 mwboost::archive::detail::iserializer<mwboost::archive::text_iarchive,MathWorks::MatlabComponents::ComponentIdentifier>::load_object_data+00311927
+[ 48] 0x00007ffed5bd0090 C:\Program Files\MATLAB\R2022b\bin\win64\libmwlxemainservices.dll+00983184 mwboost::archive::detail::iserializer<mwboost::archive::text_iarchive,MathWorks::MatlabComponents::ComponentIdentifier>::load_object_data+00308496
+[ 49] 0x00007ffed5f74679 C:\Program Files\MATLAB\R2022b\bin\win64\libmwbridge.dll+00280185 mnGetPrompt+00014889
+[ 50] 0x00007ffed68861b6   C:\Program Files\MATLAB\R2022b\bin\win64\iqm.dll+00483766 iqm::Iqm::instance+00001110
+[ 51] 0x00007ffed68d70cd   C:\Program Files\MATLAB\R2022b\bin\win64\iqm.dll+00815309 iqm::UserEvalPlugin::execute+00001357
+[ 52] 0x00007ffed68a8a4c   C:\Program Files\MATLAB\R2022b\bin\win64\iqm.dll+00625228 iqm::Iqm::setupIqmFcnPtrs+00097324
+[ 53] 0x00007ffed687a05f   C:\Program Files\MATLAB\R2022b\bin\win64\iqm.dll+00434271 iqm::Iqm::create+00008687
+[ 54] 0x00007ffed5f4311e C:\Program Files\MATLAB\R2022b\bin\win64\libmwbridge.dll+00078110 ioReadLine+00000430
+[ 55] 0x00007ffed5f42f35 C:\Program Files\MATLAB\R2022b\bin\win64\libmwbridge.dll+00077621 ioReadLine+00000165
+[ 56] 0x00007ffed5f74a10 C:\Program Files\MATLAB\R2022b\bin\win64\libmwbridge.dll+00281104 mnGetCommandLineBuffer+00000288
+[ 57] 0x00007ffed5f74ea2 C:\Program Files\MATLAB\R2022b\bin\win64\libmwbridge.dll+00282274 mnParser+00000466
+[ 58] 0x00007ffed66e7c64   C:\Program Files\MATLAB\R2022b\bin\win64\mcr.dll+00425060 mcr_set_enableReadingFromStdin+00013524
+[ 59] 0x00007ffed66987f3   C:\Program Files\MATLAB\R2022b\bin\win64\mcr.dll+00100339 mcrFunctionSignature::set_signature+00080067
+[ 60] 0x00007ffed66b6050   C:\Program Files\MATLAB\R2022b\bin\win64\mcr.dll+00221264 mwboost::archive::codecvt_null<wchar_t>::`default constructor closure'+00017616
+[ 61] 0x00007ffed68d20ca   C:\Program Files\MATLAB\R2022b\bin\win64\iqm.dll+00794826 iqm::PackagedTaskPlugin::execute+00000074
+[ 62] 0x00007ffed66e2350   C:\Program Files\MATLAB\R2022b\bin\win64\mcr.dll+00402256 mcrInstantiationError::operator=+00082912
+[ 63] 0x00007ffed68a8a4c   C:\Program Files\MATLAB\R2022b\bin\win64\iqm.dll+00625228 iqm::Iqm::setupIqmFcnPtrs+00097324
+[ 64] 0x00007ffed687ade1   C:\Program Files\MATLAB\R2022b\bin\win64\iqm.dll+00437729 iqm::Iqm::create+00012145
+[ 65] 0x00007ffed687a529   C:\Program Files\MATLAB\R2022b\bin\win64\iqm.dll+00435497 iqm::Iqm::create+00009913
+[ 66] 0x00007ffed66d06dc   C:\Program Files\MATLAB\R2022b\bin\win64\mcr.dll+00329436 mcrInstantiationError::operator=+00010092
+[ 67] 0x00007ffed66d1105   C:\Program Files\MATLAB\R2022b\bin\win64\mcr.dll+00332037 mcrInstantiationError::operator=+00012693
+[ 68] 0x00007ffed66cea00   C:\Program Files\MATLAB\R2022b\bin\win64\mcr.dll+00322048 mcrInstantiationError::operator=+00002704
+[ 69] 0x00007fff079a855a C:\Program Files\MATLAB\R2022b\bin\win64\mwboost_thread-vc142-mt-x64-1_75.dll+00034138 mwboost::thread::swap+00000074
+[ 70] 0x00007fff3bb51bb2                   C:\WINDOWS\System32\ucrtbase.dll+00138162 configthreadlocale+00000146
+[ 71] 0x00007fff3cca7374                   C:\WINDOWS\System32\KERNEL32.DLL+00095092 BaseThreadInitThunk+00000020
+[ 72] 0x00007fff3e19cc91                      C:\WINDOWS\SYSTEM32\ntdll.dll+00314513 RtlUserThreadStart+00000033
+
+
+This error was detected while a MEX-file was running. If the MEX-file
+is not an official MathWorks function, please examine its source code
+for errors. Please consult the External Interfaces Guide for information
+on debugging MEX-files.
+** This crash report has been saved to disk as C:\Users\qiuhan\AppData\Local\Temp\matlab_crash_dump.4300-1 **
+
+
+
+MATLAB is exiting because of fatal error

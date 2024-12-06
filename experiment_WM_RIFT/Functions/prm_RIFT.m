@@ -78,7 +78,7 @@ end
 
 prm.tag.dt            = 1 / prm.tag.refresh; % in second
 
-prm.tag.duration      = (prm.dur.image1 + prm.dur.mask + prm.dur.delay)/1000*2 ; % in second. *2 to ensure enough time
+prm.tag.duration      = (prm.dur.image1 + prm.dur.mask + prm.dur.delay)/1000*3 ; % in second. *2 to ensure enough time
 prm.tag.timax         = prm.tag.dt:prm.tag.dt:prm.tag.duration;
 prm.tag.tag_sigs      = cos(2*pi*prm.tag.tag_frex(:)*prm.tag.timax) / 2 + 0.5;
 
@@ -91,6 +91,12 @@ prm.img.WAng   = 8;
 prm.img.WPix = visAng2pix(prm.img.WAng, 0, prm.monitor);
 
 
+%%=========================================================================
+% diode tracking square
+prm.diode_track.SizeInDeg = 1; % vis deg
+prm.diode_track.SizeInPxl = round(prm.monitor.deg_to_pix * prm.diode_track.SizeInDeg);
+prm.diode_track.freq      = 2; % which tagging freq to check in the order of prm.tag.tag_frex
+prm.diode_track.grating   = ones(prm.diode_track.SizeInPxl,prm.diode_track.SizeInPxl);
 
 % % define the position of stimuli in polar coordinate                      
 % prm.tag.DistanceInDeg = [4 6];
@@ -111,6 +117,7 @@ if RealRun==1 && Environment==2
   prm.exp.key.down = 100;
   prm.exp.key.space = 104;
   prm.trigger.btsi.validResponses = [prm.exp.key.up, prm.exp.key.down, prm.exp.key.space]; % R index finger, R middle, and L index
+
 end
 
 prm.trigger.ExpStart      = 1;

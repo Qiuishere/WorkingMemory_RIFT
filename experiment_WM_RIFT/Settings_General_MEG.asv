@@ -15,11 +15,10 @@ AssertOpenGL;
 % Suppress non-critical tests and warnings      (TEST ELSEWHERE!)
 Screen('Preference', 'VisualDebuglevel',    3);
 Screen('Preference', 'SuppressAllWarnings', 1);
-
 if RealRun
-    Screen('Preference', 'SkipSyncTests',      0);
+Screen('Preference', 'SkipSyncTests',      0);
 else
-    Screen('Preference', 'SkipSyncTests',      1);
+    Screen('Preference', 'SkipSyncTests',      0);
 end
 
 

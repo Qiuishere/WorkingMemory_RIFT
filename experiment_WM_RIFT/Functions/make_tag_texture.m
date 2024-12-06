@@ -41,7 +41,7 @@ img(fanMask) = 255;
 
 % Apply Gaussian smoothing
 sigma = 2; % Adjust sigma for desired smoothness
-img = imgaussfilt(img, sigma);
+%img = imgaussfilt(img, sigma);
 
 alphaLayer = img;
 
@@ -57,7 +57,8 @@ for i = 1:prm.tag.nStrip
     blackbar = repmat(255-theimg,[1,1,3]);
     blackbar(:,:,4) = thealpha;
     
-    
+    blackbar = blackbar(1:prm.img.WPix/2, 1:prm.img.WPix/2, :);
+    whitebar = whitebar(1:prm.img.WPix/2, 1:prm.img.WPix/2, :);
     blackTxts(i,1) = Screen('MakeTexture', prm.w.Number,  blackbar);
     blackTxts(i,2) = Screen('MakeTexture', prm.w.Number,  fliplr(blackbar));
     whiteTxts(i,1) = Screen('MakeTexture', prm.w.Number,  whitebar);

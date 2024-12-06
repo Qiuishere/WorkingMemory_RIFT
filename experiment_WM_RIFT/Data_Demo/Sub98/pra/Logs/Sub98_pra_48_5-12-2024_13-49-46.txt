@@ -1,0 +1,35 @@
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',14,0)">line 14</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 51)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',51,0)">line 51</a>)] 
+PTB-CRITICAL WARNING! Timing code detected a FAULTY high precision TIMER in your system hardware!(Delta 16.921410000002651941031217575073 secs).
+PTB-CRITICAL WARNING! Seems the timer sometimes randomly jumps forward in time by over 250.000000 msecs!
+PTB-CRITICAL WARNING! This indicates a hardware defect, hardware design flaw, or serious misconfiguration.
+PTB-CRITICAL WARNING! For more information see Microsoft knowledge base article Nr. 274323.
+PTB-CRITICAL WARNING! http://support.microsoft.com/default.aspx?scid=KB;EN-US;Q274323&
+
+PTB-CRITICAL WARNING! It is NOT RECOMMENDED to continue using this machine for studies that require high
+PTB-CRITICAL WARNING! timing precision in stimulus onset or response collection. No guarantees can be made
+PTB-CRITICAL WARNING! wrt. to timing or correctness of any timestamps or stimulus onsets!
+PTB-CRITICAL WARNING! Read 'help GetSecsTest' and run GetSecsTest for further diagnosis and troubleshooting.
+PTB-CRITICAL WARNING! It may also help to restart the machine to see if the problem is transient.
+PTB-CRITICAL WARNING! Also check the FAQ section of the Psychtoolbox Wiki for more information.
+
+
+ Starting the task: (pra): 05-12-2024 13:49:58 
+PTB-CRITICAL WARNING! Timing code detected a FAULTY high precision TIMER in your system hardware!(Delta 16.920864000006986316293478012085 secs).
+PTB-CRITICAL WARNING! Seems the timer sometimes randomly jumps forward in time by over 250.000000 msecs!
+PTB-CRITICAL WARNING! This indicates a hardware defect, hardware design flaw, or serious misconfiguration.
+PTB-CRITICAL WARNING! For more information see Microsoft knowledge base article Nr. 274323.
+PTB-CRITICAL WARNING! http://support.microsoft.com/default.aspx?scid=KB;EN-US;Q274323&
+
+PTB-CRITICAL WARNING! It is NOT RECOMMENDED to continue using this machine for studies that require high
+PTB-CRITICAL WARNING! timing precision in stimulus onset or response collection. No guarantees can be made
+PTB-CRITICAL WARNING! wrt. to timing or correctness of any timestamps or stimulus onsets!
+PTB-CRITICAL WARNING! Read 'help GetSecsTest' and run GetSecsTest for further diagnosis and troubleshooting.
+PTB-CRITICAL WARNING! It may also help to restart the machine to see if the problem is transient.
+PTB-CRITICAL WARNING! Also check the FAQ section of the Psychtoolbox Wiki for more information.
+
+Waiting for the task to begin in 3 seconds...
+
+
+Experiment terminated at 05-Dec-2024 13:50:13, diary closed...

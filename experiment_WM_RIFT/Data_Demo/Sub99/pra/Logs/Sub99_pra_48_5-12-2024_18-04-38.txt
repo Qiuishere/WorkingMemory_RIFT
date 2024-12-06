@@ -1,0 +1,166 @@
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',14,0)">line 14</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 47)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',47,0)">line 47</a>)] 
+
+
+PTB-ERROR: Screen('Flip'); beamposition timestamping computed an *impossible stimulus onset value* of 1488695.104587 secs, which would indicate that
+PTB-ERROR: stimulus onset happened *before* it was actually requested! (Earliest theoretically possible 1488695.106476 secs).
+
+PTB-ERROR: Some more diagnostic values (only for experts): rawTimestamp = 1488695.109337, scanline = 615
+PTB-ERROR: Some more diagnostic values (only for experts): line_pre_swaprequest = 223, line_post_swaprequest = 264, time_post_swaprequest = 1488695.106784
+PTB-ERROR: Some more diagnostic values (only for experts): preflip_vblcount = 0, preflip_vbltimestamp = 1488695.104763
+PTB-ERROR: Some more diagnostic values (only for experts): postflip_vblcount = 0, postflip_vbltimestamp = -1.000000, vbltimestampquery_retrycount = 0
+
+PTB-ERROR: This error can be due to either of the following causes:
+PTB-ERROR: Very unlikely: Something is broken in your systems beamposition timestamping. I've disabled high precision
+PTB-ERROR: timestamping for now. Returned timestamps will be less robust and accurate.
+
+PTB-ERROR: The most likely cause would be that Synchronization of stimulus onset (buffer swap) to the
+PTB-ERROR: vertical blank interval VBL is not working properly, or swap completion signalling to PTB is broken.
+PTB-ERROR: Please run the script PerceptualVBLSyncTest to check this. With non-working sync to VBL, all stimulus timing
+PTB-ERROR: is futile. Also run OSXCompositorIdiocyTest on macOS. Also read 'help SyncTrouble' !
+
+ Starting the task: (pra): 05-12-2024 18:04:42 
+Waiting for the task to begin in 3 seconds...
+Switch projector mode to 1440 hzError in function DrawTextures: 	Invalid Color Argument
+Switch projector mode to 120 hzElapsed time is 0.629815 seconds.
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Screen')" style="font-weight:bold">Screen</a>
+Usage:
+
+Screen('DrawTextures', windowPointer, texturePointer(s) [, sourceRect(s)] [, destinationRect(s)] [, rotationAngle(s)] [,
+filterMode(s)] [, globalAlpha(s)] [, modulateColor(s)] [, textureShader] [, specialFlags] [, auxParameters]);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 237)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',237,0)">line 237</a>)
+                        Screen('DrawTextures', prm.w.Number, whiteTxts(:, theview), [], prm.tag.pos(quadrant, :),[],[],[], 255*this_tag);
+} 
+this_tag
+
+this_tag =
+
+    0.0725
+    0.7650
+    0.4542
+    0.3167
+    0.8730
+    0.0170
+    0.9895
+    0.1087
+    0.7093
+    0.5174
+    0.2595
+
+Screen DrawTextures?
+
+Usage:
+
+Screen('DrawTextures', windowPointer, texturePointer(s) [, sourceRect(s)] [, destinationRect(s)] [, rotationAngle(s)] [, filterMode(s)] [, globalAlpha(s)] [, modulateColor(s)] [, textureShader] [, specialFlags] [, auxParameters]);
+
+Draw many textures at once, either one texture to many locations or many
+textures.
+This function accepts the same parameters as Screen('DrawTexture'), but it is
+optimized for drawing many textures. You can leave out each argument, a default
+setting will be used in that case, provide it once to apply it to all drawn
+items, or provide a vector or matrix with a individual setting for each drawn
+item. If you provide multiple settings per argument, then the number must match
+between all arguments.
+Examples:
+a) One texture drawn to different locations at different orientations: Provide
+one texture handle for the texturePointer, a 4 row by n columns matrix for
+'destinationRect' to provide target rectangles for n locations, provide a n
+component vector of 'rotationAngles' for the n different orientations of the n
+drawn texture patches.
+b) n textures drawn to n different locations: Same as a) but provide a n
+component vector of 'texturePointers' one for each texture to be drawn to one of
+n locations at n angles.
+
+See also: MakeTexture DrawTexture DrawTextures
+Screen DrawTexture?
+
+Usage:
+
+Screen('DrawTexture', windowPointer, texturePointer [,sourceRect] [,destinationRect] [,rotationAngle] [, filterMode] [, globalAlpha] [, modulateColor] [, textureShader] [, specialFlags] [, auxParameters]);
+
+Draw the texture specified via 'texturePointer' into the target window specified
+via 'windowPointer'. In the the OS X Psychtoolbox textures replace offscreen
+windows for fast drawing of images during animation.'sourceRect' specifies a
+rectangular subpart of the texture to be drawn (Defaults to full texture).
+'destinationRect' defines the rectangular subpart of the window where the
+texture should be drawn. This defaultsto centered on the screen. 'rotationAngle'
+Specifies a rotation angle in degree for rotated drawing of the texture
+(Defaults to 0 deg. = upright). 'filterMode' How to compute the pixel color
+values when the texture is drawn magnified, minified or drawn shifted, e.g., if
+sourceRect and destinationRect do not have the same size or if sourceRect
+specifies fractional pixel values. 0 = Nearest neighbour filtering, 1 = Bilinear
+filtering - this is the default. Values 2 or 3 select use of OpenGL mip-mapping
+for improved quality: 2 = Bilinear filtering for nearest mipmap level, 3 =
+Trilinear filtering across mipmap levels, 4 = Nearest neighbour filtering for
+nearest mipmap level, 5 = nearest neighbour filtering with linear interpolation
+between mipmap levels. Mipmap filtering is only supported for GL_TEXTURE_2D
+textures (see description of 'specialFlags' flag 1 below). A negative filterMode
+value will also use mip-mapping for fast drawing of blurred textures if the
+GL_TEXTURE_2D format is used: Mip-maps are essentially image resolution
+pyramids, the filterMode value selects a specific layer in that pyramid. A value
+of -1 draws the highest resolution layer, a value of -2 draws a half-resolution
+layer, a value of -3 draws a quarter resolution layer and so on. Each layer has
+half the resolution of the preceeding layer. This allows for very fast drawing
+of blurred or low-pass filtered images, e.g., for gaze-contingent displays.
+However, the filter function for downsampling is system dependent and may vary
+across graphics cards, although a box-filter is the most common type. If you
+need a well defined filter function, use a custom written GLSL shader instead,
+so you have full control over the mathematical properties of the downsampling
+function. This would incur a performance penalty.
+'globalAlpha' A global alpha transparency value to apply to the whole texture
+for blending. Range is 0 = fully transparent to 1 = fully opaque, defaults to
+one. If both, an alpha-channel and globalAlpha are provided, then the final
+alpha is the product of both values. 'modulateColor', if provided, overrides the
+'globalAlpha' value. If 'modulateColor' is specified, the 'globalAlpha' value
+will be ignored. 'modulateColor' will be a global color that gets applied to the
+texture as a whole, i.e., it modulates each color channel. E.g., modulateColor =
+[128 255 0] would leave the green- and alpha-channel untouched, but it would
+multiply the blue channel with 0 - set it to zero blue intensity, and it would
+multiply each texel in the red channel by 128/255 - reduce its intensity to 50%.
+The most interesting application of 'modulateColor' is drawing of arbitrary
+complex shapes of selectable color: Simply generate an all-white luminance
+texture of arbitrary shape, possibly with alpha channel, then draw it with
+'modulateColor' set to the wanted color and global alpha value.
+'textureShader' (optional): If you provide a valid handle of a GLSL shader, this
+shader will be applied to the texture during drawing. If the texture already has
+a shader assigned (via Screen('MakeTexture') or automatically by PTB for some
+reason), then the shader provided here as 'textureShader' will silently override
+the shader assigned earlier. Application of shaders this way is mostly useful
+for application of simple single-pass image processing operations to a texture,
+e.g., a simple blur or a deinterlacing operation for a video texture. If you
+intend to use this texture multiple times or if you need more complex image
+processing, e.g., multi-pass operations, better use the
+Screen('TransformTexture') command. It allows for complex operations to be
+applied and is more flexible.
+'specialFlags' optional argument: Allows to pass a couple of special flags to
+influence the drawing. The flags can be combined by mor() ing them together. A
+value of kPsychUseTextureMatrixForRotation will use a different mode of
+operation for drawing of rotated textures, where the drawn 'dstRect' texture
+rectangle is always upright, but texels are retrieved at rotated positions, as
+if the 'srcRect' rectangle would be rotated. If you set a value of
+kPsychDontDoRotation then the rotation angle will not be used to rotate the
+texture. Instead it will be passed to a bount texture shader (if any), which is
+free to interpret the 'rotationAngle' parameters is it wants - e.g., to
+implement custom texture rotation.
+'auxParameters' optional argument: If this is set as a vector with at least 4
+components, and a multiple of four components, then these values are passed to a
+shader (if any is bound) as 'auxParameter0....n'. The current implementation
+supports at most 32 values per draw call. This is mostly useful when drawing
+procedural textures if one needs to pass more additional parameters to define
+the texture than can fit into other parameter fields. See 'help
+ProceduralShadingAPI' for more info. 
+If you want to draw many textures to the same onscreen- or offscreen window, use
+the function Screen('DrawTextures'). It accepts the same arguments as this
+function, but is optimized to draw many textures in one call.
+
+See also: MakeTexture DrawTexture DrawTextures
+Adjustment_withMask_RIFT
+[Warning: SetScreen: invalid value for "Debug". Debug will be set to 0.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('SetScreen', 'D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\SetScreen.m', 62)" style="font-weight:bold">SetScreen</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\SetScreen.m',62,0)">line 62</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Settings_General_MEG', 'D:\Users\qiuhan\experiment_WM_RIFT\Settings_General_MEG.m', 49)" style="font-weight:bold">Settings_General_MEG</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Settings_General_MEG.m',49,0)">line 49</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 41)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',41,0)">line 41</a>)] 
+PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FFF28005140. Setting thread priority to HIGHEST as a work-around...
+PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FFF28005140. Setting thread priority to HIGHEST as a work-around...
+PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FFF28005140. Setting thread priority to HIGHEST as a work-around...
