@@ -1,0 +1,17 @@
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',14,0)">line 14</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 43)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',43,0)">line 43</a>)] 
+
+ Starting the task: (pra): 10-12-2024 11:50:18 
+Waiting for the task to begin in 3 seconds...
+Responded 44, should be 60.
+Responded 36, should be 36.
+Responded 45, should be 42.
+Responded 65, should be 42.
+Responded 48, should be 36.
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',14,0)">line 14</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 387)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',387,0)">line 387</a>)] 
+
+
+Experiment terminated at 10-Dec-2024 11:50:59, diary closed...

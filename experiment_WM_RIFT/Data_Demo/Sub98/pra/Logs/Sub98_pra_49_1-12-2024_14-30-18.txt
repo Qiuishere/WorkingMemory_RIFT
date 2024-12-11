@@ -1,0 +1,29 @@
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 17)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',17,0)">line 17</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 43)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',43,0)">line 43</a>)] 
+Elapsed time is 4.250260 seconds.
+{Unrecognized field name "btsi".
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('waitforspace', 'D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\waitforspace.m', 27)" style="font-weight:bold">waitforspace</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\waitforspace.m',27,0)">line 27</a>)
+        [keydown,~] = prm.trigger.btsi.waitResponse(0.001, true);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 18)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',18,0)">line 18</a>)
+waitforspace(prm); waitfornokey;
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 43)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',43,0)">line 43</a>)
+    instruction_screen(prm, prm.exp.inst);
+} 
+ prm.trigger.btsi
+{Unrecognized field name "btsi".
+} 
+prm.trigger.btsi
+{Unrecognized field name "btsi".
+} 
+clear
+Adjustment_withMask_RIFT
+[Warning: instrfind will be removed in a future release. There is no simple replacement for this.] 
+[Warning: serial will be removed in a future release. Use serialport instead.] 
+[Warning: SetScreen: invalid value for "Debug". Debug will be set to 0.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('SetScreen', 'D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\SetScreen.m', 62)" style="font-weight:bold">SetScreen</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\SetScreen.m',62,0)">line 62</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Settings_General_MEG', 'D:\Users\qiuhan\experiment_WM_RIFT\Settings_General_MEG.m', 54)" style="font-weight:bold">Settings_General_MEG</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Settings_General_MEG.m',54,0)">line 54</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 37)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',37,0)">line 37</a>)] 

@@ -19,6 +19,8 @@ function [imgTxts, maskTxts, prm] = make_stimuli_texture(prm)
         end
     end
     
+        % spatial parameters
+
     prm.img.W      = size(X1,2);
     prm.img.H      = size(X1,1);
     prm.img.offPix = 139 * prm.img.scale;% distance from the shoulder to the center of the image. vertical shift to center the shoulder at fixation
@@ -32,7 +34,7 @@ function [imgTxts, maskTxts, prm] = make_stimuli_texture(prm)
     prm.bar.color = 0.6*255; % a light grey
     
 %% mask
-prm.exp.Nmask = 6;
+
     for theimg = 1:prm.exp.Nmask
         maskFile = strcat('stimuli/masks/m', num2str(theimg), '.jpg');
         mask = imread(maskFile);

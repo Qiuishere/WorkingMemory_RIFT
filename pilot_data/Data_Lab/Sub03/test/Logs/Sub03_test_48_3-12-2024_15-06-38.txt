@@ -1,0 +1,197 @@
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m',14,0)">line 14</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_behavior', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m', 42)" style="font-weight:bold">Adjustment_withMask_behavior</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m',42,0)">line 42</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('RUN', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m', 89)" style="font-weight:bold">RUN</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m',89,0)">line 89</a>)] 
+
+ Starting the task: (test): 03-12-2024 15:07:09 
+Waiting for the task to begin in 3 seconds...
+Responded 44, should be 48.
+Responded 55, should be 60.
+Responded 49, should be 48.
+Responded 53, should be 54.
+Responded 41, should be 42.
+Responded 44, should be 48.
+Responded 57, should be 60.
+Responded 47, should be 36.
+Responded 46, should be 42.
+Responded 55, should be 60.
+Responded 36, should be 30.
+Responded 47, should be 48.
+
+ans =
+
+   6.9711e+04
+
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m',14,0)">line 14</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_behavior', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m', 276)" style="font-weight:bold">Adjustment_withMask_behavior</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m',276,0)">line 276</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('RUN', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m', 89)" style="font-weight:bold">RUN</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m',89,0)">line 89</a>)] 
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m',14,0)">line 14</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_behavior', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m', 306)" style="font-weight:bold">Adjustment_withMask_behavior</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m',306,0)">line 306</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('RUN', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m', 89)" style="font-weight:bold">RUN</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m',89,0)">line 89</a>)] 
+Responded 42, should be 48.
+Responded 47, should be 60.
+Responded 55, should be 48.
+Responded 54, should be 54.
+Responded 51, should be 42.
+Responded 42, should be 48.
+Responded 51, should be 60.
+Responded 47, should be 36.
+Responded 53, should be 42.
+Responded 59, should be 60.
+Responded 29, should be 30.
+Responded 40, should be 48.
+
+ans =
+
+   6.9806e+04
+
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m',14,0)">line 14</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_behavior', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m', 276)" style="font-weight:bold">Adjustment_withMask_behavior</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m',276,0)">line 276</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('RUN', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m', 89)" style="font-weight:bold">RUN</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m',89,0)">line 89</a>)] 
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m',14,0)">line 14</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_behavior', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m', 306)" style="font-weight:bold">Adjustment_withMask_behavior</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m',306,0)">line 306</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('RUN', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m', 89)" style="font-weight:bold">RUN</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m',89,0)">line 89</a>)] 
+Responded 49, should be 60.
+Responded 31, should be 36.
+Responded 46, should be 48.
+Responded 34, should be 36.
+Responded 52, should be 54.
+Responded 47, should be 42.
+Responded 46, should be 48.
+Responded 42, should be 42.
+Responded 47, should be 36.
+Responded 49, should be 54.
+Responded 52, should be 60.
+Responded 50, should be 54.
+
+ans =
+
+   6.9899e+04
+
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m',14,0)">line 14</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_behavior', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m', 276)" style="font-weight:bold">Adjustment_withMask_behavior</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m',276,0)">line 276</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('RUN', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m', 89)" style="font-weight:bold">RUN</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m',89,0)">line 89</a>)] 
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m',14,0)">line 14</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_behavior', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m', 306)" style="font-weight:bold">Adjustment_withMask_behavior</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m',306,0)">line 306</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('RUN', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m', 89)" style="font-weight:bold">RUN</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m',89,0)">line 89</a>)] 
+Responded 48, should be 60.
+Responded 36, should be 36.
+Responded 44, should be 48.
+Responded 34, should be 36.
+Responded 53, should be 54.
+Responded 40, should be 42.
+Responded 50, should be 48.
+Responded 38, should be 42.
+Responded 50, should be 36.
+Responded 53, should be 54.
+Responded 50, should be 60.
+Responded 53, should be 54.
+
+ans =
+
+   6.9989e+04
+
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m',14,0)">line 14</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_behavior', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m', 276)" style="font-weight:bold">Adjustment_withMask_behavior</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m',276,0)">line 276</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('RUN', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m', 89)" style="font-weight:bold">RUN</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m',89,0)">line 89</a>)] 
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m',14,0)">line 14</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_behavior', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m', 306)" style="font-weight:bold">Adjustment_withMask_behavior</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m',306,0)">line 306</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('RUN', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m', 89)" style="font-weight:bold">RUN</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m',89,0)">line 89</a>)] 
+Responded 31, should be 30.
+Responded 51, should be 54.
+Responded 38, should be 36.
+Responded 32, should be 30.
+Responded 49, should be 48.
+Responded 55, should be 54.
+Responded 55, should be 60.
+Responded 30, should be 30.
+Responded 31, should be 30.
+Responded 42, should be 42.
+Responded 36, should be 36.
+Responded 44, should be 42.
+
+ans =
+
+   7.0084e+04
+
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m',14,0)">line 14</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_behavior', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m', 276)" style="font-weight:bold">Adjustment_withMask_behavior</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m',276,0)">line 276</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('RUN', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m', 89)" style="font-weight:bold">RUN</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m',89,0)">line 89</a>)] 
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m',14,0)">line 14</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_behavior', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m', 306)" style="font-weight:bold">Adjustment_withMask_behavior</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m',306,0)">line 306</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('RUN', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m', 89)" style="font-weight:bold">RUN</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m',89,0)">line 89</a>)] 
+Responded 33, should be 30.
+Responded 49, should be 54.
+Responded 39, should be 36.
+Responded 40, should be 30.
+Responded 35, should be 48.
+Responded 53, should be 54.
+Responded 45, should be 60.
+Responded 34, should be 30.
+Responded 35, should be 30.
+Responded 39, should be 42.
+Responded 25, should be 36.
+Responded 46, should be 42.
+
+ans =
+
+   7.0174e+04
+
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m',14,0)">line 14</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_behavior', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m', 276)" style="font-weight:bold">Adjustment_withMask_behavior</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m',276,0)">line 276</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('RUN', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m', 89)" style="font-weight:bold">RUN</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m',89,0)">line 89</a>)] 
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m',14,0)">line 14</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_behavior', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m', 306)" style="font-weight:bold">Adjustment_withMask_behavior</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m',306,0)">line 306</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('RUN', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m', 89)" style="font-weight:bold">RUN</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m',89,0)">line 89</a>)] 
+Responded 29, should be 30.
+Responded 32, should be 36.
+Responded 59, should be 60.
+Responded 51, should be 60.
+Responded 34, should be 30.
+Responded 29, should be 30.
+Responded 37, should be 54.
+Responded 43, should be 42.
+Responded 46, should be 48.
+Responded 55, should be 54.
+Responded 43, should be 42.
+Responded 39, should be 36.
+
+ans =
+
+   7.0273e+04
+
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m',14,0)">line 14</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_behavior', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m', 276)" style="font-weight:bold">Adjustment_withMask_behavior</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m',276,0)">line 276</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('RUN', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m', 89)" style="font-weight:bold">RUN</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m',89,0)">line 89</a>)] 
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m', 14)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Functions/Utils/instruction_screen.m',14,0)">line 14</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_behavior', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m', 306)" style="font-weight:bold">Adjustment_withMask_behavior</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/Adjustment_withMask_behavior.m',306,0)">line 306</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('RUN', '/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m', 89)" style="font-weight:bold">RUN</a> (<a href="matlab: opentoline('/Users/javiergomez/CNS/Year 1/Lab Rotations/Marius Lab/Experiment Pilot/experiment_WM_RIFT/RUN.m',89,0)">line 89</a>)] 
+Responded 32, should be 30.
+Responded 37, should be 36.
+Responded 65, should be 60.
+Responded 57, should be 60.
+Responded 39, should be 30.
+Responded 28, should be 30.
+Responded 55, should be 54.
+Responded 47, should be 42.
+Responded 47, should be 48.
+Responded 61, should be 54.
+Responded 41, should be 42.
+Responded 37, should be 36.
+((( mean Error for Body: -1.04167, for Bar = -0.458333 )))
+Diary closed (03-Dec-2024 15:19:43)
+

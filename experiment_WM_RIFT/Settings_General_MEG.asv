@@ -15,10 +15,11 @@ AssertOpenGL;
 % Suppress non-critical tests and warnings      (TEST ELSEWHERE!)
 Screen('Preference', 'VisualDebuglevel',    3);
 Screen('Preference', 'SuppressAllWarnings', 1);
+
 if RealRun
-Screen('Preference', 'SkipSyncTests',      0);
-else
     Screen('Preference', 'SkipSyncTests',      0);
+else
+    Screen('Preference', 'SkipSyncTests',      1);
 end
 
 
@@ -26,19 +27,13 @@ end
 
 KbName('UnifyKeyNames')
 % participant keys
-if RealRun
-    Keys.name = {'Index', 'Middle'};
-    Keys.number = [97, 98];
-else
-    Keys.name = {'UpArrow', 'DownArrow'};
-    Keys.number = [KbName('UpArrow') KbName('DownArrow')];
-end
 
-
-
+Keys.name = {'UpArrow', 'DownArrow'};
+Keys.number = [KbName('UpArrow') KbName('DownArrow')];
+Keys.eyetrack = [KbName('Enter') KbName('C') KbName('V')];
 RespKeys = Keys.number;
 % restrict keys that are read out by KbCheck (speeds up KbCheck)
-enabledKeys = [RespKeys KbName('ESCAPE') KbName('SPACE')];
+enabledKeys = [RespKeys Keys.eyetrack KbName('ESCAPE') KbName('SPACE') ];
 RestrictKeysForKbCheck(enabledKeys);
 
 %% Open screen & settings==================================================
@@ -61,33 +56,12 @@ if RealRun
 end
 
 
-%% Make directories for participant (if needed)============================
-if RealRun==1
-    RunDir = fullfile(prm.exp.datedir, sprintf('Sub%02d', SubNo), RunType);
-else
-    RunDir = fullfile(prm.exp.datedir, sprintf('Sub%02d', SubNo), RunType);
-end
 
-if ~exist(RunDir, 'dir')
-    mkdir(RunDir);
-end
-
-
-%% Set diary and record the current script
-
-LogDir = fullfile(RunDir, 'Logs');
-if ~exist(LogDir, 'dir')
-    mkdir(LogDir);
-end
-
-RunStart = datestr(now, 'dd-mm-yyyy_HH-MM-SS');
-diary(fullfile(LogDir, sprintf('Sub%02d_%s_%g_%s.txt', SubNo, RunType, RunStart)));
-
-
+%%record the current script
 ScriptName = {'Adjustment_withMask_RIFT','Settings_General_MEG', 'RUN'};
-myCode = cell(length(ScriptName),1);
+prm.myCode = cell(length(ScriptName),1);
 for i = 1:length(ScriptName)
     fid = fopen([ScriptName{i} '.m'],'r'); % 'r': open file for reading
-    myCode{i} = fscanf(fid,'%300c');
+    prm.myCode{i} = fscanf(fid,'%300c');
     fclose('all');
 end

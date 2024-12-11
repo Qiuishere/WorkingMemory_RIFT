@@ -1,0 +1,1182 @@
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 17)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',17,0)">line 17</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 43)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',43,0)">line 43</a>)] 
+
+ Starting the task: (pra): 11-12-2024 14:44:52 
+Waiting for the task to begin in 3 seconds...
+Switch projector mode to 1440 hzResponded 61, should be 50.
+Responded 51, should be 40.
+
+currentAng =
+
+    42
+
+
+currentAng =
+
+    41
+
+
+currentAng =
+
+    40
+
+
+currentAng =
+
+    39
+
+
+currentAng =
+
+    38
+
+
+currentAng =
+
+    37
+
+
+currentAng =
+
+    36
+
+
+currentAng =
+
+    35
+
+
+currentAng =
+
+    34
+
+
+currentAng =
+
+    33
+
+
+currentAng =
+
+    32
+
+
+currentAng =
+
+    31
+
+
+currentAng =
+
+    30
+
+
+currentAng =
+
+    29
+
+
+currentAng =
+
+    30
+
+
+currentAng =
+
+    31
+
+
+currentAng =
+
+    32
+
+
+currentAng =
+
+    33
+
+
+currentAng =
+
+    34
+
+
+currentAng =
+
+    35
+
+
+currentAng =
+
+    36
+
+
+currentAng =
+
+    37
+
+
+currentAng =
+
+    38
+
+
+currentAng =
+
+    39
+
+
+currentAng =
+
+    40
+
+
+currentAng =
+
+    41
+
+
+currentAng =
+
+    42
+
+
+currentAng =
+
+    43
+
+
+currentAng =
+
+    44
+
+
+currentAng =
+
+    45
+
+
+currentAng =
+
+    46
+
+
+currentAng =
+
+    47
+
+
+currentAng =
+
+    48
+
+
+currentAng =
+
+    49
+
+
+currentAng =
+
+    50
+
+
+currentAng =
+
+    51
+
+
+currentAng =
+
+    52
+
+
+currentAng =
+
+    53
+
+
+currentAng =
+
+    54
+
+
+currentAng =
+
+    55
+
+
+currentAng =
+
+    56
+
+
+currentAng =
+
+    57
+
+
+currentAng =
+
+    58
+
+
+currentAng =
+
+    59
+
+
+currentAng =
+
+    60
+
+
+currentAng =
+
+    61
+
+
+currentAng =
+
+    62
+
+
+currentAng =
+
+    61
+
+
+currentAng =
+
+    60
+
+
+currentAng =
+
+    59
+
+
+currentAng =
+
+    58
+
+
+currentAng =
+
+    57
+
+
+currentAng =
+
+    56
+
+
+currentAng =
+
+    55
+
+
+currentAng =
+
+    54
+
+
+currentAng =
+
+    55
+
+
+currentAng =
+
+    56
+
+
+currentAng =
+
+    57
+
+
+currentAng =
+
+    58
+
+
+currentAng =
+
+    59
+
+
+currentAng =
+
+    60
+
+
+currentAng =
+
+    61
+
+
+currentAng =
+
+    62
+
+
+currentAng =
+
+    63
+
+
+currentAng =
+
+    64
+
+
+currentAng =
+
+    65
+
+
+currentAng =
+
+    64
+
+
+currentAng =
+
+    63
+
+
+currentAng =
+
+    62
+
+
+currentAng =
+
+    61
+
+
+currentAng =
+
+    60
+
+
+currentAng =
+
+    59
+
+
+currentAng =
+
+    58
+
+
+currentAng =
+
+    57
+
+
+currentAng =
+
+    56
+
+
+currentAng =
+
+    55
+
+
+currentAng =
+
+    54
+
+
+currentAng =
+
+    53
+
+
+currentAng =
+
+    52
+
+
+currentAng =
+
+    51
+
+
+currentAng =
+
+    50
+
+
+currentAng =
+
+    49
+
+
+currentAng =
+
+    48
+
+
+currentAng =
+
+    47
+
+
+currentAng =
+
+    46
+
+
+currentAng =
+
+    45
+
+
+currentAng =
+
+    44
+
+
+currentAng =
+
+    43
+
+
+currentAng =
+
+    42
+
+
+currentAng =
+
+    43
+
+
+currentAng =
+
+    44
+
+
+currentAng =
+
+    45
+
+
+currentAng =
+
+    46
+
+
+currentAng =
+
+    47
+
+
+currentAng =
+
+    48
+
+
+currentAng =
+
+    49
+
+
+currentAng =
+
+    50
+
+
+currentAng =
+
+    51
+
+
+currentAng =
+
+    52
+
+
+currentAng =
+
+    40
+
+
+currentAng =
+
+    41
+
+
+currentAng =
+
+    42
+
+
+currentAng =
+
+    43
+
+
+currentAng =
+
+    44
+
+
+currentAng =
+
+    45
+
+
+currentAng =
+
+    46
+
+
+currentAng =
+
+    47
+
+
+currentAng =
+
+    48
+
+
+currentAng =
+
+    49
+
+
+currentAng =
+
+    50
+
+
+currentAng =
+
+    51
+
+
+currentAng =
+
+    50
+
+
+currentAng =
+
+    49
+
+
+currentAng =
+
+    48
+
+
+currentAng =
+
+    47
+
+
+currentAng =
+
+    46
+
+
+currentAng =
+
+    45
+
+
+currentAng =
+
+    44
+
+
+currentAng =
+
+    43
+
+
+currentAng =
+
+    42
+
+
+currentAng =
+
+    41
+
+
+currentAng =
+
+    40
+
+
+currentAng =
+
+    39
+
+Responded 39, should be 40.
+Switch projector mode to 120 hz
+ans =
+
+   1.9952e+06
+
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 17)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',17,0)">line 17</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 368)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',368,0)">line 368</a>)] 
+Switch projector mode to 1440 hz
+ans =
+
+   1.9952e+06
+
+
+ans =
+
+   1.9952e+06
+
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 17)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',17,0)">line 17</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 397)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',397,0)">line 397</a>)] 
+
+ans =
+
+   1.9952e+06
+
+
+currentAng =
+
+    57
+
+
+currentAng =
+
+    58
+
+
+currentAng =
+
+    59
+
+
+currentAng =
+
+    60
+
+
+currentAng =
+
+    61
+
+
+currentAng =
+
+    62
+
+
+currentAng =
+
+    63
+
+
+currentAng =
+
+    64
+
+
+currentAng =
+
+    65
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+Responded 65, should be 55.
+
+currentAng =
+
+    62
+
+
+currentAng =
+
+    63
+
+
+currentAng =
+
+    64
+
+
+currentAng =
+
+    65
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    64
+
+
+currentAng =
+
+    63
+
+
+currentAng =
+
+    62
+
+
+currentAng =
+
+    61
+
+
+currentAng =
+
+    60
+
+
+currentAng =
+
+    59
+
+
+currentAng =
+
+    58
+
+
+currentAng =
+
+    57
+
+
+currentAng =
+
+    56
+
+
+currentAng =
+
+    55
+
+
+currentAng =
+
+    54
+
+
+currentAng =
+
+    53
+
+
+currentAng =
+
+    52
+
+
+currentAng =
+
+    51
+
+
+currentAng =
+
+    50
+
+
+currentAng =
+
+    49
+
+
+currentAng =
+
+    48
+
+
+currentAng =
+
+    47
+
+
+currentAng =
+
+    46
+
+
+currentAng =
+
+    45
+
+
+currentAng =
+
+    44
+
+
+currentAng =
+
+    43
+
+Responded 43, should be 50.
+
+currentAng =
+
+    52
+
+
+currentAng =
+
+    53
+
+
+currentAng =
+
+    54
+
+
+currentAng =
+
+    55
+
+
+currentAng =
+
+    56
+
+
+currentAng =
+
+    57
+
+
+currentAng =
+
+    58
+
+
+currentAng =
+
+    59
+
+
+currentAng =
+
+    60
+
+
+currentAng =
+
+    61
+
+
+currentAng =
+
+    62
+
+
+currentAng =
+
+    63
+
+
+currentAng =
+
+    64
+
+
+currentAng =
+
+    65
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+
+currentAng =
+
+    66
+
+Responded 65, should be 40.
+Responded 43, should be 40.
+Responded 39, should be 40.
+((( mean Error for Body: 6, for Bar = -14.8 )))
+Switch projector mode to 120 hzElapsed time is 0.748666 seconds.
+{Unrecognized field name "rest".
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 442)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',442,0)">line 442</a>)
+    prm.dur.trialActual = prm.dur.trialActual(prm.dur.trialActual> 0 & prm.dur.trialActual< prm.time.rest);
+} 
+opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',442,0)
+prm.monitor
+
+ans = 
+
+  <a href="matlab:helpPopup struct" style="font-weight:bold">struct</a> with fields:
+
+         width: 1920
+        height: 1080
+     pixelSize: 32
+            hz: 120
+      screenId: 0
+      viewDist: 100
+            dt: 0.0083
+      frame_ms: @(ms)round(ms/(1000/monitor.hz))
+     screen_cm: [53.1000 29.8000]
+    screen_pix: [0 0 1920 1080]
+        center: [960 540]
+    screen_num: 0
+         black: 0
+         white: 1
+          grey: 0.5000
+     pix_in_cm: 0.0553
+     deg_to_cm: 1.7454
+    pix_to_deg: 0.0317
+    deg_to_pix: 31
+          info: [1×1 struct]
+          mode: [0 2 5]
+       mode_fr: [120 480 1440]
+
+plot_flip_time(prm)
+{Unrecognized function or variable 'thetrial'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('plot_flip_time', 'D:\Users\qiuhan\experiment_WM_RIFT\plot_flip_time.m', 2)" style="font-weight:bold">plot_flip_time</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\plot_flip_time.m',2,0)">line 2</a>)
+prm.time.fliptimes(thetrial, :)
+} 
+    plot_flip_time(prm)
+    plot_flip_time(prm, 2)
+{Index exceeds the number of array elements. Index must not exceed 0.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('plot_flip_time', 'D:\Users\qiuhan\experiment_WM_RIFT\plot_flip_time.m', 10)" style="font-weight:bold">plot_flip_time</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\plot_flip_time.m',10,0)">line 10</a>)
+scatter(1*ones(121,1), dur(144:264)); hold on % target
+} 
+    plot_flip_time(prm, 2)
+    plot_flip_time(prm, 4)
+    plot_flip_time(prm, 5)
+            Eyelink('Message', 'Trial %d', thetrial);
+Error in function Message: 	Usage error
+Eyelink system is not connected!
+
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Eyelink')" style="font-weight:bold">Eyelink</a>
+Usage:
+
+[status =] Eyelink('Message', 'formatstring', [...])
+} 
+    Eyelink('StartRecording');
+Error in function StartRecording: 	Usage error
+Eyelink system is not connected!
+
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Eyelink')" style="font-weight:bold">Eyelink</a>
+Usage:
+
+[startrecording_error =] Eyelink('StartRecording' [,file_samples, file_events, link_samples, link_events] )
+} 
+if useEye
+    Datapixx('Open');
+    Datapixx('SetPropixxDlpSequenceProgram', 0); % 2 for 480, 5 for 1440 Hz, 0 for normal
+    Datapixx('RegWrRd');
+    
+    prm = eyelink_init(prm,id); % initialize the eye tracker parameters
+    EyelinkEnterSetup(prm.eyelink);% enter the set up for the eyelink
+    Screen('FillRect',prm.monitor.window,127); % make it grey again
+end
+useEye
+
+useEye =
+
+     0
+
+    useEye = 1
+
+useEye =
+
+     1
+
+if useEye
+    Datapixx('Open');
+    Datapixx('SetPropixxDlpSequenceProgram', 0); % 2 for 480, 5 for 1440 Hz, 0 for normal
+    Datapixx('RegWrRd');
+    
+    prm = eyelink_init(prm,id); % initialize the eye tracker parameters
+    EyelinkEnterSetup(prm.eyelink);% enter the set up for the eyelink
+    Screen('FillRect',prm.monitor.window,127); % make it grey again
+end
+{Dot indexing is not supported for variables of this type.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('eyelink_init', 'D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\eyelink_init.m', 4)" style="font-weight:bold">eyelink_init</a> (<a href="matlab: opentoline('D:\Users\qiuhan\experiment_WM_RIFT\Functions\Utils\eyelink_init.m',4,0)">line 4</a>)
+prm.exp.eyeFile = sprintf('s%d.edf',str2num(id.number));
+} 
+id
+
+id =
+
+     1    21    41    61    81   101
+
+RunType
+
+RunType =
+
+    'pra'
+
+prm.exp.datedir
+
+ans =
+
+    'Data_Demo'
+
+prm.subInfo.SubNo = SubNo;
+prm.subInfo.path = fullfile(prm.exp.datedir, sprintf('Sub%02d', SubNo), RunType);
+LogDir = fullfile(RunDir, 'Logs');
+if ~exist(LogDir, 'dir')
+    mkdir(LogDir);
+end
+RunStart = datestr(now, 'dd-mm-yyyy_HH-MM-SS');
+diary(fullfile(LogDir, sprintf('Sub%02d_%s_%g_%s.txt', SubNo, RunType, RunStart)));

@@ -6,8 +6,8 @@ function prm    = prm_RIFT(SubNo, RunType, RealRun, Environment, useEye)
 %%=========================================================================
 % general exp prm
 prm.exp.SubNo          = SubNo;
-prm.exp.is_live        = RealRun;
-prm.exp.eyelink_live   = useEye;
+prm.exp.RealRun        = RealRun;
+prm.exp.useEye   = useEye;
 prm.exp.Environment    = Environment;
 prm.exp.RunType        = RunType;
 prm.exp.edgeEyeDistTop = 650;
@@ -22,6 +22,16 @@ if strcmp(RunType,'pra')
 
 end
 
+%% Make directories for participant (if needed)============================
+prm.subInfo.SubNo = SubNo;
+prm.subInfo.path = fullfile(prm.exp.datedir, sprintf('Sub%02d', SubNo), RunType);
+
+if ~exist(prm.subInfo.path, 'dir')
+    mkdir(prm.subInfo.path);
+end
+
+
+%% determine order
 if mod(SubNo,2)
     prm.exp.body1st = 1;
 else
@@ -61,6 +71,8 @@ prm.dur.trial  = sum(cell2mat(struct2cell(prm.dur)));
 
 prm.dur.fixRange = prm.monitor.frame_ms(1000:prm.monitor.dt*1000:1300);
 
+prm.exp.Nmask = 6;
+prm.Nfr.maskId = 1: prm.Nfr.mask/prm.exp.Nmask : prm.Nfr.mask;
 %% tagging strips
 
 if Environment==1
@@ -68,7 +80,7 @@ if Environment==1
     prm.tag.tag_frex      = linspace(3, 8, 11);
 elseif Environment==2 % MEG lab
     prm.tag.refresh       = prm.monitor.hz * 12;
-    prm.tag.tag_frex      = 55:1:65;%:0.5:65;
+    prm.tag.tag_frex      = 55:10:65;%:0.5:65;
 end
 
 if prm.tag.order == 0
@@ -98,36 +110,30 @@ prm.diode_track.SizeInPxl = round(prm.monitor.deg_to_pix * prm.diode_track.SizeI
 prm.diode_track.freq      = 2; % which tagging freq to check in the order of prm.tag.tag_frex
 prm.diode_track.grating   = ones(prm.diode_track.SizeInPxl,prm.diode_track.SizeInPxl);
 
-% % define the position of stimuli in polar coordinate                      
-% prm.tag.DistanceInDeg = [4 6];
-% prm.tag.DistanceInPxl = round(prm.monitor.deg_to_pix * prm.tag.DistanceInDeg);% define the position of stimuli in polar coordinate
-% prm.tag.AngleRange    = [-15 15];
-% prm.tag.AngleInDeg    = repmat([225; 315; 135; 45],[1, 2]) + prm.tag.AngleRange; %
-% 
-% % prm.tag.distance      = [-prm.monitor.width/16, -prm.monitor.height/16; prm.monitor.width/16, -prm.monitor.height/16;...
-% %                           -prm.monitor.width/16, prm.monitor.height/16; prm.monitor.width/16, prm.monitor.height/16];
-% prm.tag.JitterInDeg   = [0 0];  % with jitter
-% prm.tag.JitterInInPxl = round(prm.monitor.deg_to_pix * prm.tag.JitterInDeg);
+
 
 %%=========================================================================
 % MEG triggers
 if RealRun==1 && Environment==2
   prm.trigger.btsi = Bitsi('COM1'); % or whichever COM-port used by the PC
-  prm.exp.key.up = 99;
-  prm.exp.key.down = 100;
-  prm.exp.key.space = 104;
-  prm.trigger.btsi.validResponses = [prm.exp.key.up, prm.exp.key.down, prm.exp.key.space]; % R index finger, R middle, and L index
+  prm.exp.key.up.press     = 99;
+  prm.exp.key.up.release   = 67;
+  prm.exp.key.down.press   = 100;
+  prm.exp.key.down.release = 68;
+  prm.exp.key.space        = 104;
+  prm.trigger.btsi.validResponses = [prm.exp.key.up.press, prm.exp.key.down.press, prm.exp.key.up.release, prm.exp.key.down.release, prm.exp.key.space]; % R index finger, R middle, and L index
 
 end
 
-prm.trigger.ExpStart      = 1;
-prm.trigger.FixStart      = 11; % start of a trial
-prm.trigger.TargetStart   = 21; % stimuli onset
-prm.trigger.TargetEnd     = 22; 
-prm.trigger.DelayStart    = 31; 
-prm.trigger.DelayEnd      = 32;
-prm.trigger.Response      = 40;
-prm.trigger.ExpEnd        = 99;
+prm.trigger.ExpStart           = 1;
+prm.trigger.FixStart           = 11; % start of a trial
+prm.trigger.TargetStart.bar    = 21; % stimuli onset
+prm.trigger.TargetStart.body   = 22; % stimuli onset
+prm.trigger.TargetEnd          = 29; 
+prm.trigger.DelayStart         = 31; 
+prm.trigger.DelayEnd           = 39;
+prm.trigger.Response           = 40;
+prm.trigger.ExpEnd             = 99;
 
 %%=========================================================================
 % fixation
@@ -159,7 +165,7 @@ prm.fix.maxDevPxl  = round(prm.monitor.deg_to_pix * prm.fix.maxDevDeg);
 
 %% Constructing all the trials=========================================
     prm.fac.adjustRange = (25:65)';
-    prm.fac.targetRange = (30:6:60)';
+    prm.fac.targetRange = (30:5:60)';
     prm.fac.views = {'L', 'R'}; % 1: facing left (presented onthe right)
     prm.fac.figures = {'Fe'; 'Ma'};
     prm.fac.targetIds = [1;2];
@@ -173,7 +179,6 @@ prm.fix.maxDevPxl  = round(prm.monitor.deg_to_pix * prm.fix.maxDevDeg);
     % Create the table
     table = cell2table(combinations, ...
         'VariableNames', {'targetId','angleTarget', 'view1',  'figure1', });
-   table.angle1 = table.angleTarget;
    
    % table = repmat(table, 3, 1);
     
@@ -192,6 +197,7 @@ prm.fix.maxDevPxl  = round(prm.monitor.deg_to_pix * prm.fix.maxDevDeg);
     
     table2 = table;
     table2.stimulus = repmat("Bar", height(table), 1);
+    table2.figure1  = repmat([" "],height(table), 1);
     
     prm.N.trial = height(table)*2;
     prm.N.block = 4*2;

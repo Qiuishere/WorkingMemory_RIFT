@@ -1,5 +1,5 @@
 
-function [blackTxts, whiteTxts] = make_tag_texture(prm)
+function [blackTxts, whiteTxts, prm] = make_tag_texture(prm)
 
 imgSize = prm.img.WPix ;
 
@@ -50,6 +50,7 @@ imshow(img/255)
 
 
 for i = 1:prm.tag.nStrip
+    % use the full texture for rotation, then crop later
     theimg = imrotate(img, prm.tag.angle(i), 'bilinear', 'crop');
     thealpha = imrotate(alphaLayer, prm.tag.angle(i), 'bilinear', 'crop'); % 'bilinear' interpolation, 'crop' option
 %     whitebar = repmat(theimg,[1,1,3]);
@@ -65,14 +66,15 @@ for i = 1:prm.tag.nStrip
 %     whiteTxts(i,1) = Screen('MakeTexture', prm.w.Number,  whitebar);
 %     whiteTxts(i,2) = Screen('MakeTexture', prm.w.Number,  fliplr(whitebar));
 
+% get only the upper-left corner
+theimg = theimg(1:prm.img.WPix/2, 1:prm.img.WPix/2, :);
+thealpha = thealpha(1:prm.img.WPix/2, 1:prm.img.WPix/2, :);
+
 whitebar = uint8(cat(3,theimg, thealpha));
 whiteTxts(i,1) = Screen('MakeTexture', prm.w.Number,  whitebar, []); % set specialflag to 2 to ensure it will be read as LA format
-whiteTxts(i,2) = Screen('MakeTexture', prm.w.Number,  fliplr(whitebar), []);
 
 blackbar = uint8(cat(3,255-theimg, thealpha));
 blackTxts(i,1) = Screen('MakeTexture', prm.w.Number,  blackbar, []); % set specialflag to 2 to ensure it will be read as LA format
-blackTxts(i,2) = Screen('MakeTexture', prm.w.Number,  fliplr(blackbar), []);
 end
 
-
-
+prm.tag.size = size(theimg);

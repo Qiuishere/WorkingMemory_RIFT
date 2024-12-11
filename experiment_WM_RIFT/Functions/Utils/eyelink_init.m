@@ -1,16 +1,16 @@
 function prm = eyelink_init(prm,id)
 
 %% File and directory for the .edf file
-prm.exp.eyeFile = sprintf('s%d.edf',str2num(id.number));
+prm.exp.eyeFile = sprintf('s%02d.edf',id.SubNo);
 prm.exp.eyeDir = fullfile(id.path,'edf'); 
 mkdir(prm.exp.eyeDir); % this folder to be created if it does not exist!
 
 %% Initialize
 ELsamplingrate = 1000;
-dummymode = ~prm.exp.eyelink_live;
+dummymode = ~prm.exp.useEye;
 EyelinkInit(dummymode); % 0 -> don't ask for dummymode, 1 -> dummymode
 
-prm.eyelink = EyelinkInitDefaults(prm.monitor.window); % sends pixel coordinates to the eyetracker
+prm.eyelink = EyelinkInitDefaults(prm.w.Number); % sends pixel coordinates to the eyetracker
 
 %% Colour choices for calibration
 % We are changing calibration to a black background with almost white
@@ -43,7 +43,7 @@ failOpen = Eyelink('OpenFile', prm.exp.eyeFile); % 0 success, else error code
 if failOpen ~= 0 % Abort if it fails to open
     error('Cannot create EDF file %s', prm.exp.eyeFile); % Print some text in Matlab's Command Window
 end
-preambleText = sprintf('Recorded by EyelinkToolbox, Experiment narratives, %s, subject-%d''', prm.exp.dateString,str2num(id.number));
+preambleText = sprintf('Recorded by EyelinkToolbox, Experiment narratives, %s, subject-%02d''', prm.exp.dateString, id.SubNo);
 Eyelink('command', 'add_file_preamble_text "%s"', preambleText);
 WaitSecs(0.05);
 Eyelink('message', '%s',prm.exp.dateString);

@@ -1,0 +1,452 @@
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 17)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',17,0)">line 17</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 43)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',43,0)">line 43</a>)] 
+Elapsed time is 52.182826 seconds.
+{Undefined function or variable 'thetrial'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 77)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',77,0)">line 77</a>)
+                lineDir = (T.view1(thetrial)-1.5) *2;
+} 
+opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',77,0)
+% determine the positions in four quadrants
+    
+    for thequa = 1:4
+        subcenter = MakeOffsetRect(prm.w, [0,0], 0, 0, thequa);
+        prm.tag.subcenters(thequa,:)  = subcenter(1:2);      
+        
+        prm.img.pos(thequa, 1:4)    = MakeOffsetRect(prm.w, prm.img.presentedSize, 0, 0, thequa);
+        prm.tag.pos(thequa, 1:4, 1)    = MakeOffsetRect(prm.w, prm.tag.size, -prm.tag.size(1)/2, -prm.tag.size(1)/2, thequa);        
+        rightRect    = MakeOffsetRect(prm.w, prm.tag.size, prm.tag.size(1)/2,  -prm.tag.size(1)/2, thequa);
+        prm.tag.pos(thequa, 1:4, 2)    = rightRect([3, 2, 1, 4]); %flipping of tag images to the right is achieved by flipping destinationRect
+        prm.diode_track.positions(thequa,:) = MakeOffsetRect(prm.w, prm.w.Center, 0, 0, thequa);
+        
+        for j = prm.fac.adjustRange(1): prm.fac.adjustRange(end)
+            for k = 1:length(prm.fac.views)
+                lineDir = (k-1.5) *2;
+                lineEnds(j,k,:) = [prm.tag.subcenters(quadrant, 1) + lineDir *prm.bar.armLength* sin(j), prm.tag.subcenters(quadrant, 2) - prm.bar.armLength*cos(j)];
+            
+            end
+        end
+    end
+{Undefined function or variable 'quadrant'.
+} 
+for thequa = 1:4
+        subcenter = MakeOffsetRect(prm.w, [0,0], 0, 0, thequa);
+        prm.tag.subcenters(thequa,:)  = subcenter(1:2);      
+        
+        prm.img.pos(thequa, 1:4)    = MakeOffsetRect(prm.w, prm.img.presentedSize, 0, 0, thequa);
+        prm.tag.pos(thequa, 1:4, 1)    = MakeOffsetRect(prm.w, prm.tag.size, -prm.tag.size(1)/2, -prm.tag.size(1)/2, thequa);        
+        rightRect    = MakeOffsetRect(prm.w, prm.tag.size, prm.tag.size(1)/2,  -prm.tag.size(1)/2, thequa);
+        prm.tag.pos(thequa, 1:4, 2)    = rightRect([3, 2, 1, 4]); %flipping of tag images to the right is achieved by flipping destinationRect
+        prm.diode_track.positions(thequa,:) = MakeOffsetRect(prm.w, prm.w.Center, 0, 0, thequa);
+        
+        for j = prm.fac.adjustRange(1): prm.fac.adjustRange(end)
+            for k = 1:length(prm.fac.views)
+                lineDir = (k-1.5) *2;
+                lineEnds(j,k,:) = [prm.tag.subcenters(thequa, 1) + lineDir *prm.bar.armLength* sin(j), prm.tag.subcenters(thequa, 2) - prm.bar.armLength*cos(j)];
+            
+            end
+        end
+    end
+lineEnds
+
+lineEnds(:,:,1) =
+
+   1.0e+03 *
+
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+    2.4517    2.3483
+    2.1022    2.6978
+    2.0265    2.7735
+    2.2942    2.5058
+    2.6592    2.1408
+    2.7859    2.0141
+    2.5578    2.2422
+    2.1847    2.6153
+    2.0095    2.7905
+    2.1934    2.6066
+    2.5672    2.2328
+    2.7873    2.0127
+    2.6513    2.1487
+    2.2843    2.5157
+    2.0236    2.7764
+    2.1090    2.6910
+    2.4619    2.3381
+    2.7579    2.0421
+    2.7248    2.0752
+    2.3931    2.4069
+    2.0677    2.7323
+    2.0478    2.7522
+    2.3517    2.4483
+    2.7000    2.1000
+    2.7725    2.0275
+    2.5025    2.2975
+    2.1383    2.6617
+    2.0147    2.7853
+    2.2454    2.5546
+    2.6182    2.1818
+    2.7904    2.0096
+    2.6037    2.1963
+    2.2297    2.5703
+    2.0123    2.7877
+    2.1513    2.6487
+    2.5190    2.2810
+    2.7773    2.0227
+    2.6887    2.1113
+    2.3346    2.4654
+    2.0407    2.7593
+    2.0771    2.7229
+
+
+lineEnds(:,:,2) =
+
+   1.0e+03 *
+
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+    0.9629    0.9629
+    1.0974    1.0974
+    1.4641    1.4641
+    1.7259    1.7259
+    1.6421    1.6421
+    1.2898    1.2898
+    0.9928    0.9928
+    1.0242    1.0242
+    1.3552    1.3552
+    1.6814    1.6814
+    1.7029    1.7029
+    1.4000    1.4000
+    1.0511    1.0511
+    0.9770    0.9770
+    1.2459    1.2459
+    1.6105    1.6105
+    1.7356    1.7356
+    1.5062    1.5062
+    1.1332    1.1332
+    0.9595    0.9595
+    1.1448    1.1448
+    1.5188    1.5188
+    1.7375    1.7375
+    1.6000    1.6000
+    1.2326    1.2326
+    0.9732    0.9732
+    1.0602    1.0602
+    1.4137    1.4137
+    1.7086    1.7086
+    1.6739    1.6739
+    1.3414    1.3414
+    1.0168    1.0168
+    0.9986    0.9986
+    1.3035    1.3035
+    1.6511    1.6511
+    1.7219    1.7219
+    1.4508    1.4508
+    1.0870    1.0870
+    0.9650    0.9650
+    1.1970    1.1970
+    1.5697    1.5697
+
+prm.bar.armLength
+
+ans =
+
+  390.5280
+
+k
+
+k =
+
+     2
+
+(k-1.5) *2
+
+ans =
+
+     1
+
+thetrial = 1
+
+thetrial =
+
+     1
+
+theBarRange = squeeze(lineEnds(:, T.view1(thetrial), :));
+theBarRange
+
+theBarRange =
+
+   1.0e+03 *
+
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+         0         0
+    2.4517    0.9629
+    2.1022    1.0974
+    2.0265    1.4641
+    2.2942    1.7259
+    2.6592    1.6421
+    2.7859    1.2898
+    2.5578    0.9928
+    2.1847    1.0242
+    2.0095    1.3552
+    2.1934    1.6814
+    2.5672    1.7029
+    2.7873    1.4000
+    2.6513    1.0511
+    2.2843    0.9770
+    2.0236    1.2459
+    2.1090    1.6105
+    2.4619    1.7356
+    2.7579    1.5062
+    2.7248    1.1332
+    2.3931    0.9595
+    2.0677    1.1448
+    2.0478    1.5188
+    2.3517    1.7375
+    2.7000    1.6000
+    2.7725    1.2326
+    2.5025    0.9732
+    2.1383    1.0602
+    2.0147    1.4137
+    2.2454    1.7086
+    2.6182    1.6739
+    2.7904    1.3414
+    2.6037    1.0168
+    2.2297    0.9986
+    2.0123    1.3035
+    2.1513    1.6511
+    2.5190    1.7219
+    2.7773    1.4508
+    2.6887    1.0870
+    2.3346    0.9650
+    2.0407    1.1970
+    2.0771    1.5697
+
+theBarRange(T.angleTarget(thetrial),1)
+
+ans =
+
+   2.1090e+03
+
+theBarRange(T.angleTarget(thetrial),2)
+
+ans =
+
+   1.6105e+03
+
+theBarRange(currentAng,1)
+{Undefined function or variable 'currentAng'.
+} 
+ clear
+prm_RIFT
+{Not enough input arguments.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('prm_RIFT', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\prm_RIFT.m', 8)" style="font-weight:bold">prm_RIFT</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\prm_RIFT.m',8,0)">line 8</a>)
+prm.exp.SubNo          = SubNo;
+} 
+Adjustment_withMask_RIFT
+PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
+PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
+PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
+PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY8 ...
+PTB-INFO: Screen 3 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY9 ...
+
+PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
+PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
+PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (120, 120), matching that of
+PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
+PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
+PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('prm_RIFT', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\prm_RIFT.m', 200)" style="font-weight:bold">prm_RIFT</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\prm_RIFT.m',200,0)">line 200</a>)
+All tables in the bracketed expression must have the same number of variables.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 21)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',21,0)">line 21</a>)
+    prm = prm_RIFT(SubNo, RunType, RealRun, Environment, useEye);
+} 
+opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',21,0)
+opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\prm_RIFT.m',200,0)
+prm.fac.adjustRange = (25:65)';
+    prm.fac.targetRange = (30:5:60)';
+    prm.fac.views = {'L', 'R'}; % 1: facing left (presented onthe right)
+    prm.fac.figures = {'Fe'; 'Ma'};
+    prm.fac.targetIds = [1;2];
+    
+    % Generate all combinations using ndgrid
+    [t, d, v, f] = ndgrid(prm.fac.targetIds, prm.fac.targetRange, 1:length(prm.fac.views),  prm.fac.figures);
+    
+    % Combine into a cell array
+    combinations = [num2cell(t(:)), num2cell(d(:)), num2cell(v(:)),  f(:)];
+    
+    % Create the table
+    table = cell2table(combinations, ...
+        'VariableNames', {'targetId','angleTarget', 'view1',  'figure1', });
+   
+   % table = repmat(table, 3, 1);
+table2 = table;
+    table2.stimulus = repmat("Bar", height(table), 1);
+table2.figure1 = [];
+opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\prm_RIFT.m',200,0)
+table(thetrialid,:)
+{Undefined function or variable 'thetrialid'.
+} 
+prm.fac.stimuli = ["Body","Bar"];
+    table.stimulus = repmat("Body", height(table), 1);
+    
+    if  strcmp(prm.exp.RunType , 'pra')
+        table = table(1: prm.N.praTrial,:);
+    end
+{Reference to non-existent field 'exp'.
+} 
+prm.N.trialPerBlock = prm.N.trial/prm.N.block;
+{Reference to non-existent field 'N'.
+} 
+thetrialid = 1:10
+
+thetrialid =
+
+     1     2     3     4     5     6     7     8     9    10
+
+T = [T; table(thetrialid,:); table2(thetrialid,:)];
+{Undefined function or variable 'T'.
+} 
+T = [];
+T = [T; table(thetrialid,:); table2(thetrialid,:)];
+{All tables in the bracketed expression must have the same number of variables.
+} 
+table2.figure1 = repmat([],height(table), 1);
+{To assign to or create a variable in a table, the number of rows must match the height of the table.
+} 
+repmat([],height(table), 1)
+
+ans =
+
+     []
+
+table2.figure1 = repmat([' '],height(table), 1);
+T = [];
+    for thebl = 1: 0.5*prm.N.block
+        thetrialid = (1:prm.N.trialPerBlock) + prm.N.trialPerBlock*(thebl-1);
+        if prm.exp.body1st==1
+            T = [T; table(thetrialid,:); table2(thetrialid,:)];
+        else
+            T = [T; table2(thetrialid,:); table(thetrialid,:)];
+        end
+    end
+{Reference to non-existent field 'N'.
+} 
+T = [T; table(thetrialid,:); table2(thetrialid,:)];
+{Cannot concatenate the table variable 'figure1' because it is a cell in one table and a non-cell in another.
+} 
+table2 = table;
+    table2.stimulus = repmat("Bar", height(table), 1);
+    table2.figure1 = repmat([' '],height(table), 1);
+T = [T; table(thetrialid,:); table2(thetrialid,:)];
+{Cannot concatenate the table variable 'figure1' because it is a cell in one table and a non-cell in another.
+} 
+table2 = table;
+    table2.stimulus = repmat("Bar", height(table), 1);
+    table2.figure1 = repmat([" "],height(table), 1);
+T = [T; table(thetrialid,:); table2(thetrialid,:)];
+Adjustment_withMask_RIFT
+{Reference to non-existent field 'exp'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 24)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',24,0)">line 24</a>)
+    RealRun = prm.exp.RealRun;
+} 
+clear
+Adjustment_withMask_RIFT
+PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
+PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
+PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
+PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY8 ...
+PTB-INFO: Screen 3 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY9 ...
+
+PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
+PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
+PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (120, 120), matching that of
+PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
+PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
+PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
+[Warning: SetScreen: invalid value for "Debug". Debug will be set to 0.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('SetScreen', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\SetScreen.m', 62)" style="font-weight:bold">SetScreen</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\SetScreen.m',62,0)">line 62</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Settings_General_MEG', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Settings_General_MEG.m', 54)" style="font-weight:bold">Settings_General_MEG</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Settings_General_MEG.m',54,0)">line 54</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 37)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',37,0)">line 37</a>)] 
+
+
+----- ! PTB - ERROR: SYNCHRONIZATION FAILURE ! -----
+
+One or more internal checks (see Warnings above) indicate that synchronization
+of Psychtoolbox to the vertical retrace (VBL) is not working on your setup.
+
+This will seriously impair proper stimulus presentation and stimulus presentation timing!
+Please read 'help SyncTrouble' for information about how to solve or work-around the problem.
+You can force Psychtoolbox to continue, despite the severe problems, by adding the command
+Screen('Preference', 'SkipSyncTests', 1); at the top of your script, if you really know what you are doing.
+
+

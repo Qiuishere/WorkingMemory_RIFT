@@ -1,5 +1,8 @@
 function instruction_screen(prm,txt)
 
+
+%Screen('BlendFunction', prm.w.Number, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+Screen('BlendFunction', prm.w.Number, [], [], [1 1 1 1]);
 Screen('glPushMatrix', prm.w.Number);
 Screen('glLoadIdentity',prm.w.Number);
 
@@ -12,4 +15,4 @@ Screen('Flip', prm.w.Number);
 Screen('glPopMatrix', prm.w.Number);
 
 warning('In instruction. Press Spacebar to continue.');
-waitforspace; waitfornokey;
+waitforspace(prm); waitfornokey;

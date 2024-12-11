@@ -260,60 +260,6 @@ classdef Bitsi<handle % extend handle so that properties are modifiable (weird m
         end
 
 
-        function [response, when] = getResponse(B)
-            response = 0;
-
-            % start stopwatch
-            tic
-            if (B.debugmode)
-                    % poll the state of the keyboard
-                    [keyisdown, when, keyCode] = KbCheck;
-
-                    % if there wasn't a response before and there is a
-                    % keyboard press available
-                    if response == 0 && keyisdown
-                        response = find(keyCode);
-
-                        if ismember(response, B.validResponses)
-                            when = GetSecs;
-                        else
-                            response = 0;
-                        end
-                    end
-
-                    WaitSecs(0.001);
-
-            else
-                    % if there wasn't a response before and there is a
-                    % serial character available
-                    if response == 0 && B.serobj.BytesAvailable > 0
-
-                        response = fread(B.serobj, 1);
-
-                        % allow only characters present in the
-                        % validResponses array
-                        if ismember(response, B.validResponses)
-
-                            when = GetSecs;
-                            %fprintf('Bitsi: response code %i\n', response);
-                        else
-                            response = 0;
-                            when = 0;
-                        end
-                    else
-                            when = 0; 
-
-                    end
-
-                    %WaitSecs(0.001);
-
-                % now we waited 'duration' seconds and there might be a
-                % button captured, there may be some additional responses
-                % in the serial buffer
-                % B.clearResponses();
-            end
-        end
-
 
 
         % close

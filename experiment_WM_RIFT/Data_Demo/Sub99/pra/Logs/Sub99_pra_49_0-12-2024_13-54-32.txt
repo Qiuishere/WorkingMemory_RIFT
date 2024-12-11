@@ -1,0 +1,3034 @@
+
+
+PTB-ERROR: Screen('Flip'); beamposition timestamping computed an *impossible stimulus onset value* of 100163.449972 secs, which would indicate that
+PTB-ERROR: stimulus onset happened *before* it was actually requested! (Earliest theoretically possible 100163.462947 secs).
+
+PTB-ERROR: Some more diagnostic values (only for experts): rawTimestamp = 100163.464731, scanline = 951
+PTB-ERROR: Some more diagnostic values (only for experts): line_pre_swaprequest = 831, line_post_swaprequest = 844, time_post_swaprequest = 100163.463141
+PTB-ERROR: Some more diagnostic values (only for experts): preflip_vblcount = 0, preflip_vbltimestamp = 100163.450618
+PTB-ERROR: Some more diagnostic values (only for experts): postflip_vblcount = 0, postflip_vbltimestamp = -1.000000, vbltimestampquery_retrycount = 0
+
+PTB-ERROR: This error can be due to either of the following causes:
+PTB-ERROR: Very unlikely: Something is broken in your systems beamposition timestamping. I've disabled high precision
+PTB-ERROR: timestamping for now. Returned timestamps will be less robust and accurate.
+
+PTB-ERROR: The most likely cause would be that Synchronization of stimulus onset (buffer swap) to the
+PTB-ERROR: vertical blank interval VBL is not working properly, or swap completion signalling to PTB is broken.
+PTB-ERROR: Please run the script PerceptualVBLSyncTest to check this. With non-working sync to VBL, all stimulus timing
+PTB-ERROR: is futile. Also run OSXCompositorIdiocyTest on macOS. Also read 'help SyncTrouble' !
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 17)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',17,0)">line 17</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 43)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',43,0)">line 43</a>)] 
+
+ Starting the task: (pra): 10-12-2024 13:54:40 
+Waiting for the task to begin in 3 seconds...
+Responded 53, should be 42.
+Responded 49, should be 36.
+Responded 32, should be 48.
+Responded 56, should be 30.
+Responded 34, should be 30.
+
+ans =
+
+   1.0021e+05
+
+[Warning: In instruction. Press Spacebar to continue.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('instruction_screen', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m', 17)" style="font-weight:bold">instruction_screen</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Functions\Utils\instruction_screen.m',17,0)">line 17</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 387)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',387,0)">line 387</a>)] 
+
+ans =
+
+   1.0021e+05
+
+Responded 53, should be 42.
+Responded 49, should be 36.
+Responded 32, should be 48.
+Responded 56, should be 30.
+Responded 34, should be 30.
+((( mean Error for Body: 7.6, for Bar = 7.6 )))
+Elapsed time is 83.175406 seconds.
+{Reference to non-existent field 'rest'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Adjustment_withMask_RIFT', 'C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m', 432)" style="font-weight:bold">Adjustment_withMask_RIFT</a> (<a href="matlab: opentoline('C:\Projects\WorkingMemory_RIFT\experiment_WM_RIFT\Adjustment_withMask_RIFT.m',432,0)">line 432</a>)
+    prm.dur.trialActual = prm.dur.trialActual(prm.dur.trialActual> 0 & prm.dur.trialActual< prm.time.rest);
+} 
+mainDir = '.\Data_Lab'
+
+mainDir =
+
+    '.\Data_Lab'
+
+tic 
+                    line1End = [prm.tag.subcenters(quadrant, 1) + line1Dir *prm.bar.armLength* sin(angle1Rad), prm.tag.subcenters(quadrant, 2) - prm.bar.armLength*cos(angle1Rad)];
+toc
+Elapsed time is 0.014952 seconds.
+tic 
+                    line1End = [prm.tag.subcenters(quadrant, 1) + line1Dir *prm.bar.armLength* sin(angle1Rad), prm.tag.subcenters(quadrant, 2) - prm.bar.armLength*cos(angle1Rad)];
+toc
+Elapsed time is 0.013112 seconds.
+tic 
+                    line1End = [prm.tag.subcenters(quadrant, 1) + line1Dir *prm.bar.armLength* sin(angle1Rad), prm.tag.subcenters(quadrant, 2) - prm.bar.armLength*cos(angle1Rad)];
+toc
+Elapsed time is 0.014374 seconds.
+tic 
+                    line1End = [prm.tag.subcenters(quadrant, 1) + line1Dir *prm.bar.armLength* sin(angle1Rad), prm.tag.subcenters(quadrant, 2) - prm.bar.armLength*cos(angle1Rad)];
+toc
+Elapsed time is 0.052872 seconds.
+tic 
+                    line1End = [prm.tag.subcenters(quadrant, 1) + line1Dir *prm.bar.armLength* sin(angle1Rad), prm.tag.subcenters(quadrant, 2) - prm.bar.armLength*cos(angle1Rad)];
+toc
+Elapsed time is 0.014284 seconds.
+tic 
+                    line1End = [prm.tag.subcenters(quadrant, 1) + line1Dir *prm.bar.armLength* sin(angle1Rad), prm.tag.subcenters(quadrant, 2) - prm.bar.armLength*cos(angle1Rad)];
+toc
+Elapsed time is 0.010023 seconds.
+tic 
+                    line1End = [prm.tag.subcenters(quadrant, 1) + line1Dir *prm.bar.armLength* sin(angle1Rad), prm.tag.subcenters(quadrant, 2) - prm.bar.armLength*cos(angle1Rad)];
+toc
+Elapsed time is 0.008844 seconds.
+tic 
+                    line1End = [prm.tag.subcenters(quadrant, 1) + line1Dir *prm.bar.armLength* sin(angle1Rad), prm.tag.subcenters(quadrant, 2) - prm.bar.armLength*cos(angle1Rad)];
+toc
+Elapsed time is 0.009109 seconds.
+tic 
+                    line1End = [prm.tag.subcenters(quadrant, 1) + line1Dir *prm.bar.armLength* sin(angle1Rad), prm.tag.subcenters(quadrant, 2) - prm.bar.armLength*cos(angle1Rad)];
+toc
+Elapsed time is 0.011789 seconds.
+mainDir = '.\Data_Lab'
+
+mainDir =
+
+    '.\Data_Lab'
+
+
+% List all "SubXX" folders in the main directory
+subDirs = dir(fullfile(mainDir, 'Sub*'));
+subDirs
+
+subDirs = 
+
+  0×1 empty <a href="matlab:helpPopup struct" style="font-weight:bold">struct</a> array with fields:
+
+    name
+    folder
+    date
+    bytes
+    isdir
+    datenum
+
+mainDir = '.\Data_Lab'
+
+mainDir =
+
+    '.\Data_Lab'
+
+
+% List all "SubXX" folders in the main directory
+subDirs = dir(fullfile(mainDir, 'Sub*'));
+subDirs
+
+subDirs = 
+
+  15×1 <a href="matlab:helpPopup struct" style="font-weight:bold">struct</a> array with fields:
+
+    name
+    folder
+    date
+    bytes
+    isdir
+    datenum
+
+errorData = [];  % To store the error data
+stimulusData = {};  % To store stimulus types (Bar, Body)
+subjectIDs = {};  % To store subject IDs
+for i = 1:length(subDirs)
+    subFolder = subDirs(i).name;
+    testFolder = fullfile(mainDir, subFolder, 'test');
+    
+    % Find the .mat file in the "test" folder
+    matFile = dir(fullfile(testFolder, [subFolder, '_test_*.mat']));
+    
+    if ~isempty(matFile)
+        % Load the .mat file
+        matFilePath = fullfile(testFolder, matFile.name);
+        data = load(matFilePath);
+        
+        % Extract the table "T" from the .mat file
+        T = data.T;
+        
+        % Extract the error data (18th column)
+        errors = T{:, 18};
+        
+        % Extract the stimulus data (8th column)
+        stimuli = T{:, 8};
+        
+        % Append the data to the arrays
+        errorData = [errorData; errors];  % Combine the error data
+        stimulusData = [stimulusData; stimuli];  % Combine the stimulus data
+        subjectIDs = [subjectIDs; repmat({subFolder}, length(errors), 1)];  % Add the subject ID
+    end
+end
+combinedTable = table(subjectIDs, stimulusData, errorData, 'VariableNames', {'SubjectID', 'Stimulus', 'Error'});
+barErrors = errorData(strcmp(stimulusData, 'Bar'));
+bodyErrors = errorData(strcmp(stimulusData, 'Body'));
+% Perform t-tests for each stimulus type against 0
+barErrors = errorData(strcmp(stimulusData, 'Bar'));
+bodyErrors = errorData(strcmp(stimulusData, 'Body'));
+
+% t-test for Bar stimulus
+[~, pBar] = ttest(barErrors, 0);
+
+% t-test for Body stimulus
+[~, pBody] = ttest(bodyErrors, 0);
+% t-test between Bar and Body stimuli
+[~, pStimulus] = ttest2(barErrors, bodyErrors);
+
+% Display the t-test results
+fprintf('T-test for Bar stimulus vs. 0: p-value = %.4f\n', pBar);
+T-test for Bar stimulus vs. 0: p-value = 0.0000
+fprintf('T-test for Body stimulus vs. 0: p-value = %.4f\n', pBody);
+T-test for Body stimulus vs. 0: p-value = 0.3312
+fprintf('T-test between Bar and Body stimuli: p-value = %.4f\n', pStimulus);
+T-test between Bar and Body stimuli: p-value = 0.0244
+groupLabels = {'Bar', 'Body'};
+meanErrors = [mean(barErrors), mean(bodyErrors)]
+
+meanErrors =
+
+    0.9111    0.2111
+
+stderrErrors = [std(barErrors) / sqrt(length(barErrors)), std(bodyErrors) / sqrt(length(bodyErrors))];
+meanErrors
+
+meanErrors =
+
+    0.9111    0.2111
+
+stderrErrors
+
+stderrErrors =
+
+    0.2224    0.2171
+
+errors(strcmp(stimuli, 'Bar'))
+
+ans =
+
+     9
+     4
+    -9
+     3
+   -12
+    -7
+     3
+    -1
+     6
+   -14
+     5
+     9
+     3
+     1
+    -9
+    -8
+     2
+    -4
+    15
+    -4
+    -1
+    -3
+    -3
+     8
+     0
+    -6
+     4
+     0
+    -5
+    -5
+     3
+    -5
+     1
+     6
+    -6
+    -3
+     3
+    -1
+     5
+    -5
+     4
+     0
+    -5
+    -2
+    -4
+     5
+    -3
+    -8
+
+% Loop over each "SubXX" folder
+for i = 1:length(subDirs)
+    subFolder = subDirs(i).name;
+    testFolder = fullfile(mainDir, subFolder, 'test');
+    
+    % Find the .mat file in the "test" folder
+    matFile = dir(fullfile(testFolder, [subFolder, '_test_*.mat']));
+    
+    if ~isempty(matFile)
+        % Load the .mat file
+        matFilePath = fullfile(testFolder, matFile.name);
+        data = load(matFilePath);
+        
+        % Extract the table "T" from the .mat file
+        T = data.T;
+        
+        % Extract the error data (18th column)
+        errors = T{:, 18};
+        
+        % Extract the stimulus data (8th column)
+        stimuli = T{:, 8};
+        
+        % Append the data to the arrays
+        meanError(i,1) = mean(errors(strcmp(stimuli, 'Bar')));
+        meanError(i,2) = mean(errors(strcmp(stimuli, 'Body')));
+        errorData = [errorData; errors];  % Combine the error data
+        stimulusData = [stimulusData; stimuli];  % Combine the stimulus data
+        subjectIDs = [subjectIDs; repmat({subFolder}, length(errors), 1)];  % Add the subject ID
+    end
+end
+[~, pBar] = ttest(meanError(:,1), 0)
+
+pBar =
+
+    0.0066
+
+[~, pBody] = ttest(meanError(:,2), 0)
+
+pBody =
+
+    0.3178
+
+meanErrors = [mean(meanError(:,1)), mean(meanError(:,2))]
+
+meanErrors =
+
+    0.9111    0.2111
+
+figure;
+bar(meanErrors);
+fileName2 = fullfile(RunDir, sprintf('ResultTable_Sub%02d_%s_%g.csv', prm.exp.SubNo, prm.exp.RunType ));
+fileName2
+
+fileName2 =
+
+    'Data_Demo\Sub99\pra\ResultTable_Sub99_pra_'
+
+fileName2 = fullfile(RunDir, sprintf('ResultTable_Sub%02d_%s.csv', prm.exp.SubNo, prm.exp.RunType ));
+fileName2
+
+fileName2 =
+
+    'Data_Demo\Sub99\pra\ResultTable_Sub99_pra.csv'
+
+writetable(T, fileName2);
+prm.exp.body1st
+
+ans =
+
+     1
+
+        data = load(matFilePath, 'T');
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('load')" style="font-weight:bold">load</a>
+'.\Data_Lab\Sub15\test\Sub15_test_.mat' is not found in the current folder or on the MATLAB path, but exists in:
+    C:\Projects\WorkingMemory_RIFT\pilot_data
+
+<a href = "matlab:cd 'C:\Projects\WorkingMemory_RIFT\pilot_data'">Change the MATLAB current folder</a> or <a href = "matlab:addpath 'C:\Projects\WorkingMemory_RIFT\pilot_data'">add its folder to the MATLAB path</a>.
+} 
+clear
+% Define the main directory containing the "SubXX" folders
+mainDir = '.\Data_Lab'
+
+mainDir =
+
+    '.\Data_Lab'
+
+
+% List all "SubXX" folders in the main directory
+subDirs = dir(fullfile(mainDir, 'Sub*'));
+
+% Initialize variables to store combined data
+errorData = [];  % To store the error data
+stimulusData = {};  % To store stimulus types (Bar, Body)
+subjectIDs = {};  % To store subject IDs
+i = 1
+
+i =
+
+     1
+
+    subFolder = subDirs(i).name;
+    testFolder = fullfile(mainDir, subFolder, 'test');
+    
+    % Find the .mat file in the "test" folder
+    matFile = dir(fullfile(testFolder, [subFolder, '_test_*.mat']));
+    
+        matFilePath = fullfile(testFolder, matFile.name);
+        data = load(matFilePath, 'T');
+alldata = table();
+        alldata = [alldata, T];
+{Undefined function or variable 'T'.
+} 
+        alldata = [alldata, data.T];
+alldata = table();
+% Loop over each "SubXX" folder
+for i = 1:length(subDirs)
+    subFolder = subDirs(i).name;
+    testFolder = fullfile(mainDir, subFolder, 'test');
+    
+    % Find the .mat file in the "test" folder
+    matFile = dir(fullfile(testFolder, [subFolder, '_test_*.mat']));
+    
+    if ~isempty(matFile)
+        % Load the .mat file
+        matFilePath = fullfile(testFolder, matFile.name);
+        data = load(matFilePath, 'T');
+        
+        % Extract the table "T" from the .mat file
+        T = data.T;
+        alldata = [alldata, data.T];
+        % Extract the error data (18th column)
+        errors = T{:, 18};
+        
+        % Extract the stimulus data (8th column)
+        stimuli = T{:, 8};
+        
+        % Append the data to the arrays
+        meanError(i,1) = mean(errors(strcmp(stimuli, 'Bar')));
+        meanError(i,2) = mean(errors(strcmp(stimuli, 'Body')));
+        errorData = [errorData; errors];  % Combine the error data
+        stimulusData = [stimulusData; stimuli];  % Combine the stimulus data
+        subjectIDs = [subjectIDs; repmat({subFolder}, length(errors), 1)];  % Add the subject ID
+    end
+end
+{Duplicate table variable name: 'subjectid'.
+} 
+errorData = [];  % To store the error data
+stimulusData = {};  % To store stimulus types (Bar, Body)
+subjectIDs = {};  % To store subject IDs
+alldata = table();
+% Loop over each "SubXX" folder
+for i = 1:length(subDirs)
+    subFolder = subDirs(i).name;
+    testFolder = fullfile(mainDir, subFolder, 'test');
+    
+    % Find the .mat file in the "test" folder
+    matFile = dir(fullfile(testFolder, [subFolder, '_test_*.mat']));
+    
+    if ~isempty(matFile)
+        % Load the .mat file
+        matFilePath = fullfile(testFolder, matFile.name);
+        data = load(matFilePath, 'T');
+        
+        % Extract the table "T" from the .mat file
+        T = data.T;
+        alldata = [alldata, data.T];
+        % Extract the error data (18th column)
+        errors = T{:, 18};
+        
+        % Extract the stimulus data (8th column)
+        stimuli = T{:, 8};
+        
+        % Append the data to the arrays
+        meanError(i,1) = mean(errors(strcmp(stimuli, 'Bar')));
+        meanError(i,2) = mean(errors(strcmp(stimuli, 'Body')));
+        errorData = [errorData; errors];  % Combine the error data
+        stimulusData = [stimulusData; stimuli];  % Combine the stimulus data
+       % subjectIDs = [subjectIDs; repmat({subFolder}, length(errors), 1)];  % Add the subject ID
+    end
+end
+{Duplicate table variable name: 'subjectid'.
+} 
+errorData = [];  % To store the error data
+stimulusData = {};  % To store stimulus types (Bar, Body)
+subjectIDs = {};  % To store subject IDs
+alldata = table();
+% Loop over each "SubXX" folder
+for i = 1:length(subDirs)
+    subFolder = subDirs(i).name;
+    testFolder = fullfile(mainDir, subFolder, 'test');
+    
+    % Find the .mat file in the "test" folder
+    matFile = dir(fullfile(testFolder, [subFolder, '_test_*.mat']));
+    
+    if ~isempty(matFile)
+        % Load the .mat file
+        matFilePath = fullfile(testFolder, matFile.name);
+        data = load(matFilePath, 'T');
+        
+        % Extract the table "T" from the .mat file
+        T = data.T;
+        alldata = [alldata; data.T];
+        % Extract the error data (18th column)
+        errors = T{:, 18};
+        
+        % Extract the stimulus data (8th column)
+        stimuli = T{:, 8};
+        
+        % Append the data to the arrays
+        meanError(i,1) = mean(errors(strcmp(stimuli, 'Bar')));
+        meanError(i,2) = mean(errors(strcmp(stimuli, 'Body')));
+        errorData = [errorData; errors];  % Combine the error data
+        stimulusData = [stimulusData; stimuli];  % Combine the stimulus data
+       % subjectIDs = [subjectIDs; repmat({subFolder}, length(errors), 1)];  % Add the subject ID
+    end
+end
+alldata = alldata(abs(alldata.stimulus <20))
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('lt')" style="font-weight:bold"> < </a>
+Comparison between string and double is not supported.
+} 
+alldata = alldata(abs(alldata.Error) <20)
+{Subscripting a table using linear indexing (one subscript) or multidimensional indexing (three or more subscripts) is not supported. Use a row subscript
+and a variable subscript.
+} 
+alldata.Error
+
+ans =
+
+     8
+     8
+     1
+     9
+     0
+    -6
+    -3
+   -48
+     7
+     3
+   -54
+    -4
+     5
+    10
+    -1
+     3
+     8
+     2
+     6
+     1
+     6
+     8
+    -1
+     3
+     6
+    11
+     4
+    -4
+    -3
+    -1
+     9
+     3
+    -1
+     1
+    -7
+    -5
+     2
+    16
+    -1
+     2
+     2
+     2
+     6
+     5
+     4
+     3
+    -6
+     0
+     0
+     1
+    -3
+     6
+     9
+    -2
+    10
+     6
+    -2
+     0
+     0
+    -5
+     3
+     5
+    -5
+     4
+     8
+    -1
+    10
+     1
+     1
+     2
+     2
+     3
+     6
+     0
+     1
+     0
+     4
+     0
+     0
+    -6
+     2
+    -1
+     8
+     2
+     3
+    18
+     3
+     4
+     0
+   -30
+    -1
+   -10
+    -7
+    -6
+    10
+    -1
+    -5
+    -3
+     4
+     4
+     2
+    11
+    -1
+   -12
+    -2
+     0
+    -8
+     3
+     1
+    -1
+    -2
+     1
+     3
+     0
+     1
+    -9
+     0
+     2
+     7
+     3
+    -5
+   -14
+     0
+     5
+    -3
+     0
+     5
+   -12
+     4
+     1
+     5
+     5
+     7
+    -7
+     0
+     8
+     0
+     3
+     0
+   -15
+     2
+    -1
+     5
+    -1
+     2
+    -9
+    -5
+    -2
+    -7
+     7
+     0
+     6
+     9
+    -6
+     0
+    -3
+     2
+    -2
+    -5
+     0
+    -6
+     4
+    -3
+     1
+     0
+   -13
+     3
+    -2
+     3
+    -6
+    -3
+     3
+     4
+    -2
+    -5
+    -5
+    19
+     5
+     1
+    -2
+    -1
+     0
+     2
+     1
+     4
+     9
+     1
+    -7
+    -2
+     0
+    -6
+   -14
+    -4
+    -5
+     1
+    -1
+    -1
+    -4
+    -3
+    11
+     4
+    -5
+     6
+    -1
+    -6
+   -13
+     7
+     0
+     9
+    -6
+    -9
+    11
+    11
+    -1
+    -1
+    -8
+   -11
+    -5
+    -2
+    -2
+    -2
+     5
+    -2
+     0
+    11
+    -5
+    -8
+    -4
+   -12
+     0
+    -4
+    -2
+    -1
+    -2
+     2
+    -4
+    14
+    -1
+   -10
+    -1
+     1
+    -3
+     2
+     2
+     1
+     1
+    -5
+     0
+     1
+     0
+     0
+     2
+     3
+    -5
+     3
+    10
+   -13
+    -1
+   -15
+     4
+     5
+    -3
+   -11
+     4
+    -1
+    -4
+    -1
+    -9
+     4
+    -1
+   -17
+     1
+    -2
+     1
+     1
+     3
+     2
+     1
+     5
+    -3
+     9
+    -2
+     1
+     5
+    -1
+     7
+    -1
+     1
+    -5
+     1
+    -3
+    -2
+    -4
+     2
+     2
+     3
+     5
+     4
+    -1
+    -7
+    -3
+     4
+     3
+     0
+     3
+     0
+     0
+     4
+    -4
+    -3
+    -1
+    -5
+    -2
+     4
+     4
+    -3
+   -13
+     3
+    -4
+     2
+     4
+     3
+    -2
+    12
+    -1
+    -2
+     6
+     6
+    -4
+     1
+    -5
+     3
+     6
+     6
+    -5
+     0
+    -6
+     1
+     5
+     0
+     5
+    -2
+    -1
+     4
+    -4
+     8
+     4
+    -2
+     1
+    -2
+     4
+     1
+     8
+     0
+    -4
+    -3
+     0
+    -2
+     0
+     2
+    -5
+    -2
+     1
+    -4
+     2
+     1
+    -1
+     6
+    -9
+    -1
+    -9
+     1
+    -6
+    -4
+    -1
+    -3
+     7
+     2
+    -2
+    -1
+     0
+     3
+     2
+     3
+    -6
+    -9
+     9
+     2
+     3
+    11
+     8
+     3
+     0
+    -4
+    19
+     2
+    -2
+    -1
+    20
+     5
+     3
+    15
+    18
+     3
+     5
+     2
+    13
+     1
+    -2
+     5
+     6
+     1
+     0
+     5
+     2
+    -2
+     0
+    -7
+    -9
+     9
+     0
+    10
+     4
+   -11
+     0
+    -7
+     3
+     3
+     3
+     0
+    -4
+     3
+     8
+    -5
+    -4
+     0
+     7
+    -2
+     1
+    -3
+     3
+     2
+     6
+     2
+     7
+     1
+    -6
+     0
+     5
+    -1
+     1
+    -2
+    -4
+    -2
+     8
+    -5
+     5
+    -1
+     8
+     0
+     0
+    -1
+     3
+     6
+     6
+    -3
+     0
+     5
+    -3
+     5
+    -5
+    -1
+     4
+     4
+    -1
+    10
+    -1
+     0
+     8
+    -3
+    -2
+     7
+    -5
+    10
+    -8
+     1
+     5
+     0
+    -3
+     4
+     1
+     8
+     5
+    -5
+    -6
+     3
+    -2
+     6
+     0
+    -2
+    -1
+     0
+    -3
+     0
+     0
+    -4
+     9
+     5
+    -3
+     2
+    -1
+     5
+    -2
+     1
+    13
+     7
+    -2
+     1
+     3
+    -2
+     0
+     5
+    -3
+     0
+    -2
+     5
+     7
+     3
+     9
+     5
+     5
+     4
+    -3
+    11
+     3
+    -6
+     6
+     3
+    -1
+     0
+    -1
+    -6
+     1
+     0
+    -2
+    -4
+     2
+     1
+     0
+   -11
+     0
+     1
+     0
+     5
+     6
+    11
+    -1
+     3
+     4
+     1
+     2
+     7
+     1
+     6
+    -3
+     3
+    -1
+     1
+     0
+     4
+     0
+     6
+    -3
+     1
+    -2
+     1
+     0
+     0
+     0
+     0
+     0
+     0
+     0
+     0
+     1
+    -2
+     0
+     1
+     1
+     4
+     2
+     0
+    -1
+     0
+     5
+     5
+    12
+     1
+     3
+    -3
+    -1
+     1
+    -1
+     1
+    -1
+     1
+    -5
+    -2
+     0
+     0
+     0
+     0
+     2
+     7
+     1
+     4
+     0
+    16
+     0
+     0
+    -3
+     5
+    -3
+     2
+     0
+     2
+    -1
+    -2
+    -1
+     1
+     1
+     1
+     1
+     0
+     0
+     0
+    -2
+     3
+     9
+    -3
+     7
+     3
+     5
+    -2
+    -3
+    -5
+     7
+     1
+     0
+     0
+     0
+     1
+     1
+     5
+     1
+     0
+     0
+     0
+     0
+    -2
+     5
+    -3
+    -2
+     6
+     2
+     2
+    -1
+    -1
+     2
+    -1
+    -4
+     2
+     2
+     3
+     0
+    -2
+     3
+     0
+     5
+     4
+     1
+    -5
+    -9
+    -3
+    -1
+     2
+    -1
+    -1
+     6
+    -3
+     2
+     1
+    -3
+     0
+     1
+     0
+     2
+    -1
+    -5
+   -11
+     1
+     3
+    -6
+     5
+     2
+     5
+    -3
+     4
+    -1
+    -1
+     2
+     2
+     0
+     2
+     1
+     4
+     1
+     1
+     3
+     2
+     8
+     0
+     8
+     9
+    -8
+    -6
+    -8
+    -7
+    -2
+     1
+     1
+    -4
+     4
+     0
+     1
+     1
+     3
+     1
+    -1
+   -36
+     2
+    -1
+     0
+    -2
+     2
+     2
+    -2
+     0
+    -5
+     2
+     5
+     4
+     1
+     5
+     7
+     4
+     0
+     1
+     3
+     1
+    -1
+    -1
+     1
+     0
+     0
+     1
+     2
+     0
+    10
+     1
+    -3
+    -2
+     1
+    -7
+    -2
+     4
+     9
+     1
+     6
+     0
+     4
+     4
+    -5
+    -1
+    -3
+    -5
+     5
+     9
+     5
+    -4
+    -2
+     5
+    -1
+    -2
+     8
+     0
+     0
+    -1
+     3
+    -2
+    -1
+     5
+     5
+   -13
+     1
+     3
+    11
+    -1
+     6
+     3
+     8
+    -6
+    -4
+     0
+    -5
+     5
+    -1
+     4
+    -1
+     4
+    -3
+     2
+     3
+     5
+     6
+     5
+     4
+     2
+     5
+    -2
+    -1
+     9
+    -5
+     0
+    -2
+     4
+   -13
+     5
+    -1
+    -2
+     0
+    -2
+     1
+    -3
+     6
+     1
+     1
+     2
+    -1
+     2
+     2
+     3
+    -1
+     3
+    -2
+    -3
+     3
+     1
+    -1
+     4
+    -8
+     3
+    -2
+    -2
+     2
+     0
+     0
+    10
+    -2
+     2
+    -8
+     4
+     6
+     2
+    15
+    -7
+     1
+    -9
+     2
+    10
+     0
+    -4
+     0
+     8
+     4
+    -6
+     5
+     1
+     8
+     9
+     0
+     9
+     5
+     4
+    -7
+     8
+    -2
+    -7
+     1
+     2
+     2
+    25
+     3
+     0
+    -1
+     0
+     2
+    -2
+    -2
+     1
+     0
+     5
+    -1
+    11
+    -3
+     6
+     4
+    10
+     1
+    -5
+     1
+    -2
+    12
+   -10
+    -1
+     0
+   -15
+     7
+    -6
+    -1
+    -2
+     0
+     2
+     3
+    -1
+    -2
+     2
+     7
+     5
+    -2
+    -5
+    -2
+     6
+    -5
+   -12
+     2
+     1
+    -6
+     1
+   -30
+   -12
+     0
+    -7
+     0
+    12
+   -16
+    -1
+     5
+    11
+   -12
+     9
+    -2
+    -1
+     4
+    -5
+     5
+     5
+     3
+    -4
+     2
+     1
+    -1
+    -1
+     7
+     2
+     5
+    -4
+     4
+     5
+    -4
+     0
+     3
+     0
+     4
+     3
+    -1
+     3
+     3
+     0
+     7
+     7
+     5
+     4
+    -1
+    -2
+    -8
+    11
+     2
+     4
+     4
+     2
+    -4
+     0
+    -1
+     1
+    12
+    -5
+     1
+     4
+     3
+     1
+     3
+     3
+     2
+     3
+    -3
+    -1
+    -1
+     2
+    -2
+     6
+     4
+     1
+     3
+     7
+    -1
+    10
+    -5
+     7
+    -4
+     5
+     6
+     1
+     1
+     0
+    -3
+     5
+    -1
+     3
+    -4
+     6
+     1
+    -2
+     1
+     0
+     8
+    -5
+    -5
+     5
+     1
+     2
+     5
+    -2
+    -2
+     5
+    -4
+     1
+    -9
+   -21
+     1
+    -1
+    -1
+   -24
+    -7
+     3
+     5
+     2
+    -1
+     1
+    -7
+    -7
+    -4
+     1
+   -30
+   -19
+     6
+    18
+    -3
+     7
+     5
+     5
+    -1
+    -7
+    -1
+    -3
+   -17
+    21
+    11
+    -3
+    -8
+     2
+     0
+     5
+    -8
+   -16
+    -3
+     0
+     3
+    -3
+     1
+    -8
+    -1
+     5
+     3
+    -2
+    -2
+     1
+     7
+    -6
+     5
+    -3
+     6
+     0
+    21
+    10
+    -6
+    -2
+     0
+     3
+     5
+    -2
+     5
+    23
+    10
+     8
+    -4
+    -1
+   -17
+     5
+    16
+    -6
+     4
+     5
+    -5
+     4
+   -11
+     4
+    11
+   -14
+    11
+     2
+    14
+    -1
+     9
+    -2
+     1
+     6
+    -2
+    -7
+    -2
+     8
+    -4
+     4
+     0
+    -2
+     2
+    -2
+    -1
+     2
+     0
+    -2
+    -1
+     1
+    -5
+    -1
+     1
+     1
+     6
+     0
+    -4
+     4
+     0
+    -7
+     9
+     1
+    -2
+    -2
+    -2
+    -1
+     0
+    -2
+     3
+     8
+    -3
+     0
+    -2
+     0
+     2
+    12
+     1
+     3
+     3
+     0
+     1
+     2
+    -9
+    10
+    -3
+     2
+     1
+     5
+     0
+     1
+     3
+     0
+    -2
+     3
+    14
+    -1
+     4
+     5
+     2
+     3
+    12
+     0
+     3
+    -8
+    -2
+     6
+    11
+   -12
+    -3
+     0
+    -5
+    -2
+    -1
+     1
+    -1
+    -1
+    -2
+    -1
+     4
+     1
+     1
+     0
+    -2
+     5
+    -3
+     9
+     5
+    -3
+     2
+   -14
+     1
+    -5
+     3
+     9
+   -14
+    -5
+    14
+     6
+     2
+    -4
+    -2
+     4
+     4
+    -7
+     3
+     0
+    14
+    -2
+    -2
+    -1
+    -2
+    -3
+    -2
+    -4
+     2
+     0
+     0
+     0
+     1
+    -5
+     0
+     5
+    -5
+     2
+    -1
+     5
+    -2
+     6
+     5
+    -4
+     8
+     4
+     0
+     2
+    -1
+    -1
+     2
+     0
+     0
+     0
+     0
+    -3
+     0
+     6
+     3
+    10
+     0
+     9
+     0
+     5
+     2
+    -5
+    -3
+     5
+     2
+     2
+    -3
+     2
+    -1
+     0
+     0
+     1
+     1
+     2
+     2
+     0
+     1
+     7
+    -3
+     6
+   -13
+     1
+     2
+     2
+     1
+   -13
+    -7
+     5
+     6
+     0
+     0
+    -1
+    -1
+     0
+     0
+    -1
+     1
+     5
+     2
+    -2
+     3
+    -3
+     6
+    -5
+    17
+    -6
+     0
+     4
+     7
+     9
+    -5
+     8
+    20
+     9
+     4
+    -9
+     3
+   -12
+    -7
+     3
+    -1
+     6
+   -14
+     5
+     9
+     6
+     4
+     0
+    -4
+    10
+    -4
+     3
+    -7
+    -3
+    -4
+    -9
+     0
+     3
+     1
+    -9
+    -8
+     2
+    -4
+    15
+    -4
+    -1
+    -3
+    -3
+     8
+     6
+   -14
+     4
+     1
+     4
+    -9
+     0
+     0
+     2
+     4
+     0
+    -1
+     0
+    -6
+     4
+     0
+    -5
+    -5
+     3
+    -5
+     1
+     6
+    -6
+    -3
+    -6
+    -8
+     2
+     7
+    13
+     5
+    -7
+    -5
+     1
+     4
+    -1
+   -13
+     3
+    -1
+     5
+    -5
+     4
+     0
+    -5
+    -2
+    -4
+     5
+    -3
+    -8
+
+abs(alldata.Error) <20
+
+ans =
+
+  1440×1 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   0
+   1
+   1
+   0
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   0
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   0
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   0
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   0
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   0
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   0
+   1
+   1
+   1
+   0
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   0
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   1
+   0
+   1
+   1
+   1
+   1
+   1
+   1
+  

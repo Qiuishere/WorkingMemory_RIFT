@@ -59,29 +59,20 @@ prm = prm_RIFT(SubNo, RunType, RealRun, Environment, useEye);
 if  strcmp(prm.exp.RunType , 'test') && RealRun
     prm.subInfo = GetParticipantInfo('age','gender','hand');
 end
-    
 
-%% setup propixx mode
 
-% eye-link calibaration
-if useEye
-    Datapixx('Open');
-    Datapixx('SetPropixxDlpSequenceProgram', 0); % 2 for 480, 5 for 1440 Hz, 0 for normal
-    Datapixx('RegWrRd');
-    
-    prm = eyelink_init(prm,id); % initialize the eye tracker parameters
-    EyelinkEnterSetup(prm.eyelink);% enter the set up for the eyelink
-    Screen('FillRect',prm.monitor.window,127); % make it grey again
+
+%% Set diary  
+
+LogDir = fullfile(RunDir, 'Logs');
+if ~exist(LogDir, 'dir')
+    mkdir(LogDir);
 end
 
+RunStart = datestr(now, 'dd-mm-yyyy_HH-MM-SS');
+diary(fullfile(LogDir, sprintf('Sub%02d_%s_%g_%s.txt', SubNo, RunType, RunStart)));
 
- 
-% start the eye tracker
-if useEye
-    Eyelink('StartRecording');
-    WaitSecs(0.050);
-    Eyelink('Message', 'STARTEXP');
-end
+
 
 %% Run experiment
 
