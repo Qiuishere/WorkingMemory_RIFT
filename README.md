@@ -26,3 +26,4 @@ in order:
 
 **run_preproc_afterica**: manually identify noisy ICs and save their lables. This step doesn't save a cleaned version of data after IC rejection. Instead, the saved ICs will be rejected when loading data for further analysis using subfun/load_clean_data.m
 
+## frequency analysis: ./Analysis
