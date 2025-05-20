@@ -1,0 +1,171 @@
+function [subjects, all_ids, rootdir] = datainfo(rootdir)
+%
+% Copyright (C) Eelke Spaak, Donders Institute, Nijmegen, The Netherlands, 2019.
+% 
+% This code is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+% 
+% This code is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+% 
+% You should have received a copy of the GNU General Public License
+% along with this code. If not, see <https://www.gnu.org/licenses/>.
+
+% persistent cache;
+% 
+% if ~isempty(cache)
+%   subjects = cache.subjects;
+%   all_ids = cache.all_ids;
+%   rootdir = cache.rootdir;
+%   return;
+% end
+
+if nargin < 1 || isempty(rootdir)
+  if ispc()
+    rootdir = '';
+  else
+   % rootdir = '/home/predatt/qiuhan/MEG/Data_pilot';
+    rootdir = '/project/3018085.01/pilot';
+  end
+end
+% note: originally this file also contained references to individual
+% participants' MRI and Polhemus (headshape) data; these are stripped for
+% privacy reasons.
+
+subjects = [];
+if strcmp(rootdir, '/project/3018085.01/pilot')
+
+    subjects(1).id = 1;
+    subjects(1).rawmeg = fullfile(rootdir, 'raw','sub-001/sub-001.ds');
+    subjects(1).behav = fullfile(rootdir, 'raw','sub-001/Behavior/Sub99_test.mat');
+    subjects(1).eyetracker = fullfile(rootdir,'raw', 'sub-002/ses-beh01/beh/s2.asc');
+
+    subjects(2).id = 2;
+    subjects(2).rawmeg = fullfile(rootdir, 'raw','sub-002/sub-002.ds');
+    subjects(2).behav = fullfile(rootdir, 'raw','sub-002/Behavior/Sub98_test.mat');
+    subjects(2).eyetracker = fullfile(rootdir,'raw', 'sub-002/Behavior/edf/s98.asc');
+    %
+    subjects(3).id = 3;
+    subjects(3).rawmeg = fullfile(rootdir, 'raw','sub-003/sub-003.ds');
+    subjects(3).behav = fullfile(rootdir, 'raw','sub-003/Behavior/test/Sub96_test.mat');
+    subjects(3).eyetracker = fullfile(rootdir,'raw', 'sub-003/Behavior/test/edf/s96.asc');
+
+    subjects(4).id = 4;
+    subjects(4).rawmeg = fullfile(rootdir, 'raw','sub-004/sub-004.ds');
+    subjects(4).behav = fullfile(rootdir, 'raw','sub-004/Behavior/test/Sub95_test.mat');
+    subjects(4).eyetracker = fullfile(rootdir,'raw', 'sub-004/Behavior/test/edf/s95.asc');
+
+    subjects(5).id = 5;
+    subjects(5).rawmeg = fullfile(rootdir, 'raw','sub-005/sub005_3018085.01_20250324_01.ds');
+    subjects(5).behav = fullfile(rootdir, 'raw','sub-005/beh/test/Sub94_test.mat');
+    subjects(5).eyetracker = fullfile(rootdir,'raw', 'sub-005/beh/test/edf/s94.asc');
+
+    subjects(6).id = 6;
+    subjects(6).rawmeg = fullfile(rootdir, 'raw','sub-006', 'sub006_3018085.01_20250324_01.ds');
+    subjects(6).behav = fullfile(rootdir, 'raw','sub-006', 'beh/test/Sub02_test.mat');
+    subjects(6).eyetracker = fullfile(rootdir,'raw', 'sub-006', 'beh/test/edf/s02.asc');
+
+
+elseif strcmp(rootdir, '/project/3018085.01')
+    subjects(1).id = 1;
+    subfolder = fullfile(rootdir, 'raw','sub-001');
+    subjects(1).rawmeg     = fullfile(subfolder, 'meg/sub001ses01_3018085.01_20250331_01.ds');
+    subjects(1).behav      = fullfile(subfolder, 'beh/test/Sub01_test.mat');
+    subjects(1).eyetracker = fullfile(subfolder, 'beh/test/edf/s01.asc');
+
+    subjects(2).id = 2;
+    subfolder = fullfile(rootdir, 'raw','sub-002');
+    subjects(2).rawmeg     = fullfile(subfolder, 'meg/sub002ses01_3018085.01_20250402_01.ds');
+    subjects(2).behav      = fullfile(subfolder, 'beh/test/Sub02_test.mat');
+    subjects(2).eyetracker = fullfile(subfolder, 'beh/test/edf/s02.asc');
+    
+    subjects(3).id = 3;
+    subfolder = fullfile(rootdir, 'raw','sub-003');
+    subjects(3).rawmeg     = fullfile(subfolder, 'meg/sub003_3018085.01_20250403_01.ds');
+    subjects(3).behav      = fullfile(subfolder, 'beh/test/Sub03_test.mat');
+    subjects(3).eyetracker = fullfile(subfolder, 'beh/test/edf/s03.asc');
+    
+        subjects(4).id = 4;
+    subfolder = fullfile(rootdir, 'raw','sub-004');
+    subjects(4).rawmeg     = fullfile(subfolder, 'meg/subj004_3018085.01_20250407_01.ds');
+    subjects(4).behav      = fullfile(subfolder, 'beh/test/Sub03_test.mat');
+    subjects(4).eyetracker = fullfile(subfolder, 'beh/test/edf/s03.asc');
+    
+        subjects(5).id = 5;
+    subfolder = fullfile(rootdir, 'raw','sub-005');
+    subjects(5).rawmeg     = fullfile(subfolder, 'meg/sub005_3018085.01_20250408_01.ds');
+    subjects(5).behav      = fullfile(subfolder, 'beh/test/Sub05_test.mat');
+    subjects(5).eyetracker = fullfile(subfolder, 'beh/test/edf/s05.asc');
+    
+    subjects(6).id = 6;
+    subfolder = fullfile(rootdir, 'raw','sub-006');
+    subjects(6).rawmeg     = fullfile(subfolder, 'meg/sub006_3018085.01_20250408_01.ds');
+    subjects(6).behav      = fullfile(subfolder, 'beh/test/Sub06_test.mat');
+    subjects(6).eyetracker = fullfile(subfolder, 'beh/test/edf/s06.asc');
+
+
+end
+
+% % Get a list of all files starting with "sub"
+% files = dir([subjects(4).rawmeg '/*3018*']);
+% % Loop through each file
+% % for i = 1:length(files)
+% %     [~, name, ext] = fileparts(files(i).name); % Extract name and extension
+% %     new_name = [sprintf('sub-%03d', 4)  ext]; % Construct new name
+% % 
+% %     % Rename the file
+% %     if ~strcmp(new_name, [name ext])
+% %     movefile(fullfile(files(i).folder, files(i).name), fullfile(files(i).folder,new_name));
+% %     fprintf('Renamed %s to %s\n', files(i).name, new_name);
+% %     end
+% % end
+% 
+
+for subj_id = 1:numel(subjects)
+  subjects(subj_id).dir = fullfile(rootdir, 'preprocessed', sprintf('record%02d', subj_id));
+  subjects(subj_id).results = fullfile(rootdir, 'results', sprintf('sbj%02d', subj_id));
+end
+
+
+
+
+
+for subj_id = 1:numel(subjects)
+  % ensure consistency in subject IDs
+  assert(isempty(subjects(subj_id).id) || subjects(subj_id).id == subj_id);
+  assert(isempty(subjects(subj_id).id) || contains(subjects(subj_id).rawmeg, sprintf('%02d', subj_id)));
+  % assert(isempty(subjects(subj_id).id) || contains(subjects(subj_id).behav, sprintf('pilot%03d', subj_id)));
+%   assert(isempty(subjects(subj_id).id) || contains(subjects(subj_id).polhemus, sprintf('subj%02d', subj_id)));
+%   assert(isempty(subjects(subj_id).id) || contains(subjects(subj_id).rawmri, sprintf('subj%02d', subj_id)));
+
+  % make sure files exist
+  % assert(isempty(subjects(subj_id).id) || exist(subjects(subj_id).rawmeg, 'file'));
+  % assert(isempty(subjects(subj_id).id) || exist(subjects(subj_id).behav, 'file'));
+%   assert(isempty(subjects(subj_id).id) || exist(subjects(subj_id).polhemus, 'file'));
+%   assert(isempty(subjects(subj_id).id) || exist(subjects(subj_id).rawmri, 'file'));
+
+  % make subject dir if needed
+  warning('off', 'MATLAB:MKDIR:DirectoryExists');
+  mkdir(subjects(subj_id).dir);
+  mkdir(subjects(subj_id).results);
+  warning('on', 'MATLAB:MKDIR:DirectoryExists');
+end
+
+warning('off', 'MATLAB:MKDIR:DirectoryExists');
+% mkdir(fullfile(rootdir, 'preprocessed', 'combined'));
+warning('on', 'MATLAB:MKDIR:DirectoryExists');
+
+% also return subject IDs that have data
+all_ids = 1:numel(subjects);
+all_ids(arrayfun(@(x) isempty(x.id), subjects)) = [];
+
+cache = [];
+cache.subjects = subjects;
+cache.all_ids = all_ids;
+cache.rootdir = rootdir;
+
+end

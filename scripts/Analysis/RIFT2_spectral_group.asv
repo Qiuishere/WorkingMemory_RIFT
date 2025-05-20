@@ -1,0 +1,824 @@
+% 01.11.2024 Songyun at Nijmegen
+% check:
+% 1. PSD at group level to see RIFT
+% 2. Coh at group level 
+% 3. Coh peak at each freq druing the fixation
+% 4. ISPC at each freq to see pre-sacccadic
+% 5. RIFT power diff between oddball and distractor
+% 6. individual ISPC of the sbj with strong fixation pattern
+
+
+addpath('/project/3018083.01/scripts/subfun')
+addpath('/home/predatt/sonbai/Documents/MATLAB/fieldtrp/')
+addpath(genpath('/home/predatt/sonbai/toolbox/BEIM_toolbox-main/matlabv/'))
+
+clear all; clc ; close all
+ft_defaults
+ft_warning off
+
+Results_fold      = '/project/3018083.01/results/';
+cd(Results_fold)
+ss              = indir;
+N_sbj           = numel(ss);
+
+subjects = datainfo();
+
+sbj2exclude = [11 12];
+
+%% read individual results and run group analysis
+
+% 1) PSD at trial level
+% pre_PSD_path = '/02_spectral/pre_trial_PSD.mat';
+% post_PSD_path = '/02_spectral/post_trial_PSD.mat';
+% PSD_G = cell(N_sbj,1); % initialize a cell to save the PSD
+% 
+% for i = 1:N_sbj
+%     % load the eye tracking data
+%     if exist(fullfile(Results_fold, ss(i).name,pre_PSD_path))
+%         load(fullfile(Results_fold, ss(i).name,pre_PSD_path))
+%         load(fullfile(Results_fold, ss(i).name,post_PSD_path))
+% 
+%         contrast_freq = pre_freq;
+%         contrast_freq.powspctrm = log(base_freq.powspctrm ./ pre_freq.powspctrm);
+%         PSD_G{i} = contrast_freq;
+%     end
+% end
+% 
+% % remove empty cells and grand average
+% PSD_G = PSD_G(~cellfun('isempty',PSD_G));
+% 
+% save(fullfile('/project/3018083.01/group results/02_spectral/', 'PSD_trial_GA'),...
+%   'PSD_G');
+% 
+% % plot the GA results
+% 
+% cfg = [];
+% cfg.parameter = 'powspctrm';
+% PSD_contrast_GA    = ft_freqgrandaverage(cfg,PSD_G{:}); 
+% 
+% cfgplot = [];
+% cfgplot.showlabels   = 'yes';
+% cfgplot.layout       = 'CTF275_helmet.mat';
+% figure
+% ft_multiplotER(cfgplot, PSD_contrast_GA);
+
+%% 2) Coherene 
+% coh_trial_path = '/02_spectral/coh_trial.mat';
+% Coh_trial_G = cell(N_sbj,1); % initialize a cell to save the coh
+% 
+% % load freq to get the ft data format
+% load(fullfile(Results_fold, ss(2).name,pre_PSD_path))
+% 
+% for i = 1:N_sbj
+%     % load the eye tracking data
+%     if exist(fullfile(Results_fold, ss(i).name,coh_trial_path))
+%         load(fullfile(Results_fold, ss(i).name,coh_trial_path))
+% 
+%         coh_trial.label = pre_freq.label;
+%         coh_trial.dimord = pre_freq.dimord;
+%         Coh_trial_G{i} = coh_trial;
+%     end
+% end
+% 
+% % remove empty cells and grand average
+% Coh_trial_G = Coh_trial_G(~cellfun('isempty',Coh_trial_G));
+% 
+% cfg = [];
+% cfg.parameter = 'cohspctrm';
+% Coh_trial_GA    = ft_freqgrandaverage(cfg,Coh_trial_G{:}); 
+% 
+% save(fullfile('/project/3018083.01/group results/02_spectral/', 'Coh_trial_GA'),...
+%   'Coh_trial_GA');
+% 
+% % plot the results
+% coh_topo = [];
+% coh_topo.label = pre_freq.label;
+% coh_topo.dimord = 'chan_freq';
+% coh_topo.freq = Coh_trial_GA.freq;
+% coh_topo.powspctrm = Coh_trial_GA.cohspctrm;
+% 
+% cfgplot = [];
+% cfgplot.layout       = 'CTF275_helmet.mat';
+% figure
+% ft_multiplotER(cfgplot, coh_topo);
+
+%% 3) Coh peak at each freq druing the fixation
+% coh_fix_path = '/02_spectral/coh_fix.mat';
+% pre_PSD_path = '/02_spectral/pre_trial_PSD.mat';
+% 
+% Coh_fix_G = cell(N_sbj,4); % initialize a cell to save coh at each freq for each sbj
+% RIFT_frex = [55 60 65 70];
+% 
+% % load freq to get the ft data format
+% load(fullfile(Results_fold, ss(2).name,pre_PSD_path))
+% 
+% for i = 1:N_sbj
+%     % load the eye tracking data
+%     if exist(fullfile(Results_fold, ss(i).name,coh_fix_path))
+%         load(fullfile(Results_fold, ss(i).name,coh_fix_path)) % load coh during fixation
+%         load(subjects(i).behav)
+%         if ismember(i,[2 3 5]) % forget to balance the tagging freq, sad
+%             tagging_frex = [55 60 65 70];
+%         else
+%             tagging_frex = data.prm.stim.tag_frex;
+%         end
+% 
+% 
+% 
+%         for j = 1:4 % loop through coh_fix to check the frequency of each quadrant
+%             idx = find(tagging_frex == RIFT_frex(j));
+%             coh_temp = coh_fix{j}; % select coh of one quadrant
+%             coh_temp.label = pre_freq.label;
+%             coh_temp.dimord = pre_freq.dimord;
+%             Coh_fix_G{i,idx} = coh_temp;
+%         end      
+%     end
+% end
+% 
+% save(fullfile('/project/3018083.01/group results/02_spectral/', 'Coh_fix_G'),...
+%       'Coh_fix_G');
+% 
+% 
+% % GA and plot
+% cfg = [];
+% cfg.parameter = 'cohspctrm';
+% name4fig = {'55','60','65','70'};
+% 
+% for i = 1:4
+%     selected_coh = Coh_fix_G(:,i);
+%     % remove empty cells and grand average
+%     selected_coh = selected_coh(~cellfun('isempty',selected_coh));
+% 
+% 
+%     selected_coh_GA    = ft_freqgrandaverage(cfg,selected_coh{:}); 
+% 
+% 
+%     % plot the results
+%     coh_topo = [];
+%     coh_topo.label = pre_freq.label;
+%     coh_topo.dimord = 'chan_freq';
+%     coh_topo.freq = selected_coh_GA.freq;
+%     coh_topo.powspctrm = selected_coh_GA.cohspctrm;
+% 
+%     cfgplot = [];
+%     cfgplot.layout       = 'CTF275_helmet.mat';
+%     fg = figure;
+%     ft_multiplotER(cfgplot, coh_topo);
+% 
+%     saveas(fg,['/project/3018083.01/group results/02_spectral/', 'fix_coh_',name4fig{i},'.fig']);
+% end
+
+%% plot at posteriro ROI
+% 
+% ROI = {'MLO11', 'MLO12', 'MLO21', 'MLO22', 'MLP41', 'MLP51', 'MLP52',...
+%         'MRO11','MRO12', 'MRO21', 'MRO22', 'MRP31', 'MRP41', 'MRP51', 'MRP52', 'MZO01', 'MZP01'};
+% 
+% ROI_idx = getChannelidx(coh_topo.label, ROI);
+% cfg = [];
+% cfg.parameter = 'cohspctrm';
+% 
+% GA_coh2plot = nan(4,numel(coh_topo.freq));
+% 
+% fg = figure;
+% for iquadrant = 1:4
+%     subplot(2,2,iquadrant)
+%     % load the eye tracking data
+%     selected_coh = Coh_fix_G(:,iquadrant);
+%     % remove empty cells and grand average
+%     selected_coh = selected_coh(~cellfun('isempty',selected_coh));
+% 
+% 
+%     selected_coh_GA    = ft_freqgrandaverage(cfg,selected_coh{:}); 
+%     GA_coh2plot(iquadrant,:)        = mean(selected_coh_GA.cohspctrm(ROI_idx,:));
+% 
+%     plot(mean(selected_coh_GA.cohspctrm(ROI_idx,:)))
+% 
+% end
+
+
+
+%% 4) ISPC (fixation locked) at each freq to see pre-sacccadic
+
+ISPC_path = '/02_spectral/ISPC_all_quadrant_hanning.mat';
+
+ISPC_G = cell(N_sbj,4); % initialize a cell to save coh at each freq for each sbj
+RIFT_frex = [55 60 65 70];
+% 
+% % load freq to get the ft data format
+% load(fullfile(Results_fold, ss(2).name,pre_PSD_path))
+
+for i = 1:N_sbj
+    % load the eye tracking data
+    if exist(fullfile(Results_fold, ss(i).name,ISPC_path)) && ~ismember(i, sbj2exclude) 
+        load(fullfile(Results_fold, ss(i).name,ISPC_path)) % load coh during fixation
+        load(subjects(i).behav)
+        if ismember(i,[2 3 5]) % forget to balance the tagging freq, sad
+            tagging_frex = [55 60 65 70];
+        else
+            tagging_frex = data.prm.stim.tag_frex;
+        end
+       
+    
+        for j = 1:4 % loop through coh_fix to check the frequency of each quadrant
+            idx = find(tagging_frex == RIFT_frex(j));
+            ISPC_temp = ISPC_all_quadrant_hanning{j}; % select coh of one quadrant
+            ISPC_temp.dimord = 'chan_freq_time';
+            ISPC_temp.powspctrm = permute(ISPC_temp.powspctrm, [1 3 2]);
+            % coh_temp.label = pre_freq.label;
+            % coh_temp.dimord = pre_freq.dimord;
+            ISPC_G{i,idx} = ISPC_temp;
+        end      
+    end
+end
+
+save(fullfile('/project/3018083.01/group results/02_spectral/', 'ISPC_G'),...
+      'ISPC_G');
+
+
+
+% GA and plot
+cfg = [];
+cfg.parameter = 'powspctrm';
+name4fig = {'55','60','65','70'};
+
+for i = 1:4
+    selected_ISPC = ISPC_G(:,i);
+    % remove empty cells and grand average
+    selected_ISPC = selected_ISPC(~cellfun('isempty',selected_ISPC));
+    
+    
+    selected_coh_GA    = ft_freqgrandaverage(cfg,selected_ISPC{:}); 
+    
+        
+    cfg = [];
+    cfg.showlabels   = 'yes';
+    cfg.layout       = 'CTF275_helmet.mat';
+    cfg.comment      = 'no';
+    cfg.colormap     = '*RdBu';
+    
+    fg = figure;
+    ft_multiplotTFR(cfg,selected_coh_GA);
+
+    saveas(fg,['/project/3018083.01/group results/02_spectral/', 'ISPC_fix',name4fig{i},'.fig']);
+end
+
+
+%% plot 1 topo-map which averages tagging freq at each quardrant
+cfg = [];
+cfg.parameter = 'powspctrm';
+
+cfg_select = [];
+cfg_select.latency = [.1 .3];
+
+topo_ISPC = nan(4,272);
+for i = 1:4
+    selected_ISPC = ISPC_G(:,i);
+    % remove empty cells and grand average
+    selected_ISPC = selected_ISPC(~cellfun('isempty',selected_ISPC));
+
+
+    selected_coh_GA    = ft_freqgrandaverage(cfg,selected_ISPC{:}); 
+
+    cfg_select.frequency = RIFT_frex(i);
+    selected_coh_GA    = ft_selectdata(cfg_select,selected_coh_GA);
+
+    topo_ISPC(i,:)= squeeze(mean(selected_coh_GA.powspctrm(1:272,:,:),[2 3]));
+end
+
+cfgplot = [];
+cfgplot.showlabels   = 'no';
+cfgplot.layout       = 'CTF275_helmet.mat';
+cfgplot.colorbar     = 'yes';
+cfgplot.comment      = 'no';
+cfgplot.colormap     = '*RdBu';
+cfgplot.zlim         = [0.04 0.1];
+
+
+
+topo_ISPC2plot = [];
+topo_ISPC2plot.label = ISPC_all_quadrant_hanning{1}.label(1:272);
+topo_ISPC2plot.dimord = 'chan_freq';
+topo_ISPC2plot.freq = [0];
+topo_ISPC2plot.powspctrm = mean(topo_ISPC)';
+
+
+fg = figure;
+ft_topoplotTFR(cfgplot, topo_ISPC2plot);
+title('Fixation locked ISPC')
+saveas(fg,['/project/3018083.01/group results/02_spectral/final figure/ISPC_fix_topo.png']);
+
+
+%% select ROI to plot ISPC  
+ISPC2plot_fix = cell(1,4);
+
+for i = 1:4
+    selected_ISPC = ISPC_G(:,i);
+    % remove empty cells and grand average
+    selected_ISPC = selected_ISPC(~cellfun('isempty',selected_ISPC));
+    
+    cfg = [];
+    cfg.parameter = 'powspctrm';
+    cfg.channel = {'MLO11', 'MLO21', 'MLO22', 'MLP51', 'MLP52', 'MRO11', 'MRO21', 'MRP51', 'MRP52', 'MZO01'};
+
+    selected_coh_GA    = ft_freqgrandaverage(cfg,selected_ISPC{:}); 
+    ISPC2plot_fix{i}  = squeeze(mean(selected_coh_GA.powspctrm,1)); % average across 
+         
+end
+
+% plot 
+mycolormap        = customcolormap(linspace(0,1,11), {'#68011d','#b5172f','#d75f4e','#f7a580','#fedbc9','#f5f9f3','#d5e2f0','#93c5dc','#4295c1','#2265ad','#062e61'});
+
+freq4plot = selected_coh_GA.freq;
+time4plot = selected_coh_GA.time;
+name4fig = {'55','60','65','70'};
+fg = figure('Position',[196 -116 1306 808]); 
+for i = 1:4
+    subplot(2,2,i)
+    imagesc(time4plot,freq4plot,ISPC2plot_fix{i}); 
+    title([name4fig{i} 'Hz'])
+    colormap(mycolormap);
+    c1 = [0.02 0.1];colorbar;caxis(c1);
+    format_figure(nan,0,'Time (ms)','Hz')
+end
+sgtitle('Fixation locked ISPC');
+format_figure()
+
+saveas(fg,['/project/3018083.01/group results/02_spectral/final figure/ISPC_fix.png']);
+
+
+%% 5) check post-fixation coh (100ms to 400ms after fixation onset)
+
+coh_post_path = '/02_spectral/coh_fix_post.mat';
+pre_PSD_path = '/02_spectral/pre_trial_PSD.mat';
+% load freq to get the ft data format
+load(fullfile(Results_fold, ss(2).name,pre_PSD_path))
+
+coh_post_G = cell(N_sbj,4); % initialize a cell to save coh at each freq for each sbj
+RIFT_frex = [55 60 65 70];
+% 
+% % load freq to get the ft data format
+% load(fullfile(Results_fold, ss(2).name,pre_PSD_path))
+
+for i = 1:N_sbj
+    % load the eye tracking data
+    if exist(fullfile(Results_fold, ss(i).name,coh_post_path))
+        load(fullfile(Results_fold, ss(i).name,coh_post_path)) % load coh during fixation
+        load(subjects(i).behav)
+        if ismember(i,[2 3 5]) % forget to balance the tagging freq, sad
+            tagging_frex = [55 60 65 70];
+        else
+            tagging_frex = data.prm.stim.tag_frex;
+        end
+       
+    
+        for j = 1:4 % loop through coh_fix to check the frequency of each quadrant
+            idx = find(tagging_frex == RIFT_frex(j));
+
+            coh_post = coh_fix_post{j}; % select coh of one quadrant
+            coh_post.label = pre_freq.label;
+            coh_post.dimord = pre_freq.dimord;
+   
+            coh_post_G{i,idx} = coh_post; % coh from 100ms to 400ms after fixation onset
+        end      
+    end
+end
+
+% remove rows with empty cells, which means there is no valid data for this
+% subject
+coh_post_G(all(cellfun(@isempty, coh_post_G),2),:) = [];
+
+save(fullfile('/project/3018083.01/group results/02_spectral/', 'coh_post_G'),...
+      'coh_post_G');
+
+
+
+% cfg for GA and plot
+cfg = [];
+cfg.parameter = 'cohspctrm';
+name4fig = {'55','60','65','70'};
+
+    
+cfgplot = [];
+cfgplot.showlabels   = 'yes';
+cfgplot.layout       = 'CTF275_helmet.mat';
+    
+
+for i = 1:4
+    selected_coh_post = coh_post_G(:,i);
+    coh_post4contrast = coh_post_G(:,setdiff([1 2 3 4],i));
+    % average the contrast coh for each sbj
+    N_sbj_valid = size(coh_post4contrast,1);
+
+    contrasted_coh_post = cell(N_sbj_valid,1);
+    for isbj = 1:N_sbj_valid
+        coh_contrast = ft_freqgrandaverage(cfg,coh_post4contrast{isbj,:}); 
+        coh_post_temp = selected_coh_post{isbj};
+        % coh_post_temp.cohspctrm = coh_post_temp.cohspctrm(1:272,:) ./coh_contrast.cohspctrm;
+
+        contrasted_coh_post{isbj} = coh_post_temp;
+    end
+    
+
+   
+    selected_coh_GA    = ft_freqgrandaverage(cfg,contrasted_coh_post{:}); 
+    
+    coh_topo = [];
+    coh_topo.label = selected_coh_GA.label;
+    coh_topo.dimord = 'chan_freq';
+    coh_topo.freq = selected_coh_GA.freq;
+    coh_topo.powspctrm = selected_coh_GA.cohspctrm;
+
+    fg = figure;
+    ft_multiplotER(cfgplot, coh_topo);
+
+    % saveas(fg,['/project/3018083.01/group results/02_spectral/', 'contrasted_coh_post_',name4fig{i},'.fig']);
+end
+
+
+% select ROI and draw bar plot of tagging freq 
+
+
+
+%% 6) check pre-fixation coh (-300ms to 0ms to fixation onset)
+
+
+%%  7) check saccade locked ISPC
+% ISPC_path = '/02_spectral/ISPC_all_quadrant_sacc.mat';
+% 
+% ISPC_sacc_G = cell(N_sbj,4); % initialize a cell to save coh at each freq for each sbj
+% RIFT_frex = [55 60 65 70];
+% % 
+% % % load freq to get the ft data format
+% % load(fullfile(Results_fold, ss(2).name,pre_PSD_path))
+% 
+% for i = 1:N_sbj
+%     % load the eye tracking data
+%     if exist(fullfile(Results_fold, ss(i).name,ISPC_path))
+%         load(fullfile(Results_fold, ss(i).name,ISPC_path)) % load coh during fixation
+%         load(subjects(i).behav)
+%         if ismember(i,[2 3 5]) % forget to balance the tagging freq, sad
+%             tagging_frex = [55 60 65 70];
+%         else
+%             tagging_frex = data.prm.stim.tag_frex;
+%         end
+% 
+% 
+%         for j = 1:4 % loop through coh_fix to check the frequency of each quadrant
+%             idx = find(tagging_frex == RIFT_frex(j));
+%             ISPC_temp = ISPC_all_quadrant_sacc{j}; % select coh of one quadrant
+%             ISPC_temp.dimord = 'chan_freq_time';
+%             ISPC_temp.powspctrm = permute(ISPC_temp.powspctrm, [1 3 2]);
+%             % coh_temp.label = pre_freq.label;
+%             % coh_temp.dimord = pre_freq.dimord;
+%             ISPC_sacc_G{i,idx} = ISPC_temp;
+%         end      
+%     end
+% end
+% 
+% save(fullfile('/project/3018083.01/group results/02_spectral/', 'ISPC_sacc_G'),...
+%       'ISPC_sacc_G');
+% 
+
+
+%% GA and plot
+% name4fig = {'55','60','65','70'};
+% for i = 1:4
+%     selected_ISPC = ISPC_sacc_G(:,i);
+%     % remove empty cells and grand average
+%     selected_ISPC = selected_ISPC(~cellfun('isempty',selected_ISPC));
+% 
+%     cfg = [];
+%     cfg.parameter = 'powspctrm';
+%     selected_coh_GA    = ft_freqgrandaverage(cfg,selected_ISPC{:}); 
+% 
+% 
+%     cfg = [];
+%     cfg.showlabels   = 'yes';
+%     cfg.layout       = 'CTF275_helmet.mat';
+%     cfg.comment      = 'no';
+%     cfg.colormap     = '*RdBu';
+%     % cfg.zlim         = [0.02 0.12];
+% 
+%     fg = figure;
+%     ft_multiplotTFR(cfg,selected_coh_GA);
+% 
+%     % saveas(fg,['/project/3018083.01/group results/02_spectral/', 'ISPC_',name4fig{i},'.fig']);
+% end
+
+%% plot 1 topo-map which averages tagging freq at each quardrant
+% cfg = [];
+% cfg.parameter = 'powspctrm';
+% 
+% cfg_select = [];
+% cfg_select.latency = [.1 .3];
+% 
+% topo_ISPC_sacc = nan(4,272);
+% for i = 1:4
+%     selected_ISPC = ISPC_sacc_G(:,i);
+%     % remove empty cells and grand average
+%     selected_ISPC = selected_ISPC(~cellfun('isempty',selected_ISPC));
+% 
+% 
+%     selected_coh_GA    = ft_freqgrandaverage(cfg,selected_ISPC{:}); 
+% 
+%     cfg_select.frequency = RIFT_frex(i);
+%     selected_coh_GA    = ft_selectdata(cfg_select,selected_coh_GA);
+% 
+%     topo_ISPC_sacc(i,:)= squeeze(mean(selected_coh_GA.powspctrm(1:272,:,:),[2 3]));
+% end
+% 
+% cfgplot = [];
+% cfgplot.showlabels   = 'no';
+% cfgplot.layout       = 'CTF275_helmet.mat';
+% cfgplot.colorbar     = 'yes';
+% cfgplot.comment      = 'no';
+% cfgplot.colormap     = '*RdBu';
+% cfgplot.zlim         = [0.04 0.13];
+% 
+% 
+% topo_ISPC2plot_sacc = [];
+% topo_ISPC2plot_sacc.label = pre_freq.label;
+% topo_ISPC2plot_sacc.dimord = 'chan_freq';
+% topo_ISPC2plot_sacc.freq = [0];
+% topo_ISPC2plot_sacc.powspctrm = mean(topo_ISPC_sacc)';
+% 
+% 
+% fg = figure;
+% ft_topoplotTFR(cfgplot, topo_ISPC2plot_sacc);
+% title('Saccade locked ISPC')
+% saveas(fg,['/project/3018083.01/group results/02_spectral/final figure/ISPC_sacc_topo.png']);
+% 
+% 
+% % select ROI to plot ISPC  
+% ISPC2plot_sacc = cell(1,4);
+% 
+% for i = 1:4
+%     selected_ISPC = ISPC_sacc_G(:,i);
+%     % remove empty cells and grand average
+%     selected_ISPC = selected_ISPC(~cellfun('isempty',selected_ISPC));
+% 
+%     cfg = [];
+%     cfg.parameter = 'powspctrm';
+%     cfg.channel = {'MLO11', 'MLO12', 'MLO21', 'MLO22', 'MLP41', 'MLP51', 'MLP52',...
+%         'MRO11','MRO12', 'MRO21', 'MRO22', 'MRP31', 'MRP41', 'MRP51', 'MRP52', 'MZO01', 'MZP01'};
+% 
+%     selected_coh_GA    = ft_freqgrandaverage(cfg,selected_ISPC{:}); 
+%     ISPC2plot_sacc{i}  = squeeze(mean(selected_coh_GA.powspctrm,1)); % average across 
+% 
+% end
+% 
+% % plot 
+% mycolormap        = customcolormap(linspace(0,1,11), {'#68011d','#b5172f','#d75f4e','#f7a580','#fedbc9','#f5f9f3','#d5e2f0','#93c5dc','#4295c1','#2265ad','#062e61'});
+% 
+% freq4plot = selected_coh_GA.freq;
+% time4plot = selected_coh_GA.time;
+% name4fig = {'55','60','65','70'};
+% fg = figure('Position',[196 -116 1306 808]); 
+% for i = 1:4
+%     subplot(2,2,i)
+%     imagesc(time4plot,freq4plot,ISPC2plot_sacc{i}); 
+%     title([name4fig{i} 'Hz'])
+%     colormap(mycolormap);
+%     c1 = [0.02 0.12];colorbar;caxis(c1);
+%     format_figure(nan,0,'Time (ms)','Hz')
+% end
+% sgtitle('Saccade locked ISPC');
+% format_figure()
+
+% saveas(fg,['/project/3018083.01/group results/02_spectral/final figure/ISPC_sacc.png']);
+
+%% 8) bar plot of selected tagging freq post saccades
+% To see when sbj move their gaze, whether the coherenc of tagging freq at
+% the current location is the highest. Therefore, 4 bar plots are to be
+% plotted, showing the coh difference across 4 tagging freq. 
+coh_fix_post_path = '/02_spectral/coh_fix_post.mat';
+
+coh_fix_post_G = nan(4, N_sbj,4); % tagged freq * N_sbj * [55 60 65 70]
+RIFT_frex = [55 60 65 70];
+ROI = {'MLO11', 'MLO21', 'MLO22', 'MLP51', 'MLP52', 'MRO11', 'MRO21', 'MRP51', 'MRP52', 'MZO01'};
+
+
+% load freq to get the ft data format
+load(fullfile(Results_fold, ss(2).name,coh_fix_post_path))
+
+ROI_idx = getChannelidx(coh_fix_post{1}.labelcmb(:,1), ROI);
+freq_idx = find(ismember(coh_fix_post{1}.freq, RIFT_frex));
+assert(numel(freq_idx)==4)
+
+for i = 1:N_sbj
+    % load the eye tracking data
+    if exist(fullfile(Results_fold, ss(i).name,coh_fix_post_path))
+        load(fullfile(Results_fold, ss(i).name,coh_fix_post_path)) % load coh during fixation
+        load(subjects(i).behav)
+        if ismember(i,[2 3 5]) % forget to balance the tagging freq, sad
+            tagging_frex = [55 60 65 70];
+        else
+            tagging_frex = data.prm.stim.tag_frex; % in the order of 4 quadrants
+        end
+
+
+        for j_freq2test = 1:4 % loop through coh_fix to check the frequency of each quadrant
+            idx = find(tagging_frex == RIFT_frex(j_freq2test)); % idx for saving
+            coh_fix_post_temp = mean(coh_fix_post{j_freq2test}.cohspctrm(ROI_idx,freq_idx));
+            coh_fix_post_G(idx,i,:) = coh_fix_post_temp; % coh from 100ms to 400ms after fixation onset
+        end      
+    end
+end
+
+% remove rows with empty cells, which means there is no valid data for this
+% subject
+
+% Identify columns with NaN in any of the slices along the third dimension
+nan_columns = any(any(isnan(coh_fix_post_G), 1), 3);
+
+% Remove those columns across all slices
+coh_fix_post_G(:, nan_columns, :) = [];
+
+
+save(fullfile('/project/3018083.01/group results/02_spectral/', 'coh_fix_post_G'),...
+      'coh_fix_post_G');
+
+%% Now for the bar plot
+colors          = linspecer(4);
+title4subplot   = {'55Hz','60Hz','65Hz','70Hz'};
+
+plt                 = [];
+plt.x               = 1:4;
+plt.color           = colors([4 3 2 1],:);
+plt.err_width       = 2.5;
+plt.err_color       = [.5 .5 .5];
+plt.cap_size        = 0;
+plt.dotsout         = .2;
+plt.sizedot         = 20;
+plt.allline         = true;
+
+fg = figure('position',[1 -190 1920 916]);
+for i_tag_freq = 1:4
+    subplot(2,2,i_tag_freq)
+    coh_post_fix       = [squeeze(coh_fix_post_G(i_tag_freq,:,:))];
+    pl1                 = plot_bar(coh_post_fix,plt);
+
+    ylim([0 0.45])
+    title(['Tagged by ' title4subplot{i_tag_freq}])
+    format_figure(nan,nan,'tagging frequencies','Coherence');
+    set(gca,'xtick',[1 2 3 4],'xticklabel',{'55Hz','60Hz','65Hz','70Hz'})
+end
+
+saveas(fg,['/project/3018083.01/group results/02_spectral/final figure/RIFT_power.png']);
+
+% quick t-test
+for k = 1:4
+    coh_post_fix   = [squeeze(coh_fix_post_G(k,:,:))]; % do stat on each tagging freq
+    for m = 2:4
+        t_h(k,m) = ttest(coh_post_fix(:,1),coh_post_fix(:,m));
+    end
+end
+
+
+% plot the super sbj
+
+
+%% 9) bar plot of selected tagging freq pre saccades
+
+ROI = {'MLO11', 'MLO12', 'MLO21', 'MLO22', 'MLP41', 'MLP51', 'MLP52',...
+        'MRO11','MRO12', 'MRO21', 'MRO22', 'MRP31', 'MRP41', 'MRP51', 'MRP52', 'MZO01', 'MZP01'};
+coh_fix_pre_path = '/02_spectral/coh_fix_pre.mat';
+
+coh_fix_pre_G = nan(4, N_sbj,4); % tagged freq * N_sbj * [55 60 65 70]
+RIFT_frex = [55 60 65 70];
+
+% load freq to get the ft data format
+load(fullfile(Results_fold, ss(2).name,coh_fix_pre_path))
+
+ROI_idx = getChannelidx(coh_fix_pre{1}.labelcmb(:,1), ROI);
+freq_idx = find(ismember(coh_fix_pre{1}.freq, RIFT_frex));
+assert(numel(freq_idx)==4)
+
+for i = 1:N_sbj
+    % load the eye tracking data
+    if exist(fullfile(Results_fold, ss(i).name,coh_fix_pre_path))
+        load(fullfile(Results_fold, ss(i).name,coh_fix_pre_path)) % load coh during fixation
+        load(subjects(i).behav)
+        if ismember(i,[2 3 5]) % forget to balance the tagging freq, sad
+            tagging_frex = [55 60 65 70];
+        else
+            tagging_frex = data.prm.stim.tag_frex; % in the order of 4 quadrants
+        end
+
+
+        for j_freq2test = 1:4 % loop through coh_fix to check the frequency of each quadrant
+            idx = find(tagging_frex == RIFT_frex(j_freq2test)); % idx for saving
+            coh_fix_pre_temp = mean(coh_fix_pre{j_freq2test}.cohspctrm(ROI_idx,freq_idx));
+            coh_fix_pre_G(idx,i,:) = coh_fix_pre_temp; % coh from 100ms to 400ms after fixation onset
+        end      
+    end
+end
+
+% remove rows with empty cells, which means there is no valid data for this
+% subject
+
+% Identify columns with NaN in any of the slices along the third dimension
+nan_columns = any(any(isnan(coh_fix_pre_G), 1), 3);
+
+% Remove those columns across all slices
+coh_fix_pre_G(:, nan_columns, :) = [];
+
+
+save(fullfile('/project/3018083.01/group results/02_spectral/', 'coh_fix_pre_G'),...
+      'coh_fix_pre_G');
+
+
+
+%% cfg for GA and plot
+colors          = linspecer(4);
+title4subplot   = {'55Hz','60Hz','65Hz','70Hz'};
+
+plt                 = [];
+plt.x               = 1:4;
+plt.color           = colors([4 3 2 1],:);
+plt.err_width       = 2.5;
+plt.err_color       = [.5 .5 .5];
+plt.cap_size        = 0;
+plt.dotsout         = .2;
+plt.sizedot         = 20;
+plt.allline         = true;
+
+fg = figure('position',[1 -190 1920 916]);
+for i_tag_freq = 1:4
+    subplot(2,2,i_tag_freq)
+    coh_pre_sacc       = [squeeze(coh_fix_pre_G(i_tag_freq,:,:))];
+    pl1                 = plot_bar(coh_pre_sacc,plt);
+
+    ylim([0 0.4])
+    title(['Tagged by ' title4subplot{i_tag_freq}])
+    format_figure(nan,nan,'tagging frequencies','Coherence');
+    set(gca,'xtick',[1 2 3 4],'xticklabel',{'55Hz','60Hz','65Hz','70Hz'})
+end
+
+saveas(fg,['/project/3018083.01/group results/02_spectral/final figure/RIFT_power_PreFix.png']);
+
+% quick t-test
+for k = 1:4
+    coh_pre_sacc   = [squeeze(coh_fix_pre_G(k,:,:))]; % do stat on each tagging freq
+    for m = 2:4
+        t_h(k,m) = ttest(coh_pre_sacc(:,1),coh_pre_sacc(:,m));
+    end
+end
+
+
+%% 10) coherence during post-fixation, to check whether we can tag 4 stimuli simutaneously 
+coh_post_fix_1s_path = '/02_spectral/coh_post_fix_1s.mat';
+
+coh_post_fix_1s_G = cell(numel(ss),1); % initialize a cell to save coh at each freq for each sbj
+
+
+for i = 1:numel(ss)
+    % load the eye tracking data
+    if exist(fullfile(Results_fold, ss(i).name,coh_post_fix_1s_path))
+        disp(['load sbj' num2str(i)]);
+        load(fullfile(Results_fold, ss(i).name,coh_post_fix_1s_path)) % load coh during fixation
+        coh_post_fix_1s.label = coh_post_fix_1s.labelcmb(1:272,1);
+        coh_post_fix_1s.dimord = 'chan_freq';        
+        coh_post_fix_1s_G{i} = coh_post_fix_1s;
+    end
+end
+coh_post_fix_1s_G = coh_post_fix_1s_G(~cellfun('isempty',coh_post_fix_1s_G));
+
+cfg = [];
+cfg.parameter = 'cohspctrm';
+coh_post_fix_1s_GA = ft_freqgrandaverage(cfg, coh_post_fix_1s_G{:});
+
+% plot the GA
+coh_topo = [];
+coh_topo.label = coh_post_fix_1s_GA.label;
+coh_topo.dimord = 'chan_freq';
+coh_topo.freq = coh_post_fix_1s_GA.freq;
+coh_topo.powspctrm = coh_post_fix_1s_GA.cohspctrm;
+
+cfgplot = [];
+
+cfgplot.layout       = 'CTF275_helmet.mat';
+
+figure
+ft_multiplotER(cfgplot, coh_topo);
+
+%%
+ROI = {'MLO11', 'MLO12', 'MLO21', 'MLO22', 'MLP41', 'MLP51', 'MLP52',...
+        'MRO11','MRO12', 'MRO21', 'MRO22', 'MRP31', 'MRP41', 'MRP51', 'MRP52', 'MZO01', 'MZP01'};
+
+
+ROI_idx = getChannelidx(coh_post_fix_1s.labelcmb(:,1), ROI);
+n_valid_sbj = numel(coh_post_fix_1s_G);
+
+coh_post_fix_1s_ROI = nan(n_valid_sbj,100);
+for i = 1:n_valid_sbj
+    coh_post_fix_1s_ROI(i,:) = mean(coh_post_fix_1s_G{i}.cohspctrm(ROI_idx,:));
+end
+
+colors            = linspecer(2);
+fg = figure('Position',[1 -82 1920 916]);
+plot_line(coh_post_fix_1s_ROI,'x',1:100,'wcorr',1); hold on
+xticks([0:5:100]);xticklabels(num2cell(0:5:100)); 
+% xticklabels({'-3\pi','-2\pi','-\pi','0','\pi','2\pi','3\pi'})
+format_figure(nan,[55 60 65 70],'Frequency(Hz)','Coherence')
+saveas(fg,['/project/3018083.01/group results/02_spectral/final figure/RIFT_power_1sFixation_afterOnset.png']);

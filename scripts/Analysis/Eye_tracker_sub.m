@@ -1,0 +1,547 @@
+  function Eye_tracker_sub(subj_id)
+    % Songyun 01.05.2024 at DCC
+    % Analyse eye tracking data. Eyelink recorded:
+    % Channel 1 time stamp, channel 2 horizontal x-coordinate, 
+    % channel 3 vertical y-coordinate and channel 4 pupil size
+    % channel 5 digital trigger at DCCN
+    % X Y in pixels are saved in UADC005 UADC006
+    %
+    % Event labels in asc files are: https://www.sr-research.com/support/thread-7675.html
+    % SFIX(start fixation); c(end fixation);
+    % SSACC(start saccade); ESACC(end saccade); 
+    % SBLINK(start blink); EBLINK(end blink) and 
+    % MSG(user-generated messages)
+    %
+    % There is a systmetic delay of the trigger in UADC comparing with 
+    % Input in asc file
+    % clear all; clc
+    
+    addpath('/project/3018085.01/scripts/subfun')
+    rootdir = '/project/3018085.01';
+    subjects = Start_up(rootdir);
+
+   % subj_id = 6;
+    fprintf('*** SUBJECT %02d : epoching ***\n', subj_id);
+    mkdir(fullfile(subjects(subj_id).results, '01_eye_tracker'))
+
+    % read trl_keep which contain index of trials kept after pre-proc
+    load(fullfile(subjects(subj_id).dir, 'preproc-artifacts-rejectvisual-variance.mat'),...
+      'tri_keep');
+    % read in behaviour data
+    load(subjects(subj_id).behav);
+
+    validtrial = find(~isnan(T.rt));
+    real_keep = intersect(tri_keep, validtrial);
+
+    % exclude unresponded trial from both behavior and MEG
+    Behav = T(real_keep, :);
+
+
+        stimuli = {'Body', 'Line'};
+
+    trial_stim = strcmp(Behav.stimulus,'Bar') +1; % 1 for body, 2 for bar
+
+    %% plot behavior bias
+    figure;
+    for thestim = 1:2
+        trialid = strcmp(T.stimulus,prm.fac.stimuli{thestim}) ;
+        meanError(thestim) = mean(T.Error(trialid)); % only calculate acc for RS trials
+        STD(thestim) = std(T.Error(trialid));
+    end
+    bar([1,3], meanError); hold on
+    set(gca, 'YDir', 'reverse')
+    xticklabels(prm.fac.stimuli);
+    errorbar([1,3], meanError, STD)
+
+    
+    %% 0) read file, *optional* compare eye-tracking data between MEG and asc file
+    % data_meg = load_clean_data(subj_id);
+    
+    % cfg = [];
+    % cfg.dataset = subjects(subj_id).rawmeg;
+    % cfg.trl = make_trl(subj_id);
+    % cfg.channel = {'UADC*'};
+    % cfg.continuous = 'yes';
+    % data_meg = ft_preprocessing(cfg);
+    % 
+    % uadc005 = find(strcmp(data_meg.label, 'UADC005'));
+    % uadc006 = find(strcmp(data_meg.label, 'UADC006'));
+    
+    % read eye tracking file
+    filename_eye = subjects(subj_id).eyetracker;
+    
+    cfg = [];
+    cfg.dataset = filename_eye;
+    data_eye_raw = ft_preprocessing(cfg); % here only 987901 points are read in
+    All_timestamp = [data_eye_raw.trial{1,1}(1,:)];
+    
+    % montage
+    cfg = [];
+    cfg.dataset          = filename_eye;
+    cfg.montage.tra      = eye(5);
+    cfg.montage.labelorg = {'1', '2', '3', '4', '5'};
+    cfg.montage.labelnew = {'EYE_TIMESTAMP'; 'EYE_HORIZONTAL'; 'EYE_VERTICAL'; 'EYE_DIAMETER';'Trigger'};
+    data_eye= ft_preprocessing(cfg);
+
+
+
+
+    %% read event and visualize
+    event_eye = ft_read_event(filename_eye);
+
+    disp(unique({event_eye.type}))
+
+
+    cfg = [];
+    cfg.dataset = filename_eye;
+
+
+    cfg.trialdef.eventtype      = 'INPUT';
+    cfg.trialdef.eventvalue = [31]; 
+    cfg.trialdef.prestim = 2.5; % fixation: 1s~1.3s + target: 0.5s
+    cfg.trialdef.poststim = 3; %.5;
+    cfg.alltimestamp = All_timestamp;
+    cfg.trialfun = 'eyetracker_definetrial';
+    cfg = ft_definetrial(cfg);
+
+    data_eye= ft_preprocessing(cfg);
+
+    % cfg = [];
+    % cfg.viewmode       = 'vertical';
+    % cfg.preproc.demean = 'yes';
+    % cfg.event          = event_eye;
+%    ft_databrowser(cfg, data_eye);
+
+% exlude trials
+    cfg = [];
+    cfg.trials   = real_keep;
+    data_eye = ft_selectdata(cfg, data_eye);
+
+    assert(height(Behav)== size(data_eye.trial,2),'Trial numbers don''t match!')
+    
+    %% downsample to align with MEG
+    cfg = [];
+    cfg.resamplefs = 400;
+    cfg.demean = 'no';
+    cfg.detrend = 'no';
+    data_eye= ft_resampledata(cfg, data_eye);
+
+    t_points = data_eye.time{1};
+    nTrial = length(data_eye.trial);
+
+
+    %% demean with the fixation period
+
+    %which period to use?
+    baseline_period = (t_points<-1.5) & (t_points>=-1.8);
+    data_eye_demean = nan(length(data_eye.trial),length(t_points), 4);
+
+    cutoff = 100;
+    for i = 1:length(data_eye.trial)
+        data_eye_demean(i,:,1) = data_eye.trial{i}(2,:)- mean(data_eye.trial{i}(2,baseline_period));%prm.w.Center(1);
+        data_eye_demean(i,:,2) = data_eye.trial{i}(3,:)- mean(data_eye.trial{i}(3,baseline_period));%prm.w.Center(2);
+        data_eye_demean(i,:,3) = sqrt(data_eye_demean(i,:,1).^2 + data_eye_demean(i,:,2).^2);
+
+        data_eye_demean(i,:,4) = data_eye.trial{i}(4,:)- mean(data_eye.trial{i}(4,baseline_period));
+
+        % remove noise data
+        noiseid = data_eye_demean(i,:,3) > cutoff;
+        data_eye_demean(i, noiseid, :) = nan;
+    end
+
+
+
+
+%% plot grand average of x y location 
+
+    data_eye_aligned = [];
+
+    figure;
+    for thestim = 1:2
+        for theview = 1:2
+
+            % use only the same facing direction the same stimulus 
+            trials = find(trial_stim==thestim& Behav.view1==theview); % 1 for line, 2 for body
+
+            thedata= data_eye_demean(trials, :,:);
+
+            avg_eye{thestim,theview} = squeeze(mean(thedata,1, "omitmissing"));
+
+
+            % plot
+            subplot(2,2,theview + 2*(thestim-1))
+            plot(t_points, avg_eye{thestim, theview}(:,1)); hold on;
+            plot(t_points, avg_eye{thestim, theview}(:,2));
+
+            fill([-1.5 -1 -1 -1.5], [-50,-50, 50, 50],'yellow','LineStyle', 'none', 'FaceAlpha',0.1)
+            fill([0, 2.4, 2.4, 0],  [-50,-50, 50, 50],'blue','LineStyle', 'none', 'FaceAlpha',0.1)
+
+            legend({'horizontal','vertical'})
+            title(['eye position: ' stimuli{thestim} num2str(theview) ])
+
+            % flip the right to left
+            new_data = thedata;
+            if theview == 2
+                new_data(:,:,1) = -new_data(:,:,1); %only flip the horizontal 
+            end
+            data_eye_aligned = cat(1, data_eye_aligned, new_data);
+
+
+        end
+    end
+%% plot grand average of x y location 
+
+    data_eye_aligned = [];
+
+    figure;
+    for thestim = 1:2
+        for theview = 1:2
+
+            % use only the same facing direction the same stimulus 
+            trials = find(trial_stim==thestim& Behav.view1==theview); % 1 for line, 2 for body
+
+            thedata= data_eye_demean(trials, :,:);
+
+            avg_eye{thestim,theview} = squeeze(mean(thedata,1, "omitmissing"));
+
+
+            % plot
+            subplot(2,2,theview + 2*(thestim-1))
+            plot(t_points, avg_eye{thestim, theview}(:,1)); hold on;
+            plot(t_points, avg_eye{thestim, theview}(:,2));
+
+            fill([-1.5 -1 -1 -1.5], [-50,-50, 50, 50],'yellow','LineStyle', 'none', 'FaceAlpha',0.1)
+            fill([0, 2.4, 2.4, 0],  [-50,-50, 50, 50],'blue','LineStyle', 'none', 'FaceAlpha',0.1)
+
+            legend({'horizontal','vertical'})
+            title(['eye position: ' stimuli{thestim} num2str(theview) ])
+
+            % flip the right to left
+            new_data = thedata;
+            if theview == 2
+                new_data(:,:,1) = -new_data(:,:,1); %only flip the horizontal 
+            end
+            data_eye_aligned = cat(1, data_eye_aligned, new_data);
+
+
+        end
+    end
+%% plot grand average of x y location 
+
+    data_eye_aligned = [];
+
+    figure;
+    for thestim = 1:2
+        for theview = 1:2
+
+            % use only the same facing direction the same stimulus 
+            trials = find(trial_stim==thestim& Behav.view1==theview); % 1 for line, 2 for body
+
+            thedata= data_eye_demean(trials, :,:);
+
+            avg_eye{thestim,theview} = squeeze(mean(thedata,1, "omitmissing"));
+
+
+            % plot
+            subplot(2,2,theview + 2*(thestim-1))
+            plot(t_points, avg_eye{thestim, theview}(:,1)); hold on;
+            plot(t_points, avg_eye{thestim, theview}(:,2));
+
+            fill([-1.5 -1 -1 -1.5], [-50,-50, 50, 50],'yellow','LineStyle', 'none', 'FaceAlpha',0.1)
+            fill([0, 2.4, 2.4, 0],  [-50,-50, 50, 50],'blue','LineStyle', 'none', 'FaceAlpha',0.1)
+
+            legend({'horizontal','vertical'})
+            title(['eye position: ' stimuli{thestim} num2str(theview) ])
+
+            % flip the right to left
+            new_data = thedata;
+            if theview == 2
+                new_data(:,:,1) = -new_data(:,:,1); %only flip the horizontal 
+            end
+            data_eye_aligned = cat(1, data_eye_aligned, new_data);
+
+
+        end
+    end
+
+    save(fullfile(subjects(subj_id).results, '01_eye_tracker', 'alltrials.mat'),...
+      'data_eye_aligned', 'Behav', 't_points')
+
+
+%     %% plot grand average after aligning right to left
+%     fig_pos = figure;
+%     fig_psize = figure;
+%     fig_ang = figure;
+%     for thestim = 1:2
+% 
+%             % use only the same facing direction the same stimulus for
+%             % decoding
+%             trials = find(trial_stim==thestim); % 1 for line, 2 for body
+% 
+%             thedata= data_eye_aligned(trials, :,:);
+% 
+%             avg = squeeze(mean(thedata,1, "omitmissing"));
+%             angles = atand(avg(:,1)./avg(:,2));
+% 
+%             avg_eye_aligned{thestim}  = [avg,angles];
+% 
+%             % also calculate behavior
+%             meanError(thestim) = mean(Behav.Error(trials));
+%             % plot
+%             figure(fig_pos); % Activate first figure
+% 
+%             subplot(2,1,1)
+%             plot(t_points, avg_eye_aligned{thestim}(:,1)); hold on;
+% 
+%             fill([-1.5 -1 -1 -1.5], [-100,-100, 100, 100],'yellow','LineStyle', 'none', 'FaceAlpha',0.1)
+%             fill([0, 2.4, 2.4, 0],  [-100,-100, 100, 100],'blue','LineStyle', 'none', 'FaceAlpha',0.1)
+% 
+%             yline(0)
+%             legend({'Body','Line'})
+%             title(['eye position: ' stimuli{thestim} ])
+% 
+%             subplot(2,1,2)
+%             plot(t_points, avg_eye_aligned{thestim}(:,2)); hold on;
+% 
+%             fill([-1.5 -1 -1 -1.5], [-100,-100, 100, 100],'yellow','LineStyle', 'none', 'FaceAlpha',0.1)
+%             fill([0, 2.4, 2.4, 0],  [-100,-100, 100, 100],'blue','LineStyle', 'none', 'FaceAlpha',0.1)
+% 
+%             yline(0)
+%             legend({'Body','Line'})
+%             title(['eye position: ' stimuli{thestim} ])
+% 
+% 
+%             figure(fig_ang)
+%             plot(t_points, avg_eye_aligned{thestim}(:,5)); hold on;
+%             yline(45)
+%             fill([-1.5 -1 -1 -1.5], [-100, -100, 100, 100],'yellow','LineStyle', 'none', 'FaceAlpha',0.1)
+%             fill([0, 2.4, 2.4, 0],  [-100, -100, 100, 100],'blue','LineStyle', 'none', 'FaceAlpha',0.1)
+% 
+%             title(['eye position: ' stimuli{thestim} ])
+%             % 
+%             % % plot pupil size
+%             % figure(fig_psize); 
+%             % plot(t_points, avg_eye{thestim}(:,4)); hold on;
+%             % fill([-1.5 -1 -1 -1.5], [-2000,-2000, 500, 500],'yellow','LineStyle', 'none', 'FaceAlpha',0.1)
+%             % fill([0, 2.4, 2.4, 0],  [-2000,-2000, 500, 500],'blue','LineStyle', 'none', 'FaceAlpha',0.1)
+%             % title(['pupil size: ' stimuli{thestim} ])
+% 
+% 
+%     end
+% 
+%         %% plot grand average by target angle
+% 
+%     angles = sort(unique(Behav.angleTarget));
+%     angles
+%     stimuli = {'Body', 'Bar'};
+% 
+%     fig_pos = figure;
+%     fig_psize = figure;
+%     fig_ang = figure;
+% colors = hot(7);
+% 
+%     for thestim = 1:2
+%         for theang = 1:length(angles)
+% 
+%             % use only the same facing direction the same stimulus for
+%             % decoding
+%             trials = find(trial_stim==thestim & Behav.angleTarget==angles(theang)); % 1 for line, 2 for body
+% 
+%             thedata= data_eye_aligned(trials, :,:);
+% 
+%             avg = squeeze(mean(thedata,1, "omitmissing"));
+%             deg = atand(avg(:,1)./avg(:,2));
+% 
+%             avg_eye_aligned{thestim}  = [avg,deg];
+% 
+%             % also calculate behavior
+%             meanError(thestim) = mean(Behav.Error(trials));
+%             % plot
+%             figure(fig_pos); % Activate first figure
+% 
+%             subplot(1,2,thestim);hold on;
+%             %plot(t_points, avg_eye_aligned{thestim}(:,1),'Color', colors(theang,:)); 
+%             ylim([-40, 40])
+%            plot(t_points, avg_eye_aligned{thestim}(:,2),'Color', colors(theang,:));
+% 
+%             fill([-1.5 -1 -1 -1.5], [-100,-100, 100, 100],'yellow','LineStyle', 'none', 'FaceAlpha',0.1)
+%             fill([0, 2.4, 2.4, 0],  [-100,-100, 100, 100],'blue','LineStyle', 'none', 'FaceAlpha',0.1)
+% axis ij
+%             yline(0)
+%             %legend({'horizontal','vertical'})
+%             title(['eye position: ' stimuli{thestim} ])
+% 
+%             % figure(fig_ang)
+%             % subplot(2,1,thestim)
+%             % plot(t_points, avg_eye_aligned{thestim}(:,5)); hold on;
+%             % yline(45)
+%             % fill([-1.5 -1 -1 -1.5], [-100, -100, 100, 100],'yellow','LineStyle', 'none', 'FaceAlpha',0.1)
+%             % fill([0, 2.4, 2.4, 0],  [-100, -100, 100, 100],'blue','LineStyle', 'none', 'FaceAlpha',0.1)
+%             % 
+%             % title(['eye position: ' stimuli{thestim} ])
+%             % 
+%             % % plot pupil size
+%             % figure(fig_psize); 
+%             % plot(t_points, avg_eye{thestim}(:,4)); hold on;
+%             % fill([-1.5 -1 -1 -1.5], [-2000,-2000, 500, 500],'yellow','LineStyle', 'none', 'FaceAlpha',0.1)
+%             % fill([0, 2.4, 2.4, 0],  [-2000,-2000, 500, 500],'blue','LineStyle', 'none', 'FaceAlpha',0.1)
+%             % title(['pupil size: ' stimuli{thestim} ])
+% 
+%         end
+%     end
+% 
+%     %% visualize real-time eye posiiton
+%     %delay_time = 0.5; % Delay between frames (seconds)
+% 
+%     winSize = 0.05;
+%     timewindows = [-1.5:winSize:3-winSize; (-1.5+winSize):winSize:3];
+%     nWin = size(timewindows, 2);
+% 
+%     for i = 1:nWin
+%         figure(1); % Use the same figure
+%         clf; % Clear previous plot
+% 
+%         t = t_points>timewindows(1,i) & t_points<timewindows(2,i);
+%         thedata = avg_eye_aligned{2}(t,1:2); % plot 1 for body, 2 for line
+%         thedata = reshape(thedata, [],2);
+% 
+%         scatter(thedata(:,1), thedata(:,2), 5, 'filled'); hold on
+%         xline(0); yline(0);
+%         title(sprintf('time point: %02g s', timewindows(1,i)))
+%         set(gca, 'YDir', 'reverse') % to make the position consistent with positions on the screen
+%         xlim([-50, 50])
+%         ylim([-50, 50])
+%         pause(0.1); % Small pause to visualize in MATLAB
+% 
+%     end
+% 
+% 
+%         winSize = 0.05;
+%     timewindows = [-1.5:winSize:3-winSize; (-1.5+winSize):winSize:3];
+%     nWin = size(timewindows, 2);
+% 
+%     for i = 1:nWin
+%         figure(1); % Use the same figure
+%         clf; % Clear previous plot
+% 
+%         t = t_points>timewindows(1,i) & t_points<timewindows(2,i);
+%         thedata = data_eye_aligned(:,t,1:2);
+%         thedata = reshape(thedata, [],2);
+% 
+%         scatter(thedata(:,1), thedata(:,2), 5, 'filled'); hold on
+%         xline(0); yline(0);
+%         title(sprintf('time point: %02g s', timewindows(1,i)))
+%         set(gca, 'YDir', 'reverse') % to make the position consistent with positions on the screen
+%         xlim([-150, 150])
+%         ylim([-150, 150])
+%         pause(0.1); % Small pause to visualize in MATLAB
+% 
+%     end
+% 
+% 
+%     %% calculate angle for each trial
+% 
+%     colors = hot(size(data_eye_aligned,2));
+%     for i = 1:size(data_eye_aligned,1)
+%         if mod(i,50)==1
+%             figure;
+%             t = 1:1:size(data_eye_aligned,2);
+%             scatter(data_eye_aligned(i,t,1), data_eye_aligned(i,t,2), 5, colors(t,:), 'filled'); % Different color for each point
+% 
+%             axis equal
+%             colormap(colors);
+%             colorbar;
+%             caxis([min(t_points(t)), max(t_points(t))]); % Ensure color represents time points correctly
+%         end
+% 
+% 
+%         tan_ang = data_eye_aligned(i,:,1)./data_eye_aligned(i,:,2);
+%         angles = atand(tan_ang);
+%         data_eye_aligned(i,:,4) = angles;
+%     end
+% 
+% save()
+% 
+% 
+% %% average over time window
+% 
+% winSize = 0.4;
+% timewindows = [-1.5:winSize:3-winSize; (-1.5+winSize):winSize:3];
+% nWin = size(timewindows, 2);
+% data_avg_time = [];
+% for i = 1:size(timewindows, 2)
+%     t = t_points>timewindows(1,i) & t_points<timewindows(2,i);
+% 
+%     thedata = mean(data_eye_aligned(:, t,:),2, "omitmissing");
+%     data_avg_time = cat(2,data_avg_time, thedata);
+% 
+% end    
+% figure
+% colors = hot(7);
+% for thestim = 1:2
+%     for theang = 1:length(prm.fac.targetRange)
+% 
+%         % use only the same facing direction the same stimulus for
+%         % decoding
+%         trials = find(trial_stim==thestim & Behav.angleTarget==prm.fac.targetRange(theang)); % 1 for line, 2 for body
+% 
+%         thedata= data_avg_time(trials, :,:);
+% 
+%         avg_ang = squeeze(mean(thedata,1, "omitmissing"));
+%         angles = atand(avg_ang(:,1)./avg_ang(:,2));
+%         angles(angles<0) = angles(angles<0) + 180;
+% 
+%         % plot
+% subplot(1,2,thestim)
+%         plot(timewindows(1,:), avg_ang(:,2),'Color',colors(theang,:),'LineWidth',2); hold on;
+% 
+%         fill([-1.5 -1 -1 -1.5], [-100, -100, 100, 100],'yellow','LineStyle', 'none', 'FaceAlpha',0.1)
+%         fill([0, 2.4, 2.4, 0],  [-100, -100, 100, 100],'blue','LineStyle', 'none', 'FaceAlpha',0.1)
+%         yline(0)
+%         ylim([-40, 40])
+% axis ij
+%         %legend(prm.fac.targetRange)
+%         title(['eye position: ' stimuli{thestim} ])
+% 
+%     end
+% 
+% end
+% 
+% 
+% 
+%     %% trial-wise
+% 
+%     figure;scatter(data_avg_time(i,:,1), data_avg_time(i,:,2), 15, [0.9 0.7 0.2] , 'filled'); % Different color for each point
+%     hold on
+%     xline(0)
+%     yline(0)
+% 
+% 
+%     for i  = 1:nTrial
+%         tan_ang = data_avg_time(i,:,1)./data_avg_time(i,:,2);
+%         angles = atand(tan_ang);
+%         data_avg_time(i,:,4) = angles;
+%     end
+% 
+%     figure
+%     for thet = 1:nWin
+%         x = data_avg_time(:,thet, 4);
+%         y = Behav.angleTarget;
+%         x(x<0) = nan;
+%         [h,p] = corrcoef(x, y, 'Rows', 'complete');
+%         cors(thet) = h(1,2);
+%         pval(thet) = p(1,2);
+% 
+%         subplot(2, ceil(nWin/2), thet)
+%         scatter(x,y, 5, [0.2,0.8,0.6], 'filled', 'MarkerFaceAlpha',0.5); hold on
+%         lsline
+%         title(sprintf('%02g to %02gs', timewindows(1,thet), timewindows(2,thet)))
+%         %xlim([20,70])
+%     end
+% 
+% 
+% 
+% 
+% 
+
+

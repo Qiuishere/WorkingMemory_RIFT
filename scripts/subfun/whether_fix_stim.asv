@@ -1,0 +1,27 @@
+% Songyun 31.05.2024 at DCCN
+% check whehther the fixation is within the region of stimuli
+% fix_x, fix_y: represent fixation coordinate
+% Rect: 4 by 4 matrix contaning [quardrant, location of stim]
+% Each row is [X_leftup, Y_leftup, width, height]
+
+function [pos_idx] = whether_fix_stim(fix_x, fix_y, Rect)
+    for iquadrant = 1:4  
+        range_X = (Rect(iquadrant,1) < fix_x) && < Rect(iquadrant,3);
+        range_y = (Rect(iquadrant,2) < fix_y) && (fix_ < Rect(iquadrant,4);
+        if range_X && range_y
+            pos_idx = iquadrant;
+        end
+
+        
+    end
+
+
+
+
+
+
+
+
+
+
+end

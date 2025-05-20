@@ -1,0 +1,697 @@
+  function RIFT01_Eye_tracker(subj_id)
+    % Songyun 01.05.2024 at DCC
+    % Analyse eye tracking data. Eyelink recorded:
+    % Channel 1 time stamp, channel 2 horizontal x-coordinate, 
+    % channel 3 vertical y-coordinate and channel 4 pupil size
+    % channel 5 digital trigger at DCCN
+    % X Y in pixels are saved in UADC005 UADC006
+    %
+    % Event labels in asc files are: https://www.sr-research.com/support/thread-7675.html
+    % SFIX(start fixation); c(end fixation);
+    % SSACC(start saccade); ESACC(end saccade); 
+    % SBLINK(start blink); EBLINK(end blink) and 
+    % MSG(user-generated messages)
+    %
+    % There is a systmetic delay of the trigger in UADC comparing with 
+    % Input in asc file
+    % clear all; clc
+    addpath('/project/3018083.01/scripts/subfun')
+Start_up
+    subjects = datainfo();
+    
+    % subj_id = 2;
+    fprintf('*** SUBJECT %02d : epoching ***\n', subj_id);
+    mkdir(fullfile(subjects(subj_id).results, '01_eye_tracker'))
+    
+    % read trl_keep which contain index of trials kept after pre-proc
+    load(fullfile(subjects(subj_id).dir, 'preproc-artifacts-rejectvisual-muscle.mat'));
+    
+    % read in behaviour data
+    load(subjects(subj_id).behav);
+    i_tbl = T;
+    
+    
+    %% 0) read file, *optional* compare eye-tracking data between MEG and asc file
+    % data_meg = load_clean_data(subj_id);
+    
+    % cfg = [];
+    % cfg.dataset = subjects(subj_id).rawmeg;
+    % cfg.trl = make_trl(subj_id);
+    % cfg.channel = {'UADC*'};
+    % cfg.continuous = 'yes';
+    % data_meg = ft_preprocessing(cfg);
+    % 
+    % uadc005 = find(strcmp(data_meg.label, 'UADC005'));
+    % uadc006 = find(strcmp(data_meg.label, 'UADC006'));
+    
+    % read eye tracking file
+    filename_eye = subjects(subj_id).eyetracker;
+    
+    cfg = [];
+    cfg.dataset = filename_eye;
+    data_eye_raw = ft_preprocessing(cfg); % here only 987901 points are read in
+    All_timestamp = [data_eye_raw.trial{1,1}(1,:)];
+    
+    % montage
+    cfg = [];
+    cfg.dataset          = filename_eye;
+    cfg.montage.tra      = eye(5);
+    cfg.montage.labelorg = {'1', '2', '3', '4', '5'};
+    cfg.montage.labelnew = {'EYE_TIMESTAMP', 'EYE_HORIZONTAL', 'EYE_VERTICAL', 'EYE_DIAMETER', 'Trigger'};
+    data_eye = ft_preprocessing(cfg);
+
+
+    %% read event and visualize
+    event_eye = ft_read_event(filename_eye);
+
+    disp(unique({event_eye.type}))
+
+    % figure
+    % plot([event_eye.sample]./data_eye.hdr.Fs, [event_eye.value], '.')
+    % title('EYE INPUT')
+    % xlabel('time (s)');
+    % ylabel('trigger value');
+
+
+    cfg = [];
+    cfg.dataset = filename_eye;
+    cfg.trialdef.eventtype = 'UPPT001';
+cfg.trialdef.eventvalue = [21, 22]; % delay onset
+cfg.trialdef.prestim = 2;
+cfg.trialdef.poststim = 4;
+cfg = ft_definetrial(cfg);
+
+    cfg.trialdef.eventtype      = 'INPUT';
+    cfg.trialdef.eventvalue = [21 22]; % stimuli offset
+    cfg.trialdef.prestim = 2; % 5.5;
+    cfg.trialdef.poststim = 4; %.5;
+    cfg.alltimestamp = All_timestamp;
+    cfg.trialfun = 'eyetracker_definetrial';
+    cfg = ft_definetrial(cfg);
+
+    data_eye = ft_preprocessing(cfg);
+
+    cfg = [];
+cfg.viewmode       = 'vertical';
+cfg.preproc.demean = 'yes';
+cfg.event          = event_eye;
+ft_databrowser(cfg, data_eye);
+    
+    % cfg = [];
+    % ft_databrowser(cfg, data_eye)
+    
+    % get the information of fixations from cfg.event
+    timestamp_fix = [cfg.event(find(strcmp('FIX', {cfg.event.type}))).timestamp]';
+    duration_fix = [cfg.event(find(strcmp('FIX', {cfg.event.type}))).duration]';
+    sample_fix = nan(size(timestamp_fix));
+    All_Sample = 1:numel(cfg.alltimestamp);
+    for i = 1:numel(timestamp_fix)
+        % adjust the sample according to timestamp
+        sample_fix(i,:) = All_Sample(cfg.alltimestamp==timestamp_fix(i)); 
+    end
+    
+    % =========================================================================
+    %% try to time lock the fixation to the saccade onset rather than fixation onset
+    
+    % first find the idx of sacc
+    sacc_idx = find(strcmp('SACC', {cfg.event.type})); 
+    
+    % Check whether each saccade is followed by a fixation
+    fix_idx = sacc_idx + 1;
+    is_fix = strcmp({cfg.event(fix_idx).type}, 'FIX');
+    timestamp_sacc = [cfg.event(sacc_idx(is_fix)).timestamp];
+    duration_sacc = [cfg.event(sacc_idx(is_fix)).duration];
+    duration_fix_after_sacc = [cfg.event(fix_idx(is_fix)).duration];
+    
+    duration_fix_sacclock = duration_sacc + duration_fix_after_sacc;
+    sample_fix_sacclock = nan(size(timestamp_sacc));
+    All_Sample = 1:numel(cfg.alltimestamp);
+    for i = 1:numel(timestamp_sacc)
+        % adjust the sample according to timestamp
+        sample_fix_sacclock(i) = All_Sample(cfg.alltimestamp==timestamp_sacc(i)); 
+    end
+    
+    
+    % cd('/home/predatt/sonbai/RIFT/Results/pilot_04/eyetracker')
+    % save data_eye data_eye
+    
+    %% 1) find the fixation period. Save the idx and add a line in data.trial
+    true_cente = [960 540];
+    varTypes = ['int16','int16','cell','cell',"cell","cell",'cell','int16'];
+    varNames = ["Trial_number","Block_number","Fixation_idx","Eyelink_fixation_epoch","Duration","Fix_position","Correction",'oddball_pos'];
+    fixation_each_trial = table('Size',[numel(data_eye.trial) numel(varNames)],'VariableTypes',varTypes,'VariableNames',varNames);
+    trial_each_block = data.prm.exp.ntrialsperblock;
+    correction_within_block = nan(trial_each_block,2); % to save correction with in each block and then take mean 
+
+
+
+    for itrl = 1:numel(data_eye.trial)
+        block_idx = i_tbl{itrl,5};
+        fixation = zeros(1,numel(data_eye.time{1}));
+        start_idx = cfg.trl(itrl,1);
+        end_idx = cfg.trl(itrl,2);
+        % Find the fixation within selcted trial period
+        fix_sample = sample_fix((sample_fix >= start_idx) & (sample_fix <= end_idx));
+        fix_dur = duration_fix((sample_fix >= start_idx) & (sample_fix <= end_idx));
+        fixation_period = nan(numel(fix_dur),2);
+        fixation_duration = nan(numel(fix_dur),1);
+
+        mean_fix_pos = nan(numel(fix_sample),2);
+        for ifix = 1:numel(fix_sample)
+            start_fix = fix_sample(ifix) - start_idx + 1; % relative index compare with starting timestamp at each trial
+            % end of idx cannot exceed the lengthe of trial
+            end_idx = min(start_fix + fix_dur(ifix)-1, numel(data_eye.time{1}));
+            fixation(start_fix:end_idx)=1;
+            fixation_period(ifix,:) = [start_fix end_idx];
+            fixation_duration(ifix) = numel(start_fix:end_idx);
+
+            mean_fix_pos(ifix,1) = mean(data_eye.trial{itrl}(2,start_fix:end_idx));
+            mean_fix_pos(ifix,2)  = mean(data_eye.trial{itrl}(3,start_fix:end_idx));
+
+            % calculate the fixation correction
+            if ifix<=3 && fix_dur(ifix)>1000
+                idx_within_blcok = mod(itrl-1,trial_each_block) + 1;
+                correction_within_block(idx_within_blcok,:) = true_cente - mean_fix_pos(ifix,:);
+            end
+        end
+        % data_eye.trial{itrl}(6,:) = fixation;
+
+        fixation_each_trial{itrl,1} = itrl;
+        fixation_each_trial{itrl,2} = block_idx;
+        fixation_each_trial{itrl,3} = {fixation};
+        fixation_each_trial{itrl,4} = {fixation_period};
+        fixation_each_trial{itrl,5} = {fixation_duration};
+        fixation_each_trial{itrl,6} = {mean_fix_pos};
+
+
+        if mod(itrl, trial_each_block) == 0
+            fixation_each_trial{itrl-trial_each_block+1:itrl,7} = {nanmean(correction_within_block,1)};
+            correction_within_block = nan(trial_each_block,2);
+        end
+
+
+        fixation_each_trial{itrl,8} = i_tbl{itrl,4}; % oddball position
+        % fixation_each_trial{itrl,5} = {fix_correction};
+        % fixation_epochs = [fixation_each_trial; temps];
+        % fixation_each_trial{itrl} = fixation_period;
+
+    end
+
+    
+    
+    %% compare time delay between MEG and edf
+    % itrial = 1; % several blinks at trial 10
+    % % this part goes with inspect_eye_tracking
+    % subplot(3,1,3)
+    % plot(data_eye.time{itrial}, data_eye.trial{itrial}(2,:)); hold on
+    % % plot(data_eye.time{itrial}, 1000*data_eye.trial{itrial}(6,:));
+    % grid on
+    % title('eyetracker definetrial')
+    
+    %% The main analysis part:
+    % To do: 
+    % 1. define the oddball region for each trial
+    % 2. find the period of fixation from the event
+    % 3. sort the time period when fixation fall with stimuli region
+    % 4. check the fixation time at each stimuli
+    % cd('/home/predatt/sonbai/RIFT/Results/sbj02/eyetracker');
+    % load fixation_each_trial
+    
+    % %% a) check the trace
+    % selcted_trial = 66;
+    % StimSizeInPxl = 240; %data.prm.stim.SizeInPxl * 2; % get from experiment script
+    % center = [959 - StimSizeInPxl/2, 539 - StimSizeInPxl/2,...
+    %           StimSizeInPxl, StimSizeInPxl];
+    % DisStim = i_tbl{selcted_trial,13}{:}*2;
+    % AngStim = i_tbl{selcted_trial,14}{:};
+    % for iquadrant = 1:4  
+    %     R      = DisStim(iquadrant);  
+    %     theta  = deg2rad(AngStim(iquadrant));
+    %     rects(iquadrant,:) = center + [R * cos(theta) R * sin(theta) 0 0];
+    % end
+    % 
+    % LiveFig = figure('Position',[100 200 960 540]);
+    % % show the real stimuli at trial 2
+    % imshow('/project/3018083.01/results/sbj07/01_eye_tracker/exp_stim_sbj7_trial66.jpg'); hold on
+    % correction = fixation_each_trial{selcted_trial,7}{1};
+    % whether_fix = fixation_each_trial{selcted_trial,3}{1};
+    % fix = plot(data_eye.trial{selcted_trial}(2,1), data_eye.trial{selcted_trial}(3,1),'k.','MarkerSize',45);
+    % 
+    % grid on; axis([0 1920 0 1080])
+    % % for i = 1:4
+    % %     if i == i_tbl{selcted_trial,4}
+    % %         rectangle('Position',rects(i,:),'EdgeColor',[1 0 0],'LineWidth',2); hold on % draw oddball in red
+    % %     else
+    % %         rectangle('Position',rects(i,:),'LineWidth',2); hold on
+    % %     end
+    % % end
+    % 
+    % % t = title(' ');
+    % for i = 1:numel(data_eye.time{selcted_trial})
+    %     fix.XData = data_eye.trial{selcted_trial}(2,i) + correction(1);
+    %     fix.YData = data_eye.trial{selcted_trial}(3,i) + correction(2);
+    %     fix.Color = [0,whether_fix(i),0];
+    %     % t.String = [ 't=', num2str(data_eye.time{1}(i)) 'ms'];
+    %     pause(1/10000)
+    % end
+    % 
+    % % % only plot the fixation one by one
+    % fixation_idx = fixation_each_trial{selcted_trial,4}{1};
+    % for i = 1:size(fixation_idx,1)
+    %     selected_fix_idx = fixation_idx(i,1):fixation_idx(i,2);
+    %     avg_X = mean(data_eye.trial{selcted_trial}(2,selected_fix_idx)) + correction(1);
+    %     avg_Y = mean(data_eye.trial{selcted_trial}(3,selected_fix_idx)) + correction(2);
+    % 
+    %     fix.XData = avg_X;
+    %     fix.YData = avg_Y;
+    %     pause(.4)
+    % end
+    % 
+    % % alternatively draw the fixations with fading color to see the general trace
+    % figure('Position',[100 200 960 540]);
+    % grid on; axis([0 1920 0 1080])
+    % for i = 1:4
+    %     if i == i_tbl{selcted_trial,4}
+    %         rectangle('Position',rects(i,:),'EdgeColor',[1 0 0]); hold on % draw oddball in red
+    %     else
+    %         rectangle('Position',rects(i,:)); hold on
+    %     end
+    % end
+    % 
+    % x = data_eye.trial{selcted_trial}(2,:) + correction(1);
+    % y = data_eye.trial{selcted_trial}(3,:) + correction(2);
+    % z = 1:numel(x);
+    % col = linspace(0,1,6000);
+    % 
+    % surface([x;x],[y;y],[z;z],[col;col],...
+    %         'facecol','no',...
+    %         'edgecol','interp',...
+    %         'linew',2);
+    % colormap bone
+
+    
+    %% ========================================================================
+    % b) calculate the averaged poisiton of each fixation and determine whether 
+    % it lies within the region of stimuli add label the tagged freq
+    
+    % get from experiment script; it should be 221, but for pilot1 we use looser boundary
+    StimSizeInPxl = 240;  % data.prm.stim.SizeInPxl * 2
+    center = [959 - StimSizeInPxl/2, 539 - StimSizeInPxl/2,...
+              StimSizeInPxl, StimSizeInPxl];
+    tagged_fixation = cell(numel(data_eye.trial),1);
+    whether_fix_odd = cell(numel(data_eye.trial),1);
+    tagged_frequency = cell(numel(data_eye.trial),1);
+    OddballShapeOrSize = cell(numel(data_eye.trial),1);
+    % accepted_duration = [200 400]; % remove the fixations that too long or too short
+
+    if ismember(subj_id, [2 3 5])
+        tagg_freq = [55 60 65 70];
+    else
+        tagg_freq = data.prm.stim.tag_frex;
+    end
+
+
+    for i = 1:numel(tri_keep)
+        itrl = tri_keep(i);
+        correction = fixation_each_trial{i,7}{1};
+        % define the region of stimuli
+        DisStim = i_tbl{itrl,13}{:}*2;
+        AngStim = i_tbl{itrl,14}{:};
+        % CAUTION: rectangle set the zero point at the left-lower corner, 
+        % while PTB set it at left upper corner;
+        % eye tracker (0,0) is top left corner
+        for iquadrant = 1:4  
+            R      = DisStim(iquadrant);  
+            theta  = deg2rad(AngStim(iquadrant));
+            rects(iquadrant,:) = center + [R * cos(theta) R * sin(theta) 0 0];
+        end
+
+        selected_fixation = fixation_each_trial{itrl,4}{1};
+        % to inspect the fixation location
+
+        % figure('Position',[100 200 960 540]);
+        % grid on; axis([0 1920 0 1080])
+        % 
+        % for iqrd = 1:4
+        %     if iqrd == i_tbl{itrl,4}
+        %         rectangle('Position',rects(iqrd,:),'EdgeColor',[1 0 0]); hold on % draw oddball in red
+        %     else
+        %         rectangle('Position',rects(iqrd,:)); hold on
+        %     end
+        % end
+
+        % here 1 for upper left; 2 for upper right; 3 for bottom left; 4 for bottom right
+        fix_pos_idx = nan(1,size(selected_fixation,1));
+        tagging_freq = nan(1,size(selected_fixation,1));
+        for ifix = 1:size(selected_fixation,1)
+            selected_fix_idx = selected_fixation(ifix,1):selected_fixation(ifix,2); % time_idx of fixation period
+            if selected_fix_idx(1) > 1500
+                avg_X = mean(data_eye.trial{itrl}(2,selected_fix_idx)); %+ correction(1);
+                avg_Y = mean(data_eye.trial{itrl}(3,selected_fix_idx)); %+ correction(2);
+                fix_pos_idx(ifix) = whether_fix_stim(avg_X, avg_Y, rects);
+                if ~isnan(fix_pos_idx(ifix)) 
+                    tagging_freq((ifix))      = tagg_freq(fix_pos_idx(ifix));
+                end
+                % plot(avg_X,avg_Y,'ro'); hold on
+            end
+        end  
+        tagged_fixation{itrl} = fix_pos_idx;   
+        whether_fix_odd{itrl} = (fix_pos_idx == i_tbl{itrl,4});
+        OddballShapeOrSize{itrl} = data.results.OddballShapeOrSize(itrl);
+        tagged_frequency{itrl} = tagging_freq;
+    end
+
+    fixation_each_trial.tagged_pos = tagged_fixation;
+    fixation_each_trial.whether_fix_odd = whether_fix_odd;
+    fixation_each_trial.OddballShapeOrSize = OddballShapeOrSize;
+    fixation_each_trial.tagged_freq = tagged_frequency;
+
+
+    save(fullfile(subjects(subj_id).results, '/01_eye_tracker/fixation_each_trial.mat'),...
+      'fixation_each_trial');
+
+    %% c) inspect fixation duration
+
+    % cd('/home/predatt/sonbai/RIFT/Results/sbj02/eyertracker')
+    Dur_fix = [];
+    time = data_eye.time{1};
+    epoch_all_trals = nan(size(fixation_each_trial,1),numel(time));
+    for i = 1:size(fixation_each_trial,1)
+        fixations = zeros(1,numel(time));
+        fix_tmpnt = fixation_each_trial.Eyelink_fixation_epoch{i};
+        fix_label = fixation_each_trial.tagged_pos{i};
+        fix_AllDur = fixation_each_trial.Duration{i};
+        fix_dur = [];
+        for ifix = 1:numel(fix_label)
+            if ~isnan(fix_label(ifix))
+                fix_at_stim_idx = fix_tmpnt(ifix,1):fix_tmpnt(ifix,2);
+                fixations(fix_at_stim_idx) = fix_label(ifix);
+                fix_dur = [fix_dur fix_AllDur(ifix)];
+            end  
+        end
+        epoch_all_trals(i,:) = fixations;
+        Dur_fix = [Dur_fix fix_dur];
+    end
+
+    fg1 = figure;
+    imagesc(-1500:1:4500,1:size(fixation_each_trial,1),epoch_all_trals)
+    format_figure(nan,nan,'Time (ms)','Trials')
+
+    saveas(fg1,fullfile(subjects(subj_id).results, '/01_eye_tracker//fixation.jpg'));
+
+    fg2 = figure;
+    histogram(Dur_fix,30)
+    title('Fixation Duration')
+    format_figure(nan,nan,'Duration(ms)','Fixation count')
+
+    saveas(fg2,fullfile(subjects(subj_id).results, '/01_eye_tracker//fix_duration.jpg'));
+
+    %% d) plot position of all fixations to double check
+    fg3 = figure('Position',[100 200 960 540]);
+    for ipos = 1:4
+        subplot(2,2,ipos)
+        fix_count = 0;
+        for i = 1:numel(tri_keep)
+            itrl = tri_keep(i);
+            fix_tmpnt = fixation_each_trial.Eyelink_fixation_epoch{itrl};
+            fix_label = fixation_each_trial.tagged_pos{itrl};
+            correction = fixation_each_trial{itrl,7}{1};
+            % here 1 for upperleft; 2 for upper right; 3 for bottom left; 4 for bottom right
+            for ifix = 1:numel(fix_label)
+                fixation_pos = fixation_each_trial.Fix_position{itrl};
+
+                if fix_label(ifix) == ipos
+                    X = fixation_pos(ifix,1); %+ correction(1);
+                    Y = 1080 - fixation_pos(ifix,2); %+ correction(2);
+                    plot(X,Y,'ro'); hold on
+                    fix_count = fix_count + 1;
+                end
+            end  
+        end
+        grid on; axis([0 1920 0 1080])
+        title(['Number of fixations: ' num2str(fix_count)] )
+    end
+
+
+
+    saveas(fg3,fullfile(subjects(subj_id).results, '/01_eye_tracker/fix_count.jpg'));
+
+    cd('/home/predatt/sonbai/RIFT/Results/sbj01_second')
+    % save Epoch_fixation Epoch_fixation
+    
+    %% e) check whether odd ball is fixated more frequetly and longer
+    % 1 for shape oddball, 2 for size oddball
+    % trl_shape_oddball = find(data.results.OddballShapeOrSize == 1);
+    % trl_size_oddball = find(data.results.OddballShapeOrSize == 2);
+    % 
+    % n_AllFixStim = 0;
+    % 
+    % OddDur_shape = [];   % duration of oddball
+    % DistrDur_shape = []; % duration of disctractor
+    % OddDur_size = [];   % duration of oddball
+    % DistrDur_size = []; % duration of disctractor
+    % 
+    % for i = 1:numel(tri_keep)
+    %     itrl = tri_keep(i);
+    %     fix_dur = fixation_each_trial.Duration{itrl};
+    %     fix_label = fixation_each_trial.tagged_pos{itrl};
+    %     whether_fix_odd = fixation_each_trial.whether_fix_odd{itrl};
+    % 
+    %     % here 1 for upperleft; 2 for upper right; 3 for bottom left; 4 for bottom right
+    %     for ifix = 1:numel(fix_label)
+    %         if ~isnan(fix_label(ifix))
+    %             n_AllFixStim = n_AllFixStim + 1;
+    %             if whether_fix_odd(ifix) == 1 
+    %                 if ismember(itrl,trl_shape_oddball)
+    %                     OddDur_shape = [OddDur_shape fix_dur(ifix)];
+    %                 else
+    %                     OddDur_size = [OddDur_size fix_dur(ifix)];
+    %                 end
+    %             else
+    %                 if ismember(itrl,trl_shape_oddball)
+    %                     DistrDur_shape = [DistrDur_shape fix_dur(ifix)];
+    %                 else
+    %                     DistrDur_size = [DistrDur_size fix_dur(ifix)];
+    %                 end
+    %             end
+    %         end
+    %     end  
+    % end
+    % 
+    % 
+    % fixation_count.OddDur_shape = OddDur_shape;
+    % fixation_count.OddDur_size = OddDur_size;
+    % fixation_count.DistrDur_shape = DistrDur_shape;
+    % fixation_count.DistrDur_size = DistrDur_size;
+    % 
+    % % save(fullfile(subjects(subj_id).results, '/01_eye_tracker/fixation_count.mat'),...
+    % %   'fixation_count');
+    % 
+    % %% plot the results: whether oddball is fixated more frequent or longer
+    % 
+    % disp(numel(OddDur_shape)/(numel(DistrDur_shape) + numel(OddDur_shape)))
+    % disp(numel(OddDur_size)/(numel(DistrDur_size) + numel(OddDur_size)))
+    % 
+    % % plot
+    % figure
+    % for i_prefix = 1:2
+    %     subplot(1,2,i_prefix)
+    %     if i_prefix ==1
+    %         OddDur = OddDur_shape;
+    %         DistrDur = DistrDur_shape;
+    %     else
+    %         OddDur = OddDur_size;
+    %         DistrDur = DistrDur_size;
+    %     end
+    %     bar([mean(OddDur),mean(DistrDur)]); hold on
+    % 
+    %     std_Odd = std(OddDur);
+    % 
+    %     std_Distr = std(DistrDur);
+    % 
+    %     errlow = [mean(OddDur)-std_Odd,mean(DistrDur)-std_Distr];
+    %     errhigh = [mean(OddDur)+std_Odd,mean(DistrDur)+std_Distr];
+    %     errorbar(1:2,[mean(OddDur),mean(DistrDur)],errlow',errhigh);
+    % end
+    % 
+    % 
+    % %% f) see the difference bewteen 2 pre-fixation conditions.
+    % %  check whether the first fixation is the oddball in 2 conditions
+    % N_trial_PostFix = 0;
+    % N_trial_PreFix = 0;
+    % first_fix_oddPre = 0;
+    % first_fix_oddPost = 0;
+    % OddDur_shape = [];   % duration of oddball
+    % DistrDur_shape = []; % duration of disctractor
+    % OddDur_size = [];   % duration of oddball
+    % DistrDur_size = []; % duration of disctractor
+    % 
+    % for i = 1:numel(tri_keep)
+    %     itrl = tri_keep(i);
+    %     prefix_condition = fixation_each_trial.Block_number(itrl);
+    %     fix_label = fixation_each_trial.tagged_pos{itrl};
+    %     whether_fix_odd = fixation_each_trial.whether_fix_odd{itrl};
+    %     idx_nan = isnan(fix_label);
+    %     fix_label(idx_nan) = [];
+    %     whether_fix_odd(idx_nan) = [];
+    % 
+    %     if mod(prefix_condition,2) == 0 && ~isempty(fix_label)
+    %         N_trial_PostFix = N_trial_PostFix + 1;
+    %         if whether_fix_odd(1)
+    %             first_fix_oddPost = first_fix_oddPost +1;
+    %         end
+    %     elseif mod(prefix_condition,2) == 1 && ~isempty(fix_label)
+    %         N_trial_PreFix = N_trial_PreFix + 1;
+    %         if whether_fix_odd(1)
+    %             first_fix_oddPre = first_fix_oddPre +1;
+    %         end
+    %     end
+    % 
+    % end
+    % 
+    % 
+    % 
+    % disp(first_fix_oddPre/N_trial_PreFix)
+    % disp(first_fix_oddPost/N_trial_PostFix)
+    
+    
+    
+    
+    
+    %% 2) find the fixation period. Save the idx and add a line in data.trial
+    % true_cente = [960 540];
+    % varTypes = ['int16','int16','cell','cell',"cell","cell",'cell','int16'];
+    % varNames = ["Trial_number","Block_number","Fixation_idx","Eyelink_fixation_epoch","Duration","Fix_position","Correction",'oddball_pos'];
+    % fixation_each_trial_sacc = table('Size',[numel(data_eye.trial) numel(varNames)],'VariableTypes',varTypes,'VariableNames',varNames);
+    % trial_each_block = data.prm.exp.ntrialsperblock;
+    % correction_within_block = nan(trial_each_block,2); % to save correction with in each block and then take mean 
+    % 
+    % for itrl = 1:numel(data_eye.trial)
+    %     block_idx = i_tbl{itrl,5};
+    %     fixation = zeros(1,numel(data_eye.time{1}));
+    %     start_idx = cfg.trl(itrl,1);
+    %     end_idx = cfg.trl(itrl,2);
+    %     % Find the fixation within selcted trial period
+    %     fix_sample = sample_fix_sacclock((sample_fix_sacclock >= start_idx) & (sample_fix_sacclock <= end_idx));
+    %     fix_dur = duration_fix_sacclock((sample_fix_sacclock >= start_idx) & (sample_fix_sacclock <= end_idx));
+    %     fixation_period = nan(numel(fix_dur),2);
+    %     fixation_duration = nan(numel(fix_dur),1);
+    % 
+    %     mean_fix_pos = nan(numel(fix_sample),2);
+    %     for ifix = 1:numel(fix_sample)
+    %         start_fix = fix_sample(ifix) - start_idx + 1; % relative index compare with starting timestamp at each trial
+    %         % end of idx cannot exceed the lengthe of trial
+    %         end_idx = min(start_fix + fix_dur(ifix)-1, numel(data_eye.time{1}));
+    %         fixation(start_fix:end_idx)=1;
+    %         fixation_period(ifix,:) = [start_fix end_idx];
+    %         fixation_duration(ifix) = numel(start_fix:end_idx);
+    % 
+    %         mean_fix_pos(ifix,1) = mean(data_eye.trial{itrl}(2,start_fix:end_idx));
+    %         mean_fix_pos(ifix,2)  = mean(data_eye.trial{itrl}(3,start_fix:end_idx));
+    % 
+    %         % calculate the fixation correction
+    %         if ifix<=3 && fix_dur(ifix)>1000
+    %             idx_within_blcok = mod(itrl-1,trial_each_block) + 1;
+    %             correction_within_block(idx_within_blcok,:) = true_cente - mean_fix_pos(ifix,:);
+    %         end
+    %     end
+    %     % data_eye.trial{itrl}(6,:) = fixation;
+    % 
+    %     fixation_each_trial_sacc{itrl,1} = itrl;
+    %     fixation_each_trial_sacc{itrl,2} = block_idx;
+    %     fixation_each_trial_sacc{itrl,3} = {fixation};
+    %     fixation_each_trial_sacc{itrl,4} = {fixation_period};
+    %     fixation_each_trial_sacc{itrl,5} = {fixation_duration};
+    %     fixation_each_trial_sacc{itrl,6} = {mean_fix_pos};
+    % 
+    % 
+    %     if mod(itrl, trial_each_block) == 0
+    %         fixation_each_trial_sacc{itrl-trial_each_block+1:itrl,7} = {nanmean(correction_within_block,1)};
+    %         correction_within_block = nan(trial_each_block,2);
+    %     end
+    % 
+    % 
+    %     fixation_each_trial_sacc{itrl,8} = i_tbl{itrl,4}; % oddball position
+    %     % fixation_each_trial{itrl,5} = {fix_correction};
+    %     % fixation_epochs = [fixation_each_trial; temps];
+    %     % fixation_each_trial{itrl} = fixation_period;
+    % 
+    % end
+    % 
+    % % ==========================================================================
+    % % get from experiment script; it should be 221, but for pilot1 we use looser boundary
+    % StimSizeInPxl = 240;  % data.prm.stim.SizeInPxl * 2
+    % center = [959 - StimSizeInPxl/2, 539 - StimSizeInPxl/2,...
+    %           StimSizeInPxl, StimSizeInPxl];
+    % tagged_fixation = cell(numel(data_eye.trial),1);
+    % whether_fix_odd = cell(numel(data_eye.trial),1);
+    % tagged_frequency = cell(numel(data_eye.trial),1);
+    % OddballShapeOrSize = cell(numel(data_eye.trial),1);
+    % % accepted_duration = [200 400]; % remove the fixations that too long or too short
+    % 
+    % if ismember(subj_id, [2 3 5])
+    %     tagg_freq = [55 60 65 70];
+    % else
+    %     tagg_freq = data.prm.stim.tag_frex;
+    % end
+    % 
+    % 
+    % for i = 1:numel(tri_keep)
+    %     itrl = tri_keep(i);
+    %     correction = fixation_each_trial_sacc{i,7}{1};
+    %     % define the region of stimuli
+    %     DisStim = i_tbl{itrl,13}{:}*2;
+    %     AngStim = i_tbl{itrl,14}{:};
+    %     % CAUTION: rectangle set the zero point at the left-lower corner, 
+    %     % while PTB set it at left upper corner;
+    %     % eye tracker (0,0) is top left corner
+    %     for iquadrant = 1:4  
+    %         R      = DisStim(iquadrant);  
+    %         theta  = deg2rad(AngStim(iquadrant));
+    %         rects(iquadrant,:) = center + [R * cos(theta) R * sin(theta) 0 0];
+    %     end
+    % 
+    %     selected_fixation = fixation_each_trial_sacc{itrl,4}{1};
+    %     % to inspect the fixation location
+    % 
+    %     % figure('Position',[100 200 960 540]);
+    %     % grid on; axis([0 1920 0 1080])
+    %     % 
+    %     % for iqrd = 1:4
+    %     %     if iqrd == i_tbl{itrl,4}
+    %     %         rectangle('Position',rects(iqrd,:),'EdgeColor',[1 0 0]); hold on % draw oddball in red
+    %     %     else
+    %     %         rectangle('Position',rects(iqrd,:)); hold on
+    %     %     end
+    %     % end
+    % 
+    %     % here 1 for upper left; 2 for upper right; 3 for bottom left; 4 for bottom right
+    %     fix_pos_idx = nan(1,size(selected_fixation,1));
+    %     tagging_freq = nan(1,size(selected_fixation,1));
+    %     for ifix = 1:size(selected_fixation,1)
+    %         selected_fix_idx = selected_fixation(ifix,1):selected_fixation(ifix,2); % time_idx of fixation period
+    %         if selected_fix_idx(1) > 1500
+    %             avg_X = mean(data_eye.trial{itrl}(2,selected_fix_idx)); %+ correction(1);
+    %             avg_Y = mean(data_eye.trial{itrl}(3,selected_fix_idx)); %+ correction(2);
+    %             fix_pos_idx(ifix) = whether_fix_stim(avg_X, avg_Y, rects);
+    %             if ~isnan(fix_pos_idx(ifix)) 
+    %                 tagging_freq((ifix))      = tagg_freq(fix_pos_idx(ifix));
+    %             end
+    %             % plot(avg_X,avg_Y,'ro'); hold on
+    %         end
+    %     end  
+    %     tagged_fixation{itrl} = fix_pos_idx;   
+    %     whether_fix_odd{itrl} = (fix_pos_idx == i_tbl{itrl,4});
+    %     OddballShapeOrSize{itrl} = data.results.OddballShapeOrSize(itrl);
+    %     tagged_frequency{itrl} = tagging_freq;
+    % end
+    % 
+    % fixation_each_trial_sacc.tagged_pos = tagged_fixation;
+    % fixation_each_trial_sacc.whether_fix_odd = whether_fix_odd;
+    % fixation_each_trial_sacc.OddballShapeOrSize = OddballShapeOrSize;
+    % fixation_each_trial_sacc.tagged_freq = tagged_frequency;
+    % 
+    % 
+    % save(fullfile(subjects(subj_id).results, '/01_eye_tracker/fixation_each_trial_sacc.mat'),...
+    %   'fixation_each_trial_sacc');
+  end

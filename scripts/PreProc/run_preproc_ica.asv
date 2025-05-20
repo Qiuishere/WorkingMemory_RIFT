@@ -1,0 +1,33 @@
+function run_preproc_ica(subj_id)
+
+subjects = datainfo();
+
+fprintf('*** SUBJECT %02d : ica ***\n', subj_id);
+
+% load data
+load(fullfile(subjects(subj_id).dir, 'preproc-data-artreject-400hz.mat'),...
+  'data');
+
+%% this is only for pilot 001
+% cfg = [];
+% cfg.hpfilter = 'yes';
+% cfg.hpfreq = 2;
+% cfg.bpfilttype = 'but';
+% cfg.bpfiltord = 4;
+% data = ft_preprocessing(cfg, data);
+
+%% run ICA
+cfg = [];
+cfg.method = 'runica';
+cfg.demean = 'no';
+cfg.channel = {'MEG'}; % only do ICA on MEG channels, not the refchans
+
+comp = ft_componentanalysis(cfg, data);
+
+unmixing = comp.unmixing;
+topolabel = comp.topolabel;
+
+save(fullfile(subjects(subj_id).dir, 'preproc-ica-weights.mat'),...
+  'unmixing', 'topolabel');
+
+end

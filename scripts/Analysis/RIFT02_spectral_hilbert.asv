@@ -1,0 +1,1212 @@
+function RIFT02_spectral(subj_id)
+    close all; clear all
+    addpath('/project/3018085.01/scripts/subfun')
+
+    subjects = Start_up;
+    
+    subj_id = 6;
+    
+    
+    mkdir(fullfile(subjects(subj_id).results, '02_spectral'))
+    
+    fprintf('*** SUBJECT %02d : epoching ***\n', subj_id);
+    
+    % read trl_keep which contain index of trials kept after pre-proc
+    load(fullfile(subjects(subj_id).dir, 'preproc-artifacts-rejectvisual-muscle.mat'),...
+      'tri_keep');
+     
+    data_MEG = load_clean_data(subj_id);
+
+    plotchans = {'MLO11', 'MLO12', 'MLO13', 'MLO14', 'MLO21', 'MLO22', 'MLO23',...
+        'MLO24', 'MLO31', 'MLO32', 'MLO34', 'MLO41', 'MLO42', 'MLO43', 'MLO44',...
+        'MLO53', 'MLP31', 'MLP41', 'MLP42', 'MLP51', 'MLP52', 'MLP53', 'MLP54',...
+        'MLP55', 'MLT16', 'MLT27', 'MLT47', 'MLT57', 'MRO11', 'MRO12', 'MRO13',...
+        'MRO14', 'MRO21', 'MRO22', 'MRO23', 'MRO24', 'MRO31', 'MRO32', 'MRO34',...
+        'MRO41', 'MRO42', 'MRO43', 'MRO44', 'MRO53', 'MRP31', 'MRP41', 'MRP42',...
+        'MRP51', 'MRP52', 'MRP53', 'MRP55', 'MRT16', 'MRT27', 'MRT47', 'MRT57',...
+        'MZO01', 'MZO02', 'MZP01'};
+    
+    %%    % load behavorial data
+    load(subjects(subj_id).behav); % variable named as data
+    Freqs = prm.tag.tag_frex; % order: first one is the upmost
+    Freqs
+
+    Behav = T;
+    Behav = Behav(tri_keep, :);
+
+
+        PDtagged_freq = Freqs(prm.diode_track.freq);
+        stimuli = {'Body', 'Bar'};
+
+
+    
+    %% load photodiode signal and keep the same trials, downsample
+    
+    cfg = [];
+    cfg.dataset = subjects(subj_id).rawmeg;
+    cfg.trl = make_trl(subj_id);
+    cfg.channel = {'UADC001'};
+    cfg.continuous = 'yes';
+    data_diode = ft_preprocessing(cfg);
+   
+    
+    cfg = [];
+    cfg.trials = tri_keep;
+    data_diode = ft_selectdata(cfg, data_diode);
+    
+    cfg = [];
+    cfg.resamplefs = 400;
+    cfg.demean = 'no';
+    cfg.detrend = 'no';
+    data_diode = ft_resampledata(cfg, data_diode);
+
+            t_points = data_diode.time{1};
+    Ntrials = length(data_diode.trial);
+
+  
+    
+  
+
+    
+    %% create data with synthetic tagging signals
+    
+    data_tagsig = [];
+    for thefr = 1:length(Freqs)
+        data_tagsig.label{thefr} = ['tag_' num2str(Freqs(thefr))];
+    end
+    data_tagsig.label{end+1} = ['tag' '_all'];
+        
+    % tagsigs = cos(2*pi*freqs'*data_MEG.time{1});
+    % tag_all = sum(tagsigs);
+    % tagsigs = [tagsigs; tag_all];
+    % data_tagsig.trial = repmat({tagsigs}, 1, numel(data_MEG.trial));
+
+
+    for i = 1:length(data_MEG.trial)
+      %  timelag_65 = mod(onset_t(i), 1/65);
+       % phaselag_freqs = timelag_65 ./ (1./freqs') * 2*pi;
+        thetagsig = cos(2*pi*Freqs'*(data_MEG.time{1})); %- timelag_65
+        tag_all = sum(thetagsig);
+        tagsigs = [thetagsig; tag_all];
+        data_tagsig.trial{i} = tagsigs;
+    end
+    
+    data_tagsig.time = data_MEG.time;
+    data_tagsig.trialinfo = data_MEG.trialinfo;
+    
+    
+    % append tagging signals and photodiode signal to MEG data
+    
+    data_cmb = ft_appenddata([], data_MEG, data_diode, data_tagsig);
+    
+
+    
+    %% 1) coherence of all brain data: subselect and fourier
+    n_added_chan = length(data_cmb.label) - length(data_MEG.label);
+
+    cfg = [];
+    cfg.latency = [0.2,prm.dur.delay/1000-0.2-1/data_diode.fsample]; % 0 is delay onset
+    data_delay  = ft_selectdata(cfg, data_cmb);
+
+    % try power
+    cfg = [];
+    cfg.method = 'mtmfft';
+    cfg.taper = 'boxcar';   %'boxcar';
+    cfg.foi = 1:1:100;
+    cfg.output = 'pow';
+    freq_pow = ft_freqanalysis(cfg, data_delay);
+
+
+    coh_topo = [];
+    coh_topo.label = freq_pow.label(1:end-n_added_chan);
+    coh_topo.dimord = 'chan_freq';
+    coh_topo.freq = freq_pow.freq;
+    coh_topo.powspctrm = freq_pow.powspctrm;
+
+    cfgplot = [];
+    cfgplot.layout       = 'CTF275.lay';
+    figure
+    ft_multiplotER(cfgplot, coh_topo);
+
+
+
+    cfg = [];
+    cfg.method = 'mtmfft';
+    cfg.taper = 'boxcar';   %'boxcar';
+    cfg.foi = 1:1:100;
+    cfg.output = 'fourier';
+    freq_trials = ft_freqanalysis(cfg, data_delay);
+
+
+
+
+    save(fullfile(subjects(subj_id).results, '02_spectral', 'freq_trials'),...
+      'freq_trials','Behav','Freqs'); % save everything you need for the group level analysis
+
+
+
+
+%% select sensors based on all trials
+%
+cfg = [];
+cfg.method = 'coh';
+nchan = numel(freq_trials.label)-n_added_chan;
+cfg.channelcmb = [freq_trials.label(1:end-n_added_chan) repmat({ 'tag_all'}, nchan, 1)]; % compute coherence between all chan with 'tagall'
+coh_trial = ft_connectivityanalysis(cfg, freq_trials);
+
+
+coh_topo = [];
+coh_topo.label = freq_trials.label(1:end-n_added_chan);
+coh_topo.dimord = 'chan_freq';
+coh_topo.freq = coh_trial.freq;
+coh_topo.powspctrm = coh_trial.cohspctrm;
+
+cfgplot = [];
+cfgplot.layout       = 'CTF275.lay';
+figure
+ft_multiplotER(cfgplot, coh_topo);
+
+nSensors = 40;
+% compute SNR for tagged fequencies. Because Freqs is already sorted in the
+% order of up->down, the output of topSensors will be in up->down order
+for i = 1:length(Freqs)
+    thefrex = Freqs(i);
+    id_tagged = coh_trial.freq==thefrex;
+    neibs = [thefrex-5: thefrex+5];
+    neibs(ismember(neibs, Freqs)) = [];
+    id_neighbour = ismember(coh_trial.freq, neibs);
+
+    SNR(:,i) = coh_trial.cohspctrm(:, id_tagged)./ mean(coh_trial.cohspctrm(:, id_neighbour),2);
+
+end
+
+
+    [ss, order] = sort(mean(SNR,2), 'descend' );
+
+    topSensors = order(1:nSensors);
+    coh_trial.labelcmb(topSensors, 1)
+
+
+
+%% coherence compute and plot
+chanids = match_str(data_MEG.label, plotchans);
+
+figure
+for i = 1:length(stimuli)
+
+        thesti = stimuli{i};
+        cfg = [];
+        cfg.trials   = find(strcmp(Behav.stimulus,thesti) );
+        freq_sti  = ft_selectdata(cfg, freq_trials);
+
+
+        cfg = [];
+        cfg.method = 'coh';
+        nchan = numel(freq_trials.label)-n_added_chan;
+        cfg.channelcmb = [freq_trials.label(1:end-n_added_chan) repmat({ 'tag_all'}, nchan, 1)]; % compute coherence between all chan with 'tagall'
+        coh_trial = ft_connectivityanalysis(cfg, freq_sti);
+
+        % % 
+        % coh_topo = [];
+        % coh_topo.label = freq_trials.label(1:end-n_added_chan);
+        % coh_topo.dimord = 'chan_freq';
+        % coh_topo.freq = coh_trial.freq;
+        % coh_topo.powspctrm = coh_trial.cohspctrm;
+        % 
+        % figure;
+        % cfgplot = [];
+        % cfgplot.layout       = 'CTF275.lay';
+        % ft_multiplotER(cfgplot, coh_topo);
+
+        subplot(1, length(stimuli), i);hold on
+        %occi_chan = find(cellfun(@(x) contains(x, 'O', 'IgnoreCase', false), coh_trial.labelcmb(:,1)));
+        plot(coh_trial.freq, mean(coh_trial.cohspctrm(chanids,:),1))
+        xlabel('frequencies')
+        ylabel('coherence')
+        title(['mean coherence ' thesti])
+        ylim([0,0.8])
+
+end
+
+
+
+%% now separate angles
+angles = sort(unique(Behav.angleTarget));
+
+
+
+for i = 1:length(stimuli)
+    figure;
+    for j = 1:length(angles)
+
+        thesti = stimuli{i};
+        cfg = [];
+        cfg.trials   = find(strcmp(Behav.stimulus,thesti) & Behav.angleTarget==angles(j));
+        freq_sti  = ft_selectdata(cfg, freq_trials);
+
+
+        cfg = [];
+        cfg.method = 'coh';
+        nchan = numel(freq_trials.label)-n_added_chan;
+        cfg.channelcmb = [freq_trials.label(1:end-n_added_chan) repmat({ 'tag_all'}, nchan, 1)]; % compute coherence between all chan with 'tagall'
+        coh_trial = ft_connectivityanalysis(cfg, freq_sti);
+
+        % 
+        % coh_topo = [];
+        % coh_topo.label = freq_trials.label(1:end-n_added_chan);
+        % coh_topo.dimord = 'chan_freq';
+        % coh_topo.freq = coh_trial.freq;
+        % coh_topo.powspctrm = coh_trial.cohspctrm;
+        % 
+        % cfgplot = [];
+        % cfgplot.layout       = 'CTF275.lay';
+        % figure
+        % ft_multiplotER(cfgplot, coh_topo);
+
+
+        subplot(1, length(angles), j);hold on
+        temp = mean(coh_trial.cohspctrm(chanids,:));
+        plot(coh_trial.freq(55:70),temp(55:70))
+        xlabel('frequencies')
+        ylabel('coherence')
+        yline(1)
+        title([thesti '-' num2str(angles(j))])
+%    saveas(cfg,fullfile(subjects(subj_id).results, '02_spectral', 'cohByAng.jpg'));
+
+        for k = 1: length(Freqs)       % Freqs is already in the order of upper-> lower    
+            coh_ang(k, j, i) = mean(coh_trial.cohspctrm(chanids, coh_trial.freq==Freqs(k)));
+        end
+
+    end
+end
+
+
+    save(fullfile(subjects(subj_id).results, '02_spectral', 'coh_tagged'),...
+      'coh_ang');
+
+figure;
+subplot(1,2,1)
+plot(angles,coh_ang(:,:,1),'o-','LineWidth',2)
+legend({'upper','lower'})
+title(stimuli{1})
+
+subplot(1,2,2)
+plot(angles,coh_ang(:,:,2),'o-','LineWidth',2)
+legend({'upper','lower'})
+title(stimuli{2})
+    
+figure;
+plot(angles, coh_ang(2,:,1)./coh_ang(1,:,1),'o-','LineWidth',2)
+hold on;
+plot(angles, coh_ang(2,:,2)./coh_ang(1,:,2),'o-','LineWidth',2)
+legend(stimuli)
+yline(1)
+title('ratiot lower/upper')
+
+%% now separate timewindow
+winSize = 0.8;
+timeWin(1,:) = -0.8:0.2:3.5;
+timeWin(2,:) = timeWin(1,:) + winSize;
+
+for i = 1:length(stimuli)
+    figure;
+    thesti = stimuli{i};
+
+
+    for j = 1:size(timeWin, 2)
+        cfg = [];
+        cfg.trials = find(strcmp(Behav.stimulus,thesti) );
+        cfg.latency = [timeWin(1,j), timeWin(2,j) - 1/data_MEG.fsample]; % 0 is delay onset
+        data_win  = ft_selectdata(cfg, data_cmb);
+
+        cfg = [];
+        cfg.method = 'mtmfft';
+        cfg.taper = 'boxcar';   
+        cfg.foi = 55:1/winSize:70;        
+        cfg.output = 'fourier';
+        freq_trials = ft_freqanalysis(cfg, data_win);
+
+
+        cfg = [];
+        cfg.method = 'coh';
+        nchan = numel(freq_trials.label)-n_added_chan;
+        cfg.channelcmb = [freq_trials.label(1:end-n_added_chan) repmat({ 'tag_all'}, nchan, 1)]; % compute coherence between all chan with 'tagall'
+        coh_trial = ft_connectivityanalysis(cfg, freq_trials);
+
+
+
+        % subplot(1, size(timeWin, 2), j);hold on
+        % temp = mean(coh_trial.cohspctrm(chanids,:));
+        % plot(coh_trial.freq,temp)
+        % xlabel('frequencies')
+        % ylabel('coherence')
+        % ylim([0,.15])
+        % title([thesti '-' num2str(mean(timeWin(:,j))) 's'])
+
+        for k = 1: length(Freqs)
+            coh_time(k, j, i) = mean(coh_trial.cohspctrm(chanids, coh_trial.freq==Freqs(k)));
+        end
+
+    end
+
+end
+
+
+figure;
+subplot(1,2,1)
+plot(mean(timeWin,1),coh_time(:,1:22,1),'o-','LineWidth',2)
+legend({'upper','lower'})
+title(stimuli{1})
+
+subplot(1,2,2)
+plot(mean(timeWin,1),coh_time(:,1:22,2),'o-','LineWidth',2)
+legend({'upper','lower'})
+title(stimuli{2})
+
+figure;
+plot(mean(timeWin), coh_time(2,1:22,1)./coh_time(1,1:22,1),'o-','LineWidth',2)
+hold on;
+plot(mean(timeWin), coh_time(2,1:22,2)./coh_time(1,1:22,2),'o-','LineWidth',2)
+legend(stimuli)
+xline(0);xline(prm.dur.delay/1000)
+title('ratio lower/upper')
+
+    %% 
+    
+    % %% 2) PSD of all data
+    % % select the data only for fixation, compute PSD
+    % % then contrast with PSD on 
+    % Behav = load_behav(subj_id);
+    % Behav = Behav(tri_keep,:);
+    % tri_idx = 1:numel(tri_keep);
+    % % n_tag = 4; % 1 2 3 4 
+    % % trial_fix = tri_idx((ismember(Behav.block,[n_tag])));
+    % 
+    % 
+    % cfg = [];
+    % cfg.latency = [0.5 3.5-1/data.fsample];
+    % % cfg.trials = trial_fix;
+    % data_all = ft_selectdata(cfg, data);
+    % 
+    % cfg = [];
+    % cfg.latency = [-1.5 -1/data.fsample];
+    % data_pre = ft_selectdata(cfg, data);
+    % 
+    % % PSD
+    % cfg = [];
+    % cfg.output  = 'pow';
+    % cfg.channel = 'all';
+    % cfg.method  = 'mtmfft';
+    % cfg.taper   = 'hanning';
+    % % cfg.foilim = [1 100];
+    % cfg.foi     = 1:1:100;
+    % cfg.keeptrials = 'no';
+    % base_freq   = ft_freqanalysis(cfg, data_all);
+    % 
+    % 
+    % % PSD before stimuli onset
+    % pre_freq   = ft_freqanalysis(cfg, data_pre);
+    % 
+    % % plot the results at all sensor
+    % cfgplot = [];
+    % cfgplot.showlabels   = 'yes';
+    % cfgplot.layout       = 'CTF275_helmet.mat';
+    % % figure
+    % % ft_multiplotER(cfgplot, base_freq);
+    % % 
+    % % figure
+    % % ft_multiplotER(cfgplot, pre_freq);
+    % 
+    % % contrast
+    % contrast_freq = base_freq;
+    % contrast_freq.powspctrm = log(base_freq.powspctrm ./ pre_freq.powspctrm);
+    % figure
+    % ft_multiplotER(cfgplot, contrast_freq);
+    % xlim([52 75])
+    % 
+    % save(fullfile(subjects(subj_id).results, '02_spectral', 'pre_trial_PSD.mat'),...
+    %   'pre_freq');
+    % 
+    % 
+    % save(fullfile(subjects(subj_id).results, '02_spectral', 'post_trial_PSD.mat'),...
+    %   'base_freq');
+    % %% 3) select MEG fixating stimuli, note that srate of MEG is 600Hz, while srate of eye-link is 1000Hz
+    % srate_eyelink = 1000;
+    % srate_MEG = data.fsample;
+    % 
+    % Nidx_eyelink = 6000;
+    % Nidx_meg = numel(data.time{1});
+    % Idx_meg_StimOnset = 1*srate_MEG; % roughly estimate stimuli onset
+    % 
+    % min_fix_lenght = 50/srate_eyelink*srate_MEG; % exclude all fixations shorter than 100ms
+    % max_fix_lenght = 1500/srate_eyelink*srate_MEG; % exclude all fixations longer than 400ms
+    % 
+    % fixation_MEG = table();
+    % varTypes = ["cell","cell","double",'double'];
+    % varNames = ["MEG_epoch","Time","Fix_position","Trial"];
+    % temps = table('Size',[1 numel(varNames)],'VariableTypes',varTypes,'VariableNames',varNames);
+    % 
+    % for itrl = 1:size(fixation_each_trial,1)
+    %     fix_tmpnt = fixation_each_trial.Eyelink_fixation_epoch{itrl};
+    %     fix_label = fixation_each_trial.tagged_pos{itrl};
+    %     for ifix = 1:numel(fix_label)
+    %         fix_pos = fix_label(ifix);
+    %         fix_idx_eyelink = fix_tmpnt(ifix,:); % begin and end idx of each fixation in eyelink
+    %         if ~isnan(fix_pos) 
+    %             % convert the idx in eyelink to idx in MEG
+    %             Startfix_sample_meg = ceil(fix_idx_eyelink(1)/Nidx_eyelink*Nidx_meg);
+    %             Endfix_sample_meg = ceil(fix_idx_eyelink(2)/Nidx_eyelink*Nidx_meg);
+    %             Duration_MEG_idx = Startfix_sample_meg:Endfix_sample_meg-1;
+    %             % check whether fixation happens after stimuli onset and
+    %             % duration is long enough to be reasonable
+    %             if Startfix_sample_meg > Idx_meg_StimOnset && numel(Duration_MEG_idx) > min_fix_lenght && numel(Duration_MEG_idx) < max_fix_lenght
+    %                 Fix_meg = data.trial{itrl}(:,Duration_MEG_idx);
+    %                 Fix_label = fix_label(ifix);
+    %                 temps{:,1} = {Fix_meg};
+    %                 temps{:,2} = {0: 1/srate_MEG : size(Fix_meg,2)/srate_MEG-1/srate_MEG};
+    %                 temps{:,3} = Fix_label;
+    %                 temps{:,4} = itrl;
+    %                 fixation_MEG = [fixation_MEG; temps];
+    %             end
+    %         end
+    %     end
+    % end % end of trial selection
+    % 
+    % % save fixation_MEG fixation_MEG
+    % % save(fullfile(subjects(subj_id).results, '02_spectral', 'fixation_MEG.mat'),...
+    % %   'fixation_MEG');
+    
+    %% check duration of selected fixation epochs
+    % 
+    % Fixation_MEG.fsample = data.fsample;
+    % Fixation_MEG.label = data.label;
+    % % Fixation_MEG.elec = data_cmb.elec;
+    % tagged_freq = cell(4,1);
+    % data_fix = cell(4,1); % MEG when participants fixate at the object 
+    % 
+    % for ipos = 1:4
+    %     Fixation_MEG.trial = table2cell(fixation_MEG(fixation_MEG.Fix_position == ipos,1))';
+    %     Fixation_MEG.time = table2cell(fixation_MEG(fixation_MEG.Fix_position == ipos,2))'; 
+    %     cfg_select = [];
+    %     durations = cellfun(@numel, Fixation_MEG.time)/600;
+    %     cfg_select.trials = durations >= 0.1  & durations <= 0.5;
+    %     data_fix{ipos} = ft_selectdata(cfg_select, Fixation_MEG);
+    % end
+    % 
+    % % plot the duration distribution at each quadrant
+    % for selected_pos = 1:4
+    %     subplot(2,2,selected_pos)
+    %     time = cellfun('length' ,data_fix{selected_pos}.time);
+    %     histogram(time);
+    % end
+    
+    
+    %% do FFT on selected fixated MEG epoches and contrast, to check the RIFT 
+    % power during fixation at the tagged objects
+    % 
+    freq = cell(1,4);
+    cfg = [];
+    cfg.output  = 'pow';
+    cfg.channel = 'MEG';
+    cfg.method  = 'mtmfft';
+    cfg.taper   = 'boxcar';
+    cfg.foilim = [1 100];
+    % cfg.foi     = 1:1:100;
+    cfg.keeptrials = 'no';
+    cfg.pad = 1;  % padding so the epochs are long enough
+    for i = 1:4 
+        freq{i} = ft_freqanalysis(cfg, data_twofreq{i});
+    end
+    % 
+    % 
+    % % contrast
+    % freq_contrast = freq{1};
+    % freq_contrast.powspctrm = log(freq{3}.powspctrm ./freq{1}.powspctrm);
+    % 
+    % cfgplot = [];
+    % cfgplot.showlabels   = 'yes';
+    % cfgplot.layout       = 'CTF275_helmet.mat';
+    % figure
+    % ft_multiplotER(cfgplot, freq_contrast);
+    % 
+    % save(fullfile(subjects(subj_id).results,'/02_spectral/', 'PSD_at_fixated_epochs'),...
+    %   'freq');
+    % 
+    
+    
+    
+    
+    
+    %% 4) select MEG 300ms before and 700ms after the fixation
+    % length and do coherence
+    fixation_MEGwTag_posthoc = table();
+    varTypes = ["cell","cell","double",'double','double','double','double','int16'];
+    varNames = ["MEG_epoch","Time","Fix_position","Trial",'Duration','whether_fix_oddball','OddballShapeOrSize','tagging_freq'];
+    temps = table('Size',[1 numel(varNames)],'VariableTypes',varTypes,'VariableNames',varNames);
+
+    srate_eyelink = 1000;
+    srate_MEG = data_cmb.fsample;
+
+
+    Nidx_eyelink = 6000;
+    Nidx_meg = numel(data_MEG.time{1});
+    Idx_meg_StimOnset = 1*srate_MEG; % roughly estimate stimuli onset
+
+    min_fix_lenght = 100; % exclude all fixations shorter than 100ms
+    max_fix_lenght = 500; % exclude all fixations longer than 500ms
+    % Epoch_length_ms = 500;
+    Epoch_pre_ms = 300;
+    Epoch_post_ms = 700;
+    Epoch_pre_meg = Epoch_pre_ms/srate_eyelink*srate_MEG;
+    Epoch_post_meg = Epoch_post_ms/srate_eyelink*srate_MEG;
+
+    epoch_time = -Epoch_pre_ms/1000 : 1/srate_MEG : Epoch_post_ms/1000 - 1/srate_MEG;
+    % Epoch_length_megsample = Epoch_length_ms/srate_eyelink*srate_meg;
+    
+    for itrl = 1:n_trial % n_trial is the trial kept after pre-processing, not the original trial number 
+        fix_tmpnt = fixation_each_trial.Eyelink_fixation_epoch{itrl};
+        fix_label = fixation_each_trial.tagged_pos{itrl};
+        fix_duration = fixation_each_trial.Duration{itrl};
+        tagging_freq = fixation_each_trial.tagged_freq{itrl};
+        whether_fix_oddball = fixation_each_trial.whether_fix_odd{itrl}; % whether current fixation is on an oddball
+        OddballShapeOrSize = fixation_each_trial.OddballShapeOrSize{itrl}; % whether current fixation is on an oddball
+
+
+        for ifix = 1:numel(fix_label)
+            fix_pos = fix_label(ifix);
+            fix_idx_eyelink = fix_tmpnt(ifix,:); % begin and end idx of each fixation in eyelink
+            Fix_duration = fix_duration(ifix);
+            if ifix > 1
+                fix_pos_previous = fix_label(ifix - 1);
+            else
+                fix_pos_previous = 0;
+            end
+
+            % here we only check the first fixation on the stimuli image    
+            if ~isnan(fix_pos) && (Fix_duration > min_fix_lenght && Fix_duration < max_fix_lenght) && fix_pos_previous~=fix_pos
+                % convert the idx in eyelink to idx in MEG
+                % fix_middle = ceil(mean(fix_idx_eyelink)/Nidx_eyelink*Nidx_meg);
+                % Startfix_sample_meg= fix_middle - Epoch_length_megsample/2 + 1;
+                % Endfix_sample_meg  = fix_middle + Epoch_length_megsample/2; 
+
+                OnsetStim_sample = ceil(fix_idx_eyelink(1) / Nidx_eyelink * Nidx_meg);
+
+                Startfix_sample_meg= int32(OnsetStim_sample - Epoch_pre_meg);
+                Endfix_sample_meg  = int32(OnsetStim_sample + Epoch_post_meg); 
+
+                Duration_MEG_idx = Startfix_sample_meg:Endfix_sample_meg - 1;
+                % check whether fixation happens after stimuli onset and
+                % duration is long enough to be reasonable
+                if Startfix_sample_meg > 0 && Endfix_sample_meg < Nidx_meg
+
+                    meg_with_tag = data_cmb.trial{itrl}(:,Duration_MEG_idx);
+                    Fix_label = fix_label(ifix);
+                    Fix_odd =  whether_fix_oddball(ifix);
+                    tagging_frex = tagging_freq(ifix);
+                    temps{:,1} = {meg_with_tag};
+                    temps{:,2} = {epoch_time};
+                    temps{:,3} = Fix_label;
+                    temps{:,4} = itrl;
+                    temps{:,5} = Fix_duration;
+                    temps{:,6} = Fix_odd;
+                    temps{:,7} = OddballShapeOrSize;
+                    temps{:,8} = tagging_frex;
+
+                    fixation_MEGwTag_posthoc = [fixation_MEGwTag_posthoc; temps];
+                end
+            end
+        end
+    end
+    
+    
+    % save(fullfile(subjects(subj_id).results,'/02_spectral/', 'fixation_MEGwTag_posthoc.mat' ),...
+    %     'fixation_MEGwTag_posthoc');
+    
+    
+    
+    %% 5) coherence of -300ms to 0ms at 4 quardrant
+    % to-do: need the contrast 
+    
+    n_added_chan = 5;
+
+    cfg_freq = [];
+    cfg_freq.method = 'mtmfft';
+    cfg_freq.taper  = 'boxcar';
+    cfg_freq.foilim = [1 100];
+    cfg_freq.output = 'fourier';
+    cfg_freq.toi    = [-.3 .1];
+
+    coh_fix_pre = cell(4,1);
+
+    for selected_quadrant = 1:4
+        data_AllFixWtag_odd = data_cmb; % copy the format of MEG data
+        epoch_idx               = fixation_MEGwTag_posthoc.Fix_position == selected_quadrant;
+        data_AllFixWtag_odd.time    = fixation_MEGwTag_posthoc.Time(epoch_idx,:)';
+        data_AllFixWtag_odd.trial   = fixation_MEGwTag_posthoc.MEG_epoch(epoch_idx,:)';
+
+        freq = ft_freqanalysis(cfg_freq, data_AllFixWtag_odd);
+
+        % compute and plot coherence
+        selected_ref_chan = freq.label(end); % select the 'TagAll'
+
+        cfg_coh = [];
+        cfg_coh.method = 'coh';
+        nchan = numel(freq.label)-n_added_chan;
+        cfg_coh.channelcmb = [freq.label(1:end-n_added_chan) repmat({selected_ref_chan{1}}, nchan, 1)];
+        coh_fix_pre{selected_quadrant} = ft_connectivityanalysis(cfg_coh, freq);
+    end
+
+    save(fullfile(subjects(subj_id).results,'/02_spectral/', 'coh_fix_pre' ),...
+        'coh_fix_pre');
+
+    
+    %% plot the coherence of 1 quadrant
+    % quadrant2plot = 1;
+    % coh_topo = [];
+    % coh_topo.label = freq.label(1:end-n_added_chan);
+    % coh_topo.dimord = 'chan_freq';
+    % coh_topo.freq = coh_fix_pre{quadrant2plot}.freq;
+    % coh_topo.powspctrm = coh_fix_pre{quadrant2plot}.cohspctrm;
+    % 
+    % cfgplot = [];
+    % 
+    % cfgplot.layout       = 'CTF275_helmet.mat';
+    % 
+    % figure
+    % ft_multiplotER(cfgplot, coh_topo);
+
+    %% 6) coherence of 100ms to 400ms at 4 quardrant
+    % to-do: need the contrast 
+    
+    n_added_chan = 5;
+
+    cfg_freq = [];
+    cfg_freq.method = 'mtmfft';
+    cfg_freq.taper  = 'boxcar';
+    cfg_freq.foilim = [1 100];
+    cfg_freq.output = 'fourier';
+    cfg_freq.toi    = [.1 .4];
+
+    coh_fix_post = cell(4,1);
+
+    for selected_quadrant = 1:4
+        data_AllFixWtag_odd = data_cmb; % copy the format of MEG data
+        epoch_idx               = fixation_MEGwTag_posthoc.Fix_position == selected_quadrant;
+        data_AllFixWtag_odd.time    = fixation_MEGwTag_posthoc.Time(epoch_idx,:)';
+        data_AllFixWtag_odd.trial   = fixation_MEGwTag_posthoc.MEG_epoch(epoch_idx,:)';
+
+        freq = ft_freqanalysis(cfg_freq, data_AllFixWtag_odd);
+
+        % compute and plot coherence
+        selected_ref_chan = freq.label(end); % select the 'TagAll'
+
+        cfg_coh = [];
+        cfg_coh.method = 'coh';
+        nchan = numel(freq.label)-n_added_chan;
+        cfg_coh.channelcmb = [freq.label(1:end-n_added_chan) repmat({selected_ref_chan{1}}, nchan, 1)];
+        coh_fix_post{selected_quadrant} = ft_connectivityanalysis(cfg_coh, freq);
+    end
+
+    save(fullfile(subjects(subj_id).results,'/02_spectral/', 'coh_fix_post' ),...
+        'coh_fix_post');
+    
+    
+    %% plot the coherence of 1 quadrant
+    % quadrant2plot = 1;
+    % coh_topo = [];
+    % coh_topo.label = freq.label(1:end-n_added_chan);
+    % coh_topo.dimord = 'chan_freq';
+    % coh_topo.freq = coh_fix_post{quadrant2plot}.freq;
+    % coh_topo.powspctrm = coh_fix_post{quadrant2plot}.cohspctrm;
+    % 
+    % cfgplot = [];
+    % 
+    % cfgplot.layout       = 'CTF275_helmet.mat';
+    % 
+    % figure
+    % ft_multiplotER(cfgplot, coh_topo);
+    
+    
+    %% 7) calculate ISPC and see pre-saccadic effect: hanning taper
+    % To-do: do the contrast
+    ISPC_all_quadrant_hanning = cell(4,1);
+
+
+    cfg_foureir              = [];
+    cfg_foureir.output       = 'fourier';
+    cfg_foureir.channel      = 'all';
+    cfg_foureir.method       = 'mtmconvol';
+    cfg_foureir.taper        = 'hanning';
+    cfg_foureir.foi          = 15:5:90;                      
+    cfg_foureir.t_ftimwin    = ones(length(cfg_foureir.foi),1).*.2;   % length of time window
+    cfg_foureir.toi          = -.3:.01:.7;                 
+    cfg_foureir.keeptrials   = 'yes';
+
+
+
+    for selected_quadrant = 1:4 % change this to see pre-saccadic effect at different tagging frequency
+
+        [m,n] = size(fixation_MEGwTag_posthoc.MEG_epoch{1}); % sensor * time points
+        MEGwtagged = fixation_MEGwTag_posthoc(fixation_MEGwTag_posthoc.Fix_position == selected_quadrant,:);
+        MEGwtagged = sortrows(MEGwtagged,"Duration","ascend");
+        % 
+        % figure
+        % hist(cell2mat(MEGwtagged.Duration))
+
+        data_megWtag = data_cmb;
+        data_megWtag.time = MEGwtagged.Time';
+        data_megWtag.trial= MEGwtagged.MEG_epoch';
+
+
+        % compute fourier coefficients
+
+        TF = ft_freqanalysis(cfg_foureir, data_megWtag);
+
+        [n_trl,n_sensor,n_frq, n_t] = size(TF.fourierspctrm); % trials * sensor * freq * time 
+        % tag_fre_idx = find(ismember(TF.freq, [55,60,65,70]));
+
+        % fourspctrm = real(squeeze(TF.fourierspctrm(1,1,:,:)));
+        % imagesc(cfg.toi, TF.freq, fourspctrm)
+
+        % calculate inter-site phase clustering
+        idx_tagg = n_sensor;
+        disp(TF.label{idx_tagg})
+
+        phase_synchronization = nan(n_t,n_frq,n_sensor-n_added_chan); 
+        phase_MEG = nan(n_trl,n_sensor-n_added_chan);
+        for it = 1:n_t
+            for ifreq = 1:n_frq
+                fourspctrm = squeeze(TF.fourierspctrm(:,:,ifreq,it));  % trial * chan
+                if ~isnan(abs(fourspctrm(1)))
+                    phase_tag = squeeze(phase_PD(fourspctrm(:, idx_tagg))); % phase of tagging freq in each trial
+                    for itrial = 1:n_trl  
+                        phase_MEG(itrial,:) = squeeze(phase_PD(fourspctrm(itrial,1:n_sensor-n_added_chan)));
+                    end
+
+                        % phase angle differences
+                        phase_angle_differences = phase_MEG(:,1:end)-phase_tag;
+
+                        % euler representation of angles
+                        euler_phase_differences = exp(1i*phase_angle_differences);
+
+                        % mean vector (in complex space)
+                        mean_complex_vector = mean(euler_phase_differences,1);
+
+                        % length of mean vector (this is the "M" from Me^ik, and is the measure of phase synchronization)
+                        phase_synchronization(it,ifreq,:) = abs(mean_complex_vector);
+                end
+            end
+        end
+
+
+        % coherence compute and plot
+        Coh_contrast = [];
+        Coh_contrast.label = TF.label(1:end-n_added_chan);
+        Coh_contrast.freq = TF.freq;
+        Coh_contrast.time = TF.time;
+        Coh_contrast.powspctrm = permute(phase_synchronization,[3 1 2]);
+        Coh_contrast.dimord = 'rpt_chan_freq_time';
+        Coh_contrast.freq = TF.freq;
+        % ISPC.elec = data_cmb.elec;
+
+        ISPC_all_quadrant_hanning{selected_quadrant} = Coh_contrast;
+
+
+    end
+
+    save(fullfile(subjects(subj_id).results,'/02_spectral/', 'ISPC_all_quadrant_hanning' ),...
+        'ISPC_all_quadrant_hanning');
+
+    % %% plot ISPC
+    % cfg = [];
+    % cfg.showlabels   = 'yes';
+    % cfg.layout       = 'CTF275_helmet.mat';
+    % figure
+    % 
+    % ft_multiplotTFR(cfg, ISPC_all_quadrant_hanning{4});
+
+
+
+%    %% 8) check the RIFT power difference between oddball and distractors
+%     n_added_chan = 5;
+% 
+%     cfg_freq = [];
+%     cfg_freq.method = 'mtmfft';
+%     cfg_freq.taper = 'boxcar';
+%     cfg_freq.foilim = [50 80];
+% 
+%     cfg_freq.output = 'fourier';
+% 
+%     tagging_coh_results = cell(4,1);
+% 
+%     for selected_quadrant = 1:4
+% 
+%         epoch_idx = fixation_MEGwTag_posthoc.Fix_position == selected_quadrant; % first select quardrant
+%         epoch_odd = fixation_MEGwTag_posthoc.whether_fix_oddball == 1; % select whether fixated at oddball
+%         epoch_shape = fixation_MEGwTag_posthoc.OddballShapeOrSize == 1; % select whether shape or size oddball
+% 
+%         idx_distractor = epoch_idx == 1 & epoch_odd == 0;
+%         idx_odd_shape  = epoch_idx == 1 & epoch_odd == 1 & epoch_shape == 1;
+%         idx_odd_size   = epoch_idx == 1 & epoch_odd == 1 & epoch_shape == 0;
+% 
+%         % the sum of 3 condition should adds up to total trials of the quadrant
+%         assert(sum(idx_distractor)+sum(idx_odd_shape)+sum(idx_odd_size)==sum(epoch_idx))
+%         idx_groups = {idx_distractor,idx_odd_shape,idx_odd_size};
+% 
+%         % only do FT at the tagging freq to compare the power/coherence
+%         % difference
+%         foi = unique(fixation_MEGwTag_posthoc.tagging_freq(epoch_idx));
+% 
+%         coh_tagging_freq = nan(numel(data_cmb.label)-n_added_chan,3);
+%         for igroup = 1:numel(idx_groups)
+%             selected_idx = idx_groups{igroup};
+%             data_AllFixWtag = data_cmb;
+%             data_AllFixWtag.time = fixation_MEGwTag_posthoc.Time(selected_idx,:)';
+%             data_AllFixWtag.trial= fixation_MEGwTag_posthoc.MEG_epoch(selected_idx,:)';
+% 
+%             freq = ft_freqanalysis(cfg_freq, data_AllFixWtag);
+%             freq_idx = find(foi == freq.freq);
+%              % compute and plot coherence
+%             selected_ref_chan = freq.label(end); % select the 'TagAll'
+% 
+%             cfg_coh = [];
+%             cfg_coh.method = 'coh';
+%             nchan = numel(freq.label)-n_added_chan;
+%             cfg_coh.channelcmb = [freq.label(1:end-n_added_chan) repmat({selected_ref_chan{1}}, nchan, 1)];
+%             coh_fix_temp= ft_connectivityanalysis(cfg_coh, freq);
+%             coh_tagging_freq(:,igroup) = coh_fix_temp.cohspctrm(:,freq_idx);
+% 
+%         end % end of epoch groups
+% 
+%         tagging_coh_results{selected_quadrant} = coh_tagging_freq;
+% 
+% 
+%     end
+% 
+%     save(fullfile(subjects(subj_id).results,'/02_spectral/', 'tagging_coh_results' ),...
+%         'tagging_coh_results');
+% 
+%     %% plot the results
+%     idx_quadrant = 2;
+%     selected_coh = tagging_coh_results{idx_quadrant};
+% 
+%     Coh_contrast = [];
+% 
+%     Coh_contrast.label = data_cmb.label(1:273);
+%     Coh_contrast.powspctrm = selected_coh(:,2)-selected_coh(:,1); % distractor, shape, size
+%     Coh_contrast.dimord = 'chancmb_freq';
+%     % Coh_contrast.time = 1;
+%     Coh_contrast.freq = 55;
+% 
+% 
+%     cfg = [];
+%     cfg.showlabels   = 'yes';
+%     cfg.layout       = 'CTF275_helmet.mat';
+% 
+%     figure
+%     ft_topoplotER(cfg, Coh_contrast);
+
+
+
+    %% 9) select MEG 300ms before and 700ms after the saccade
+    % % length and do coherence
+    % fixation_MEGwTag_posthoc_sacc = table();
+    % varTypes = ["cell","cell","double",'double','double','double','double','int16'];
+    % varNames = ["MEG_epoch","Time","Fix_position","Trial",'Duration','whether_fix_oddball','OddballShapeOrSize','tagging_freq'];
+    % temps = table('Size',[1 numel(varNames)],'VariableTypes',varTypes,'VariableNames',varNames);
+    % 
+    % srate_eyelink = 1000;
+    % srate_MEG = data_cmb.fsample;
+    % 
+    % 
+    % Nidx_eyelink = 6000;
+    % Nidx_meg = numel(data.time{1});
+    % Idx_meg_StimOnset = 1*srate_MEG; % roughly estimate stimuli onset
+    % 
+    % min_fix_lenght = 100; % exclude all fixations shorter than 100ms
+    % max_fix_lenght = 500; % exclude all fixations longer than 500ms
+    % % Epoch_length_ms = 500;
+    % Epoch_pre_ms = 300;
+    % Epoch_post_ms = 700;
+    % Epoch_pre_meg = Epoch_pre_ms/srate_eyelink*srate_MEG;
+    % Epoch_post_meg = Epoch_post_ms/srate_eyelink*srate_MEG;
+    % 
+    % epoch_time = -Epoch_pre_ms/1000 : 1/srate_MEG : Epoch_post_ms/1000 - 1/srate_MEG;
+    % % Epoch_length_megsample = Epoch_length_ms/srate_eyelink*srate_meg;
+    % 
+    % for itrl = 1:n_trial_sacc % n_trial is the trial kept after pre-processing, not the original trial number 
+    %     fix_tmpnt = fixation_each_trial_sacc.Eyelink_fixation_epoch{itrl};
+    %     fix_label = fixation_each_trial_sacc.tagged_pos{itrl};
+    %     fix_duration = fixation_each_trial_sacc.Duration{itrl};
+    %     tagging_freq = fixation_each_trial_sacc.tagged_freq{itrl};
+    %     whether_fix_oddball = fixation_each_trial_sacc.whether_fix_odd{itrl}; % whether current fixation is on an oddball
+    %     OddballShapeOrSize = fixation_each_trial_sacc.OddballShapeOrSize{itrl}; % whether current fixation is on an oddball
+    % 
+    % 
+    %     for ifix = 1:numel(fix_label)
+    %         fix_pos = fix_label(ifix);
+    %         fix_idx_eyelink = fix_tmpnt(ifix,:); % begin and end idx of each fixation in eyelink
+    %         Fix_duration = fix_duration(ifix);
+    % 
+    %         if ~isnan(fix_pos) && (Fix_duration > min_fix_lenght && Fix_duration < max_fix_lenght) 
+    %             % convert the idx in eyelink to idx in MEG
+    %             % fix_middle = ceil(mean(fix_idx_eyelink)/Nidx_eyelink*Nidx_meg);
+    %             % Startfix_sample_meg= fix_middle - Epoch_length_megsample/2 + 1;
+    %             % Endfix_sample_meg  = fix_middle + Epoch_length_megsample/2; 
+    % 
+    %             OnsetStim_sample = ceil(fix_idx_eyelink(1) / Nidx_eyelink * Nidx_meg);
+    % 
+    %             Startfix_sample_meg= int32(OnsetStim_sample - Epoch_pre_meg);
+    %             Endfix_sample_meg  = int32(OnsetStim_sample + Epoch_post_meg); 
+    % 
+    %             Duration_MEG_idx = Startfix_sample_meg:Endfix_sample_meg - 1;
+    %             % check whether fixation happens after stimuli onset and
+    %             % duration is long enough to be reasonable
+    %             if Startfix_sample_meg > 0 && Endfix_sample_meg < Nidx_meg
+    % 
+    %                 meg_with_tag = data_cmb.trial{itrl}(:,Duration_MEG_idx);
+    %                 Fix_label = fix_label(ifix);
+    %                 Fix_odd =  whether_fix_oddball(ifix);
+    %                 tagging_frex = tagging_freq(ifix);
+    %                 temps{:,1} = {meg_with_tag};
+    %                 temps{:,2} = {epoch_time};
+    %                 temps{:,3} = Fix_label;
+    %                 temps{:,4} = itrl;
+    %                 temps{:,5} = Fix_duration;
+    %                 temps{:,6} = Fix_odd;
+    %                 temps{:,7} = OddballShapeOrSize;
+    %                 temps{:,8} = tagging_frex;
+    % 
+    %                 fixation_MEGwTag_posthoc_sacc = [fixation_MEGwTag_posthoc_sacc; temps];
+    %             end
+    %         end
+    %     end
+    % end
+
+    %% 10) calculate ISPC on saccade-locked MEG
+    % % To-do: do the contrast
+    % n_added_chan = 5;
+    % ISPC_all_quadrant_sacc = cell(4,1);
+    % 
+    % 
+    % cfg_foureir              = [];
+    % cfg_foureir.output       = 'fourier';
+    % cfg_foureir.channel      = 'all';
+    % cfg_foureir.method       = 'mtmconvol';
+    % cfg_foureir.taper        = 'hanning';
+    % cfg_foureir.foi          = 15:5:90;                      
+    % cfg_foureir.t_ftimwin    = ones(length(cfg_foureir.foi),1).*.2;   % length of time window
+    % cfg_foureir.toi          = -.3:.01:.7;                 
+    % cfg_foureir.keeptrials   = 'yes';
+    % 
+    % 
+    % 
+    % for selected_quadrant = 1:4 % change this to see pre-saccadic effect at different tagging frequency
+    % 
+    %     [m,n] = size(fixation_MEGwTag_posthoc_sacc.MEG_epoch{1}); % sensor * time points
+    %     MEGwtagged = fixation_MEGwTag_posthoc_sacc(fixation_MEGwTag_posthoc_sacc.Fix_position == selected_quadrant,:);
+    %     MEGwtagged = sortrows(MEGwtagged,"Duration","ascend");
+    %     % 
+    %     % figure
+    %     % hist(cell2mat(MEGwtagged.Duration))
+    % 
+    %     data_megWtag = data_cmb;
+    %     data_megWtag.time = MEGwtagged.Time';
+    %     data_megWtag.trial= MEGwtagged.MEG_epoch';
+    % 
+    % 
+    %     % compute fourier coefficients
+    % 
+    %     TF = ft_freqanalysis(cfg_foureir, data_megWtag);
+    % 
+    %     [n_trl,n_sensor,n_frq, n_t] = size(TF.fourierspctrm); % trials * sensor * freq * time 
+    %     % tag_fre_idx = find(ismember(TF.freq, [55,60,65,70]));
+    % 
+    %     % fourspctrm = real(squeeze(TF.fourierspctrm(1,1,:,:)));
+    %     % imagesc(cfg.toi, TF.freq, fourspctrm)
+    % 
+    %     % calculate inter-site phase clustering
+    %     idx_tagg = n_sensor;
+    %     disp(TF.label{idx_tagg})
+    % 
+    %     phase_synchronization = nan(n_t,n_frq,n_sensor-n_added_chan); 
+    %     phase_MEG = nan(n_trl,n_sensor-n_added_chan);
+    %     for it = 1:n_t
+    %         for ifreq = 1:n_frq
+    %             fourspctrm = squeeze(TF.fourierspctrm(:,:,ifreq,it));  % trial * chan
+    %             if ~isnan(abs(fourspctrm(1)))
+    %                 phase_tag = squeeze(phase(fourspctrm(:, idx_tagg))); % phase of tagging freq in each trial
+    %                 for itrial = 1:n_trl  
+    %                     phase_MEG(itrial,:) = squeeze(phase(fourspctrm(itrial,1:n_sensor-n_added_chan)));
+    %                 end
+    % 
+    %                     % phase angle differences
+    %                     phase_angle_differences = phase_MEG(:,1:end)-phase_tag;
+    % 
+    %                     % euler representation of angles
+    %                     euler_phase_differences = exp(1i*phase_angle_differences);
+    % 
+    %                     % mean vector (in complex space)
+    %                     mean_complex_vector = mean(euler_phase_differences,1);
+    % 
+    %                     % length of mean vector (this is the "M" from Me^ik, and is the measure of phase synchronization)
+    %                     phase_synchronization(it,ifreq,:) = abs(mean_complex_vector);
+    %             end
+    %         end
+    %     end
+    % 
+    % 
+    %     % coherence compute and plot
+    %     Coh_contrast = [];
+    %     Coh_contrast.label = TF.label(1:end-n_added_chan);
+    %     Coh_contrast.freq = TF.freq;
+    %     Coh_contrast.time = TF.time;
+    %     Coh_contrast.powspctrm = permute(phase_synchronization,[3 1 2]);
+    %     Coh_contrast.dimord = 'rpt_chan_freq_time';
+    %     Coh_contrast.freq = TF.freq;
+    %     % ISPC.elec = data_cmb.elec;
+    % 
+    %     ISPC_all_quadrant_sacc{selected_quadrant} = Coh_contrast;
+    % 
+    % 
+    % end
+    % 
+    % save(fullfile(subjects(subj_id).results,'/02_spectral/', 'ISPC_all_quadrant_sacc' ),...
+    %     'ISPC_all_quadrant_sacc');
+
+    %% plot ISPC
+    % cfg = [];
+    % cfg.showlabels   = 'yes';
+    % cfg.layout       = 'CTF275_helmet.mat';
+    % figure
+    % 
+    % ft_multiplotTFR(cfg, ISPC_all_quadrant_sacc{4});
+
+
+    %% 11) calculate phase of pre and post-saccade
+    % 
+    % % to-do: need the contrast 
+    % dt = 0.0017;
+    % 
+    % n_added_chan = 5;
+    % 
+    % cfg_freq = [];
+    % cfg_freq.method = 'mtmfft';
+    % cfg_freq.taper  = 'boxcar';
+    % cfg_freq.foi    = 45:5:90;  
+    % cfg_freq.output = 'fourier';
+    % 
+    % cfg_select = [];
+    % cfg_select.latency    = [-.3 -.1-dt]; % pre-saccadic
+    % 
+    % coh_sacc_pre = cell(4,1);
+    % 
+    % for selected_quadrant = 1:4
+    %     data_FixWtag = data_cmb; % copy the format of MEG data
+    %     epoch_idx               = fixation_MEGwTag_posthoc_sacc.Fix_position == selected_quadrant;
+    %     data_FixWtag.time    = fixation_MEGwTag_posthoc_sacc.Time(epoch_idx,:)';
+    %     data_FixWtag.trial   = fixation_MEGwTag_posthoc_sacc.MEG_epoch(epoch_idx,:)';
+    % 
+    % 
+    %     data_FixWtag_toi = ft_selectdata(cfg_select,data_FixWtag);
+    %     freq = ft_freqanalysis(cfg_freq, data_FixWtag_toi);
+    % 
+    %     % compute and plot coherence
+    %     selected_ref_chan = freq.label(end); % select the 'TagAll'
+    % 
+    %     cfg_coh = [];
+    %     cfg_coh.method = 'coh';
+    %     nchan = numel(freq.label)-n_added_chan;
+    %     cfg_coh.channelcmb = [freq.label(1:end-n_added_chan) repmat({selected_ref_chan{1}}, nchan, 1)];
+    %     coh_sacc_pre{selected_quadrant} = ft_connectivityanalysis(cfg_coh, freq);
+    % end
+    % 
+    % save(fullfile(subjects(subj_id).results,'/02_spectral/', 'coh_sacc_pre' ),...
+    %     'coh_sacc_pre');
+    % 
+    % 
+    % %% post-saccade phase
+    % dt = 0.0017;
+    % cfg_freq = [];
+    % cfg_freq.method = 'mtmfft';
+    % cfg_freq.taper  = 'boxcar';
+    % cfg_freq.foi    = 45:5:90;  
+    % cfg_freq.output = 'fourier';
+    % 
+    % cfg_select = [];
+    % cfg_select.latency    = [.1 .3-dt]; % pre-saccadic
+    % 
+    % coh_sacc_post = cell(4,1);
+    % 
+    % for selected_quadrant = 1:4
+    %     data_FixWtag = data_cmb; % copy the format of MEG data
+    %     epoch_idx            = fixation_MEGwTag_posthoc_sacc.Fix_position == selected_quadrant;
+    %     data_FixWtag.time    = fixation_MEGwTag_posthoc_sacc.Time(epoch_idx,:)';
+    %     data_FixWtag.trial   = fixation_MEGwTag_posthoc_sacc.MEG_epoch(epoch_idx,:)';
+    % 
+    %     data_FixWtag_toi = ft_selectdata(cfg_select,data_FixWtag);
+    %     freq = ft_freqanalysis(cfg_freq, data_FixWtag_toi);
+    % 
+    %     % compute and plot coherence
+    %     selected_ref_chan = freq.label(end); % select the 'TagAll'
+    % 
+    %     cfg_coh = [];
+    %     cfg_coh.method = 'coh';
+    %     nchan = numel(freq.label)-n_added_chan;
+    %     cfg_coh.channelcmb = [freq.label(1:end-n_added_chan) repmat({selected_ref_chan{1}}, nchan, 1)];
+    %     coh_sacc_post{selected_quadrant} = ft_connectivityanalysis(cfg_coh, freq);
+    % end
+    % 
+    % save(fullfile(subjects(subj_id).results,'/02_spectral/', 'coh_sacc_post' ),...
+    %     'coh_sacc_post');
+
+
+
+    %% 12) Check the coherence during the 1s post-fixation
+    dt = 0.0017;
+    % determine fix condition, even blocks 
+    fixation_cond = mod(fixation_each_trial.Block_number,2); 
+    cfg_select.trial = ~fixation_cond;
+    cfg_select.latency = [0 1-dt];
+    data_post_fix_1s = ft_selectdata(cfg_select,data_cmb);
+       
+ 
+    n_added_chan = 5;
+
+    cfg_freq = [];
+    cfg_freq.method = 'mtmfft';
+    cfg_freq.taper  = 'boxcar';
+    cfg_freq.foilim = [1 100];
+    cfg_freq.output = 'fourier';
+
+    freq = ft_freqanalysis(cfg_freq, data_post_fix_1s);
+
+
+    % compute and plot coherence
+    selected_ref_chan = freq.label(end); % select the 'TagAll'
+    
+    cfg_coh = [];
+    cfg_coh.method = 'coh';
+    nchan = numel(freq.label)-n_added_chan;
+    cfg_coh.channelcmb = [freq.label(1:end-n_added_chan) repmat({selected_ref_chan{1}}, nchan, 1)];
+    coh_post_fix_1s = ft_connectivityanalysis(cfg_coh, freq);
+
+
+    save(fullfile(subjects(subj_id).results,'/02_spectral/', 'coh_post_fix_1s.mat' ),...
+        'coh_post_fix_1s');
+ 
+    %% plot and check
+    % coh_topo = [];
+    % coh_topo.label = coh_post_fix_1s.labelcmb(1:272,1);
+    % coh_topo.dimord = 'chan_freq';
+    % coh_topo.freq = coh_post_fix_1s.freq;
+    % coh_topo.powspctrm = coh_post_fix_1s.cohspctrm;
+    % 
+    % cfgplot = [];
+    % 
+    % cfgplot.layout       = 'CTF275_helmet.mat';
+    % 
+    % figure
+    % ft_multiplotER(cfgplot, coh_topo);
+
+end
